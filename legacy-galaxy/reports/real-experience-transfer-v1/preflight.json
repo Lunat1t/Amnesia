@@ -1,0 +1,113 @@
+{
+  "plan": {
+    "schema": "real-experience-transfer-v1",
+    "repository": "sympy/sympy",
+    "source_task": "sympy__sympy-14711",
+    "intervening_task": "sympy__sympy-16766",
+    "target_task": "sympy__sympy-17630",
+    "pair_hypothesis": "Experience with zero identity and typed symbolic operations in Vector may help diagnose lost ZeroMatrix shape in repeated block multiplication. This relevance is a preregistered hypothesis, not an observed transfer result.",
+    "conditions": [
+      "control",
+      "relevant",
+      "irrelevant",
+      "obsolete"
+    ],
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "timeout_seconds": 900,
+    "initial_repetitions": 1,
+    "measurement_repetitions": 3,
+    "obsolete_gate": "Require a historically verified extracted episode plus reviewed evidence of target-specific supersession. Age or a changed commit alone does not qualify.",
+    "primary": "official evaluator resolved target issue with PASS_TO_PASS preservation",
+    "secondary": [
+      "agent tokens",
+      "searches",
+      "tool calls",
+      "duration",
+      "verified repeated error category"
+    ],
+    "unavailable": [
+      "wrong patch count without independent labels",
+      "semantic usefulness from file opens",
+      "pricing without known cached input rates"
+    ],
+    "delivery_design": "Four arms use forced audited exposure over the same base context. Native retrieval and obsolete exclusion are measured separately, not inferred from supplied episodes.",
+    "freeze_policy": "Freeze task IDs, commits, hidden evaluator hashes, model, episode hashes and condition order before B calls. Abort on packet-budget overflow rather than change other context. Publish missing sources and failures."
+  },
+  "plan_sha256": "c79a147251afa5f201f7f64e4ae46d8f602fb7b1dca1a08a9d3c7360efdf507e",
+  "tasks": [
+    {
+      "role": "source_task",
+      "id": "sympy__sympy-14711",
+      "base_commit": "c6753448b5c34f95e250105d76709fe4d349ca1f",
+      "snapshot_hash": "0bd77345d456c0aebcb53b94a8457d1a492f77a5",
+      "accepted_audit": {
+        "base_validated": true,
+        "base_target_failure_observed": true,
+        "base_pass_to_pass_preserved": true,
+        "gold_patch_applied": true,
+        "gold_verified": true,
+        "overlay_hash": "955dfb3e264f06cbee6285bcf20d1346b33d3826fc901ddd51a21e823b44bb3d",
+        "reference_patch_hash": "603fc55c24e66a70d67dac2cb8661fdb9be0c08333133151cfd7a72fbe9881eb",
+        "base_patch_sha256": "839b37e7fc67ccdd9991dd69311d435e3a42a5c903c10a4014fd0e83764ccfc3",
+        "audit_status": "accepted",
+        "reason": "both baseline-failure and gold-pass policies satisfied"
+      },
+      "hidden_artifact_sha256": {
+        "gold": "603fc55c24e66a70d67dac2cb8661fdb9be0c08333133151cfd7a72fbe9881eb",
+        "overlay": "955dfb3e264f06cbee6285bcf20d1346b33d3826fc901ddd51a21e823b44bb3d"
+      }
+    },
+    {
+      "role": "intervening_task",
+      "id": "sympy__sympy-16766",
+      "base_commit": "b8fe457a02cc24b3470ff678d0099c350b7fef43",
+      "snapshot_hash": "4c654d82f70f123276b6da54d4785f38b807bd31",
+      "accepted_audit": {
+        "base_validated": true,
+        "base_target_failure_observed": true,
+        "base_pass_to_pass_preserved": true,
+        "gold_patch_applied": true,
+        "gold_verified": true,
+        "overlay_hash": "e719ebdc9f0e13e6557ef49c7f1e43c6ba1fcdaedfa3b1d7ba7b28d2df3ebb06",
+        "reference_patch_hash": "4ccb660fed60d4938ce682008579da0653874ad171d82bcc286b79b443cdbe0b",
+        "base_patch_sha256": "4da77fa0c1223d13918297727a3ce3b6731195695cfc00e2862aa0ee69ffdd9c",
+        "audit_status": "accepted",
+        "reason": "both baseline-failure and gold-pass policies satisfied"
+      },
+      "hidden_artifact_sha256": {
+        "gold": "4ccb660fed60d4938ce682008579da0653874ad171d82bcc286b79b443cdbe0b",
+        "overlay": "e719ebdc9f0e13e6557ef49c7f1e43c6ba1fcdaedfa3b1d7ba7b28d2df3ebb06"
+      }
+    },
+    {
+      "role": "target_task",
+      "id": "sympy__sympy-17630",
+      "base_commit": "58e78209c8577b9890e957b624466e5beed7eb08",
+      "snapshot_hash": "6511a0ce9f26ede7f4abc7d4c06ceded39d28ba0",
+      "accepted_audit": {
+        "base_validated": true,
+        "base_target_failure_observed": true,
+        "base_pass_to_pass_preserved": true,
+        "gold_patch_applied": true,
+        "gold_verified": true,
+        "overlay_hash": "534210411f2e68c4c70460ba311b6d0f56556d21cd88aa3016cc640c693d89f9",
+        "reference_patch_hash": "d3bca3e20c8056ddd3473d79daaacd83a6bf0a7ede68a2dd2718e159a3207e9b",
+        "base_patch_sha256": "4da77fa0c1223d13918297727a3ce3b6731195695cfc00e2862aa0ee69ffdd9c",
+        "audit_status": "accepted",
+        "reason": "both baseline-failure and gold-pass policies satisfied"
+      },
+      "hidden_artifact_sha256": {
+        "gold": "d3bca3e20c8056ddd3473d79daaacd83a6bf0a7ede68a2dd2718e159a3207e9b",
+        "overlay": "534210411f2e68c4c70460ba311b6d0f56556d21cd88aa3016cc640c693d89f9"
+      }
+    }
+  ],
+  "runtime": {
+    "swebench_installed": true,
+    "docker_sdk_installed": true
+  },
+  "status": "source snapshots audited; episodes and target-specific obsolete evidence pending",
+  "agent_runs": 0,
+  "target_calls": 0
+}

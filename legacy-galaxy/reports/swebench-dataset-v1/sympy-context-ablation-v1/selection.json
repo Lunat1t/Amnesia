@@ -1,0 +1,53 @@
+{
+  "status": "frozen_before_ablation_runs",
+  "task_id": "sympy__sympy-13878",
+  "dataset_sha256": "9f0dd9bc9644e2b1ca6ee4965291487e884d873c2f291a06aa773d936f0ae278",
+  "base_commit": "7b127bdf71a36d85216315f80c1b54d22b060818",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "one_run_per_arm": true,
+  "arms": [
+    {
+      "arm": "A",
+      "name": "off",
+      "source": "existing frozen sanity-pilot run",
+      "run_id": "sympy__sympy-13878-714e877fa2a4-without_galaxy"
+    },
+    {
+      "arm": "B",
+      "name": "galaxy_current",
+      "source": "existing frozen sanity-pilot run",
+      "run_id": "sympy__sympy-13878-714e877fa2a4-with_galaxy",
+      "context_package_hash": "e97e9ce1458a21049678a8affba72de0766e0444f6f723ffab26b2a7926a4ba9",
+      "context_tokens": 4201
+    },
+    {
+      "arm": "C",
+      "name": "top3",
+      "keep_top_k": 3,
+      "description": "Keep only the three highest-ranked Galaxy evidence items."
+    },
+    {
+      "arm": "D",
+      "name": "top1",
+      "keep_top_k": 1,
+      "description": "Keep only the highest-ranked Galaxy evidence item."
+    },
+    {
+      "arm": "E",
+      "name": "without_ctx_004",
+      "exclude_paths": [
+        "sympy/core/tests/test_args.py"
+      ],
+      "description": "Current packet with the rank-4, off-task downstream test item removed."
+    }
+  ],
+  "E_suspected_item_basis": "rank 4 in the frozen current packet is sympy/core/tests/test_args.py, a downstream test outside the changed component and outside the agent's observed first reads; this is a hypothesis for ablation, not a finding of causal harm.",
+  "comparison_constraints": [
+    "same immutable SWE-bench base commit",
+    "same prompt and model settings",
+    "one repetition only",
+    "official evaluator after each patch"
+  ],
+  "created_at": "2026-10-02T17:47:08.892861+00:00"
+}

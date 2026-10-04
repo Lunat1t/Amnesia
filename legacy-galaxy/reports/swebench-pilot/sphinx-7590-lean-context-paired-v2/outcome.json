@@ -1,0 +1,94 @@
+{
+  "plan_sha256": "7d2b4ab7efda35226070c1d3a516edbc843a98d44c2b36cad288adf381fbaa2b",
+  "measurement_correction": {
+    "original_field_error": "rendered Markdown codepoints divided by four was stored as context_tokens",
+    "corrected_field": "ContextPackage.token_estimate from ContextCompiler source packet before render-only task-block removal (serialized packet codepoints divided by four; approximate, not provider tokenization)",
+    "rendered_character_count_field": "context_rendered_characters",
+    "repair_scope": "post-run metric and report derivation only; prompt, supplied content, model trajectory, patch, and evaluator result are unchanged"
+  },
+  "source_metrics_refreshed": true,
+  "arm_order": [
+    "with_galaxy",
+    "without_galaxy"
+  ],
+  "arms": {
+    "without_galaxy": {
+      "run_id": "sphinx-doc__sphinx-7590-3154a37df731-without_galaxy",
+      "mode": "without_galaxy",
+      "input_tokens": 368620,
+      "cached_input_tokens": 342528,
+      "uncached_input_tokens": 26092,
+      "output_tokens": 1720,
+      "total_tokens": 370340,
+      "tool_calls": 13,
+      "duration_ms": 177877.817564,
+      "context_tokens": null,
+      "context_rendered_characters": null,
+      "verified_success": false,
+      "verification": {
+        "resolved": false,
+        "patch_successfully_applied": true,
+        "infra_failure": false,
+        "reason": null,
+        "runner_exit_code": 0,
+        "fail_to_pass_success": 0,
+        "fail_to_pass_failure": 1,
+        "pass_to_pass_success": 24,
+        "pass_to_pass_failure": 0,
+        "report_sha256": "491d1ae3164ae60cdf9494857b7fd2f59d197751fa131d20c072622e1007566b",
+        "report_path": "without_galaxy-report.json"
+      },
+      "verification_integrity_valid": true,
+      "rendered_context_sha256": null,
+      "context_hash_matches_package": null,
+      "agent_patch_sha256": "795dcb6c0150fe89e1fe898cffe22dc172260981dba8e58b567082f0370cd7d5"
+    },
+    "with_galaxy": {
+      "run_id": "sphinx-doc__sphinx-7590-3154a37df731-with_galaxy",
+      "mode": "with_galaxy",
+      "input_tokens": 479186,
+      "cached_input_tokens": 444160,
+      "uncached_input_tokens": 35026,
+      "output_tokens": 2550,
+      "total_tokens": 481736,
+      "tool_calls": 16,
+      "duration_ms": 182818.70452800058,
+      "context_tokens": 2247,
+      "context_rendered_characters": 1673,
+      "verified_success": false,
+      "verification": {
+        "resolved": false,
+        "patch_successfully_applied": true,
+        "infra_failure": false,
+        "reason": null,
+        "runner_exit_code": 0,
+        "fail_to_pass_success": 0,
+        "fail_to_pass_failure": 1,
+        "pass_to_pass_success": 24,
+        "pass_to_pass_failure": 0,
+        "report_sha256": "491d1ae3164ae60cdf9494857b7fd2f59d197751fa131d20c072622e1007566b",
+        "report_path": "with_galaxy-report.json"
+      },
+      "verification_integrity_valid": true,
+      "rendered_context_sha256": "472240f06e75b3f315c427cda56ec96060c674520d21c17492d2648b5fd9f2e7",
+      "context_hash_matches_package": true,
+      "agent_patch_sha256": "8eeac22f2bf49382b5bab49d77f7835d1d262a3b9d3f22cc3a9093d9c880ca87"
+    }
+  },
+  "paired_delta_on_minus_off": {
+    "input_tokens": 110566,
+    "cached_input_tokens": 101632,
+    "uncached_input_tokens": 8934,
+    "output_tokens": 830,
+    "total_tokens": 111396,
+    "tool_calls": 3,
+    "duration_ms": 4940.886964000587
+  },
+  "leakage_audit_passed": true,
+  "both_evidence_ledgers_valid": true,
+  "context_hash_matches_package": true,
+  "evaluator_reports_match": true,
+  "paired_verified_outcome": "both failed F2P 0/1; both passed P2P 24/24",
+  "context_hash_matches": true,
+  "both_context_hashes_valid": true
+}

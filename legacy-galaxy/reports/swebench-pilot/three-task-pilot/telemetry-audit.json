@@ -1,0 +1,67 @@
+{
+  "method": "parse the latest cumulative usage snapshot in each retained Codex JSONL trace; do not sum snapshots",
+  "run_count": 6,
+  "runs": [
+    {
+      "run_id": "pallets__flask-5014-d2d21eb574d7-with_galaxy",
+      "mode": "with_galaxy",
+      "input_tokens": 146319,
+      "cached_input_tokens": 124160,
+      "uncached_input_tokens": 22159,
+      "output_tokens": 717,
+      "total_tokens": 147036,
+      "events_sha256": "2c2cf2890671569659134a50bebdc0ae5fa82912270667855eb5135eeb48f503"
+    },
+    {
+      "run_id": "pallets__flask-5014-d2d21eb574d7-without_galaxy",
+      "mode": "without_galaxy",
+      "input_tokens": 140516,
+      "cached_input_tokens": 124928,
+      "uncached_input_tokens": 15588,
+      "output_tokens": 756,
+      "total_tokens": 141272,
+      "events_sha256": "be4c56449f274d30a8af4617bfc197a6d4eb81a06b57a4331da439c8a7408e0e"
+    },
+    {
+      "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-with_galaxy",
+      "mode": "with_galaxy",
+      "input_tokens": 270772,
+      "cached_input_tokens": 249856,
+      "uncached_input_tokens": 20916,
+      "output_tokens": 1392,
+      "total_tokens": 272164,
+      "events_sha256": "34a18d09925ab54ab9d1394270f375bc3925409c925d7bc7fcd8f22e471dffcb"
+    },
+    {
+      "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-without_galaxy",
+      "mode": "without_galaxy",
+      "input_tokens": 369785,
+      "cached_input_tokens": 339456,
+      "uncached_input_tokens": 30329,
+      "output_tokens": 1774,
+      "total_tokens": 371559,
+      "events_sha256": "2c9541eaabed893f9677cbff6e4605a5e4c9800dce0b70b6b2eba191cae893ea"
+    },
+    {
+      "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-with_galaxy",
+      "mode": "with_galaxy",
+      "input_tokens": 699086,
+      "cached_input_tokens": 656640,
+      "uncached_input_tokens": 42446,
+      "output_tokens": 3130,
+      "total_tokens": 702216,
+      "events_sha256": "ddfebfaee8e30891565bc80abf5104eae68dcecb3abf063969a8a83963636ccf"
+    },
+    {
+      "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-without_galaxy",
+      "mode": "without_galaxy",
+      "input_tokens": 400212,
+      "cached_input_tokens": 364288,
+      "uncached_input_tokens": 35924,
+      "output_tokens": 1855,
+      "total_tokens": 402067,
+      "events_sha256": "5694d294a8aaa75715a88661a0316cd8472ae66bb949840569965209546744f7"
+    }
+  ],
+  "interpretation": "cached input is separately reported and is not a billing estimate; currency cost cannot be inferred without a dated price schedule"
+}

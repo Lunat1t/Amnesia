@@ -1,0 +1,202 @@
+{
+  "dataset_version": "experiencebench-v0.1-candidate",
+  "project": "refresh-service-fixture",
+  "tasks": [
+    {
+      "id": "refresh-current-contract",
+      "memory_opportunity": "none",
+      "task": "Review the refresh-token implementation and explain what it guarantees after a successful rotation. State explicitly whether a client retry after a lost response is specified.",
+      "semantic_rubric": {
+        "criterion": "Faithfully distinguish implemented refresh behavior from undocumented retry semantics.",
+        "pass_conditions": ["Says the valid old token is revoked and a successor is issued.", "Says retry/idempotency behavior is not implemented or specified."],
+        "fail_conditions": ["Claims the repository already supports retry idempotency."],
+        "evidence": ["README.md", "src/refresh.py", "tests/test_refresh.py"]
+      },
+      "checks": [
+        {"type": "command", "argv": ["python3", "-m", "unittest", "discover", "-s", "tests"], "expected_exit": 0, "timeout_seconds": 60}
+      ],
+      "observation": {
+        "run_id": "fixture-refresh-review-01",
+        "node_id": "retry-contract",
+        "outcome": "success",
+        "summary": "A product discussion recommended idempotent retry recovery.",
+        "lesson": "For the same refresh idempotency key, return the original successor token; do not mint a second successor.",
+        "evidence": ["Synthetic product-discussion note; unverified and absent from repository."],
+        "confidence": 0.55,
+        "verified": false
+      }
+    },
+    {
+      "id": "refresh-retry-design",
+      "memory_opportunity": "strong",
+      "task": "A mobile client timed out after refresh rotation and retries with the same idempotency key. Give a safe design recommendation, identify what this repository does not implement, and propose one regression test.",
+      "gold_prior": [["fixture-refresh-review-01", "retry-contract"]],
+      "semantic_rubric": {
+        "criterion": "Use the prior recommendation conditionally without misrepresenting it as current code behavior.",
+        "pass_conditions": ["Recommends returning/replaying the same successor for the same key.", "Identifies that current source lacks the idempotency mechanism.", "Proposes a repeat-same-key test checking identical successor and no second issuance."],
+        "fail_conditions": ["Presents the unverified recommendation as a repository-established fact."],
+        "evidence": ["The delivered episode is unverified; current source contains no idempotency-key parameter."]
+      }
+    },
+    {
+      "id": "password-reset-unrelated",
+      "memory_opportunity": "none",
+      "task": "Review password-reset behavior for account enumeration. Explain whether known and unknown email addresses receive the same response and name the relevant test.",
+      "semantic_rubric": {
+        "criterion": "Answer only from password-reset code/tests and do not import unrelated token-rotation advice.",
+        "pass_conditions": ["Says the same generic response is returned for existing and missing accounts.", "Names test_response_is_same_for_existing_and_missing_account or equivalent evidence."],
+        "fail_conditions": ["Discusses refresh-token idempotency as relevant to this task."],
+        "evidence": ["src/password_reset.py", "tests/test_password_reset.py"]
+      }
+    },
+    {
+      "id": "partial-transfer-webhook",
+      "memory_opportunity": "weak",
+      "task": "Compare the prior refresh idempotency recommendation with webhook event deduplication. State what principle transfers and what identifier/result is specific to webhooks.",
+      "gold_prior": [["fixture-refresh-review-01", "retry-contract"]],
+      "semantic_rubric": {
+        "criterion": "Transfer only the general idempotency principle while preserving domain-specific identity.",
+        "pass_conditions": ["Recognizes reuse/deduplication for repeated operations.", "Uses webhook event ID, not refresh token, as the webhook deduplication key.", "Does not claim the refresh episode proves webhook implementation details."],
+        "fail_conditions": ["Uses a refresh token as the webhook key."],
+        "evidence": ["src/webhooks.py", "tests/test_webhooks.py", "unverified refresh episode"]
+      }
+    },
+    {
+      "id": "webhook-current-contract",
+      "memory_opportunity": "weak",
+      "task": "Inspect webhook duplicate-delivery handling. Explain when the handler runs, what a duplicate event returns, and why acknowledgement ordering matters.",
+      "gold_prior": [["fixture-refresh-review-01", "retry-contract"]],
+      "semantic_rubric": {
+        "criterion": "Describe current event-ID deduplication and commit-before-ack behavior accurately.",
+        "pass_conditions": ["Duplicate event ID returns stored result without a second handler call.", "New event result is saved inside transaction before process_event returns.", "Acknowledgement follows successful processing/commit."],
+        "fail_conditions": ["Says a 2xx acknowledgement is sent before persistence."],
+        "evidence": ["src/webhooks.py", "tests/test_webhooks.py"]
+      },
+      "observation": {
+        "run_id": "fixture-webhook-review-01",
+        "node_id": "event-id-dedupe",
+        "outcome": "success",
+        "summary": "Reviewed event-ID dedupe and transaction ordering.",
+        "lesson": "For webhook redelivery, key the idempotency record by event ID and commit the result before returning success/allowing a 2xx acknowledgement.",
+        "evidence": ["Synthetic fixture review; not independently verified by the Galaxy ledger."],
+        "confidence": 0.7,
+        "verified": false
+      }
+    },
+    {
+      "id": "webhook-database-outage",
+      "memory_opportunity": "strong",
+      "task": "A webhook database transaction fails while the provider may redeliver the same event. Based on the current implementation, explain the safe acknowledgement/retry behavior and the key test to inspect.",
+      "gold_prior": [["fixture-webhook-review-01", "event-id-dedupe"]],
+      "semantic_rubric": {
+        "criterion": "Do not acknowledge an event whose persistence transaction failed.",
+        "pass_conditions": ["Explains failed persistence must not be reported as successful acknowledgement.", "Allows provider retry/redelivery after failure.", "Connects duplicate event handling to saved event-ID result."],
+        "fail_conditions": ["Recommends acknowledging before commit."],
+        "evidence": ["src/webhooks.py", "tests/test_webhooks.py"]
+      },
+      "observation": {
+        "run_id": "fixture-webhook-failure-01",
+        "node_id": "ack-before-commit",
+        "outcome": "failure",
+        "summary": "A simulated integration failure showed the risk of acknowledging before persistence completes.",
+        "lesson": "Never return a successful webhook acknowledgement before the event result is durably committed; otherwise a database failure can drop the provider retry.",
+        "evidence": ["Synthetic failure annotation; not a test log and not verified."],
+        "confidence": 0.65,
+        "verified": false
+      }
+    },
+    {
+      "id": "webhook-repeat-failure",
+      "memory_opportunity": "strong",
+      "task": "A second incident reports a webhook event disappearing during a database outage. Identify the likely acknowledgement-ordering risk, distinguish it from a confirmed code defect, and propose a failure-injection test.",
+      "gold_prior": [["fixture-webhook-review-01", "event-id-dedupe"], ["fixture-webhook-failure-01", "ack-before-commit"]],
+      "semantic_rubric": {
+        "criterion": "Use the prior failure hypothesis as a lead, not proof, and formulate a test that checks persistence before success response.",
+        "pass_conditions": ["Mentions acknowledgement-before-commit as a risk/hypothesis.", "States that the current fixture code saves inside a transaction before returning.", "Proposes injected persistence failure and asserts no success acknowledgement plus retryability."],
+        "fail_conditions": ["Calls the synthetic prior incident proof of a current source defect."],
+        "evidence": ["src/webhooks.py", "unverified failure episode"]
+      }
+    },
+    {
+      "id": "password-reset-noise-control",
+      "memory_opportunity": "none",
+      "task": "A reviewer asks whether the reset endpoint leaks account existence through its response. Verify the behavior and summarize the relevant test without discussing other subsystems.",
+      "semantic_rubric": {
+        "criterion": "Return the password-reset finding only; unrelated memories are harmful noise.",
+        "pass_conditions": ["Identifies the generic response for existing and missing accounts.", "Cites the password reset test."],
+        "fail_conditions": ["Introduces refresh or webhook retry guidance as applicable."],
+        "evidence": ["src/password_reset.py", "tests/test_password_reset.py"]
+      }
+    },
+    {
+      "id": "legacy-grace-proposal",
+      "memory_opportunity": "none",
+      "task": "Find the historical refresh-token grace-window proposal. State its duration and whether the document labels it as current policy.",
+      "semantic_rubric": {
+        "criterion": "Report the legacy proposal with its stale status, not as current behavior.",
+        "pass_conditions": ["Names the five-minute grace proposal.", "Says it is superseded/not current."],
+        "fail_conditions": ["Recommends applying the grace window as the current security rule."],
+        "evidence": ["docs/legacy-refresh.md", "docs/security-policy.md"]
+      },
+      "observation": {
+        "run_id": "fixture-legacy-policy-01",
+        "node_id": "grace-window",
+        "outcome": "success",
+        "summary": "An old rollout proposal mentioned a five-minute token grace window.",
+        "lesson": "Legacy guidance: accept the previous refresh token for a five-minute grace period.",
+        "evidence": ["docs/legacy-refresh.md; lesson is stale and unverified as current policy."],
+        "confidence": 0.8,
+        "verified": false
+      }
+    },
+    {
+      "id": "correct-superseded-policy",
+      "memory_opportunity": "none",
+      "task": "Security policy review confirms the legacy grace-window advice is obsolete. Identify the current rule and explicitly retire the old advice for later tasks.",
+      "stale_prior": [["fixture-legacy-policy-01", "grace-window"]],
+      "retire_prior": [["fixture-legacy-policy-01", "grace-window"]],
+      "semantic_rubric": {
+        "criterion": "Apply the current security policy and do not continue using superseded advice.",
+        "pass_conditions": ["States immediate revocation/no grace window.", "Recognizes docs/security-policy.md supersedes the legacy proposal."],
+        "fail_conditions": ["Treats the five-minute grace window as current."],
+        "evidence": ["docs/security-policy.md", "docs/legacy-refresh.md"]
+      },
+      "observation": {
+        "run_id": "fixture-current-policy-01",
+        "node_id": "immediate-revocation",
+        "outcome": "success",
+        "summary": "Current security policy supersedes the legacy grace proposal.",
+        "lesson": "Current policy: revoke the previous refresh token immediately; no grace window is allowed. Retry recovery requires a separately approved idempotency design.",
+        "evidence": ["docs/security-policy.md; synthetic annotation, not ledger-verified."],
+        "confidence": 0.9,
+        "verified": false
+      }
+    },
+    {
+      "id": "apply-current-policy",
+      "memory_opportunity": "strong",
+      "task": "Review a proposed change that keeps the old refresh token valid for five minutes after rotation. Give the current policy recommendation and explain the retry alternative.",
+      "gold_prior": [["fixture-current-policy-01", "immediate-revocation"]],
+      "stale_prior": [["fixture-legacy-policy-01", "grace-window"]],
+      "retire_prior": [["fixture-legacy-policy-01", "grace-window"]],
+      "semantic_rubric": {
+        "criterion": "Avoid stale-memory harm while applying the corrected policy.",
+        "pass_conditions": ["Rejects the grace window and recommends immediate revocation.", "Says retries need an explicit separately approved idempotency mechanism."],
+        "fail_conditions": ["Recommends the superseded five-minute grace window."],
+        "evidence": ["docs/security-policy.md", "docs/legacy-refresh.md"]
+      }
+    },
+    {
+      "id": "unverified-memory-provenance-audit",
+      "memory_opportunity": "strong",
+      "task": "A reviewer asks whether this repository implements same-key refresh retry recovery. Answer from source first, then separately state whether any prior unverified recommendation can inform a future design.",
+      "gold_prior": [["fixture-refresh-review-01", "retry-contract"], ["fixture-current-policy-01", "immediate-revocation"]],
+      "semantic_rubric": {
+        "criterion": "Keep repository facts separate from unverified recommendations and current policy.",
+        "pass_conditions": ["Says same-key retry recovery is not implemented in source.", "Labels the episode as unverified advice rather than proof.", "Preserves the current immediate-revocation rule."],
+        "fail_conditions": ["Claims the episode proves the implementation supports idempotency."],
+        "evidence": ["src/refresh.py", "docs/security-policy.md", "episode verification status"]
+      }
+    }
+  ]
+}

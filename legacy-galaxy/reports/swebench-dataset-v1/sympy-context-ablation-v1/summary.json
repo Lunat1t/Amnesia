@@ -1,0 +1,224 @@
+{
+  "status": "complete",
+  "task_id": "sympy__sympy-13878",
+  "dataset_sha256": "9f0dd9bc9644e2b1ca6ee4965291487e884d873c2f291a06aa773d936f0ae278",
+  "base_commit": "7b127bdf71a36d85216315f80c1b54d22b060818",
+  "arms": [
+    {
+      "arm": "A",
+      "name": "off",
+      "run_id": "sympy__sympy-13878-714e877fa2a4-without_galaxy",
+      "verified_success": false,
+      "total_tokens": 358733,
+      "input_tokens": 355923,
+      "output_tokens": 2810,
+      "tool_calls": 10,
+      "search_calls": 5,
+      "unique_files_opened": 2,
+      "repeated_file_reads": 3,
+      "edit_events": 1,
+      "test_runs": 0,
+      "duration_ms": 138306.67907000042,
+      "context_tokens": null,
+      "context_char_count": null,
+      "context_tokens_estimate_method": null,
+      "context_package_hash": null,
+      "context_files_supplied": [],
+      "context_files_later_opened": [],
+      "context_files_later_touched": [],
+      "agent_first_files": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/crv.py"
+      ],
+      "context_entity_use": "unknown",
+      "semantic_context_use": "unknown; later open/edit is only an observed path match",
+      "evaluator_report_sha256": "bb43026d6aa6a787c81ecf1bd7b924c811d8b03bc7260f668abb7b21d6beebf5",
+      "integrity_valid": true,
+      "description": ""
+    },
+    {
+      "arm": "B",
+      "name": "galaxy_current",
+      "run_id": "sympy__sympy-13878-714e877fa2a4-with_galaxy",
+      "verified_success": false,
+      "total_tokens": 1025635,
+      "input_tokens": 1019943,
+      "output_tokens": 5692,
+      "tool_calls": 30,
+      "search_calls": 7,
+      "unique_files_opened": 2,
+      "repeated_file_reads": 2,
+      "edit_events": 14,
+      "test_runs": 0,
+      "duration_ms": 178900.64505900047,
+      "context_tokens": 1161,
+      "context_char_count": 4643,
+      "context_tokens_estimate_method": "rendered_context_codepoints_divided_by_4_approximation",
+      "context_package_hash": "e97e9ce1458a21049678a8affba72de0766e0444f6f723ffab26b2a7926a4ba9",
+      "context_files_supplied": [
+        "sympy/stats/crv.py",
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py",
+        "sympy/core/tests/test_args.py",
+        "sympy/stats/__init__.py",
+        "sympy/stats/rv.py",
+        "sympy/__init__.py",
+        "sympy/core/compatibility.py",
+        "sympy/functions/special/delta_functions.py",
+        "sympy/polys/polyerrors.py",
+        "sympy/solvers/inequalities.py",
+        "sympy/solvers/solveset.py"
+      ],
+      "context_files_later_opened": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_files_later_touched": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "agent_first_files": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_entity_use": "unknown",
+      "semantic_context_use": "unknown; later open/edit is only an observed path match",
+      "evaluator_report_sha256": "bb43026d6aa6a787c81ecf1bd7b924c811d8b03bc7260f668abb7b21d6beebf5",
+      "integrity_valid": true,
+      "description": ""
+    },
+    {
+      "arm": "C",
+      "name": "top3",
+      "run_id": "sympy__sympy-13878-ba889329a6da-with_galaxy",
+      "verified_success": true,
+      "total_tokens": 1056719,
+      "input_tokens": 1051204,
+      "output_tokens": 5515,
+      "tool_calls": 26,
+      "search_calls": 11,
+      "unique_files_opened": 2,
+      "repeated_file_reads": 4,
+      "edit_events": 6,
+      "test_runs": 0,
+      "duration_ms": 178418.16706500138,
+      "context_tokens": 1007,
+      "context_char_count": 4028,
+      "context_tokens_estimate_method": "rendered_context_codepoints_divided_by_4_approximation",
+      "context_package_hash": "f8a7e154d5307dd1dc5f5e690473c0d707570cb0da5b56239edab8af8fabe37f",
+      "context_files_supplied": [
+        "sympy/stats/crv.py",
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_files_later_opened": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_files_later_touched": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "agent_first_files": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_entity_use": "unknown",
+      "semantic_context_use": "unknown; later open/edit is only an observed path match",
+      "evaluator_report_sha256": "88c5198b22cf62471577f99138717fe3fe924dbe12ba85f729ea73e098619eaa",
+      "integrity_valid": true,
+      "description": "Keep only the three highest-ranked Galaxy evidence items."
+    },
+    {
+      "arm": "D",
+      "name": "top1",
+      "run_id": "sympy__sympy-13878-0642d2c6c1d3-with_galaxy",
+      "verified_success": false,
+      "total_tokens": 376234,
+      "input_tokens": 373141,
+      "output_tokens": 3093,
+      "tool_calls": 13,
+      "search_calls": 4,
+      "unique_files_opened": 1,
+      "repeated_file_reads": 1,
+      "edit_events": 3,
+      "test_runs": 0,
+      "duration_ms": 122911.4959139988,
+      "context_tokens": 974,
+      "context_char_count": 3895,
+      "context_tokens_estimate_method": "rendered_context_codepoints_divided_by_4_approximation",
+      "context_package_hash": "8407f5f283c376182bba6573e29f1a8d4ea7d732d5ae59eae71d337b54c39f43",
+      "context_files_supplied": [
+        "sympy/stats/crv.py"
+      ],
+      "context_files_later_opened": [],
+      "context_files_later_touched": [],
+      "agent_first_files": [
+        "sympy/stats/crv_types.py"
+      ],
+      "context_entity_use": "unknown",
+      "semantic_context_use": "unknown; later open/edit is only an observed path match",
+      "evaluator_report_sha256": "bb43026d6aa6a787c81ecf1bd7b924c811d8b03bc7260f668abb7b21d6beebf5",
+      "integrity_valid": true,
+      "description": "Keep only the highest-ranked Galaxy evidence item."
+    },
+    {
+      "arm": "E",
+      "name": "without_ctx_004",
+      "run_id": "sympy__sympy-13878-3b38a74026d2-with_galaxy",
+      "verified_success": false,
+      "total_tokens": 466626,
+      "input_tokens": 463276,
+      "output_tokens": 3350,
+      "tool_calls": 14,
+      "search_calls": 5,
+      "unique_files_opened": 3,
+      "repeated_file_reads": 3,
+      "edit_events": 3,
+      "test_runs": 0,
+      "duration_ms": 124959.25429800081,
+      "context_tokens": 1162,
+      "context_char_count": 4647,
+      "context_tokens_estimate_method": "rendered_context_codepoints_divided_by_4_approximation",
+      "context_package_hash": "4ca89069856bc007741c627e9ec3325cc063777c693a4a7ddf93e29dcce17ef5",
+      "context_files_supplied": [
+        "sympy/__init__.py",
+        "sympy/core/compatibility.py",
+        "sympy/functions/special/delta_functions.py",
+        "sympy/polys/polyerrors.py",
+        "sympy/solvers/inequalities.py",
+        "sympy/solvers/solveset.py",
+        "sympy/stats/__init__.py",
+        "sympy/stats/crv.py",
+        "sympy/stats/crv_types.py",
+        "sympy/stats/rv.py",
+        "sympy/stats/tests/test_continuous_rv.py",
+        "sympy/utilities/pytest.py"
+      ],
+      "context_files_later_opened": [
+        "sympy/stats/crv.py",
+        "sympy/stats/crv_types.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_files_later_touched": [
+        "sympy/stats/crv_types.py"
+      ],
+      "agent_first_files": [
+        "sympy/stats/crv_types.py",
+        "sympy/stats/crv.py",
+        "sympy/stats/tests/test_continuous_rv.py"
+      ],
+      "context_entity_use": "unknown",
+      "semantic_context_use": "unknown; later open/edit is only an observed path match",
+      "evaluator_report_sha256": "bb43026d6aa6a787c81ecf1bd7b924c811d8b03bc7260f668abb7b21d6beebf5",
+      "integrity_valid": true,
+      "description": "Current packet with the rank-4, off-task downstream test item removed."
+    }
+  ],
+  "limitations": [
+    "one sample per arm",
+    "descriptive ablation only",
+    "not evidence of causal context harm or quality benefit"
+  ],
+  "created_at": "2026-10-03T09:10:27.197333+00:00"
+}

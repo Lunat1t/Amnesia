@@ -1,0 +1,55 @@
+{
+  "protocol": "Galaxy SWE-bench Verified Dataset v1 selection preregistration",
+  "selection_uses": [
+    "repository",
+    "difficulty",
+    "gold_patch_bytes",
+    "gold_files_changed",
+    "gold_lines_added",
+    "gold_lines_deleted",
+    "fail_to_pass_count",
+    "pass_to_pass_count",
+    "problem_statement_length"
+  ],
+  "selection_excludes": [
+    "Galaxy pilot performance",
+    "Galaxy retrieval score",
+    "expected Galaxy advantage",
+    "agent-generated patches"
+  ],
+  "candidate_pool_size": 72,
+  "repository_strata": [
+    "django/django",
+    "sympy/sympy",
+    "sphinx-doc/sphinx",
+    "matplotlib/matplotlib"
+  ],
+  "repository_quota": 18,
+  "difficulty_selection": "within each repository sort actual SWE-bench difficulty ascending, then patch bytes ascending and instance_id lexical; select round-robin over available difficulty strata until quota is filled",
+  "patch_size_coverage": "within each repo/difficulty stratum use deterministic low/middle/high patch-byte quantiles before lexical tie break",
+  "audit_policy": "accepted only when official base no-op reproduces at least one FAIL_TO_PASS failure, all observed PASS_TO_PASS pass, no infra_failure; official gold patch applies, resolves, all FAIL_TO_PASS and PASS_TO_PASS pass, no infra_failure",
+  "final_dataset_selection": {
+    "eligibility": "only candidates with completed accepted official base/gold audit",
+    "repository_targets": {
+      "django/django": 8,
+      "matplotlib/matplotlib": 7,
+      "sphinx-doc/sphinx": 7,
+      "sympy/sympy": 8
+    },
+    "repository_shortfall": "if a target is unavailable among accepted candidates, redistribute each missing slot one at a time to the repository with the largest accepted-minus-current count; ties use lexical repository name",
+    "within_repository": "round-robin across the four frozen SWE-bench difficulty labels in this order: <15 min fix, 15 min - 1 hour, 1-4 hours, >4 hours; skip exhausted strata",
+    "within_difficulty": "sort eligible tasks by gold_patch_bytes ascending and instance_id ascending; before selection, divide each stratum into deterministic low/middle/high patch-size thirds and round-robin these thirds, skipping exhausted thirds",
+    "selection_excludes": [
+      "Galaxy OFF/ON performance",
+      "retrieval or context scores",
+      "expected treatment effect",
+      "agent-generated patches",
+      "task-specific subjective preference"
+    ],
+    "stable_order": "selected dataset rows sorted by repository lexical order, then difficulty order above, then instance_id lexical"
+  },
+  "task_set": "independent",
+  "candidate_pool_hash": "c09a2aae35baf0a5c7923332e8399251f4eb79c9f8b0833ded13127b80df1ebe",
+  "created_at": "2026-10-01",
+  "status": "frozen_before_audit"
+}

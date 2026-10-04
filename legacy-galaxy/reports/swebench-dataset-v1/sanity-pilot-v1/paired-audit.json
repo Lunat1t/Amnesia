@@ -1,0 +1,215 @@
+{
+  "audit_method": "Reconcile saved runs.jsonl against final cumulative Codex usage snapshot in each events.jsonl and official SWE-bench report JSON; no model runs performed.",
+  "dataset_sha256": "9f0dd9bc9644e2b1ca6ee4965291487e884d873c2f291a06aa773d936f0ae278",
+  "task_count": 5,
+  "run_count": 10,
+  "verified_success": {
+    "off": 3,
+    "on": 3
+  },
+  "paired_outcomes": {
+    "off_pass_on_pass": 3,
+    "off_pass_on_fail": 0,
+    "off_fail_on_pass": 0,
+    "off_fail_on_fail": 2
+  },
+  "sum_total_processed_tokens": {
+    "off": 1629091,
+    "on": 2469169
+  },
+  "sum_cached_input_tokens": {
+    "off": 1465856,
+    "on": 2294528
+  },
+  "sum_uncached_input_tokens": {
+    "off": 154793,
+    "on": 162552
+  },
+  "sum_output_tokens": {
+    "off": 8442,
+    "on": 12089
+  },
+  "token_total_relative_change": 0.5156728506878989,
+  "all_usage_rows_reconciled": true,
+  "all_evaluator_outcomes_reconciled": true,
+  "all_evidence_ledgers_valid": true,
+  "limitations": [
+    "one model run per arm per task; descriptive sample only",
+    "fixed five-task selection does not support generalization to all coding tasks",
+    "Galaxy product claim evaluated here is current Context only, not Memory/Experience transfer",
+    "processed tokens are not currency cost; no dated price schedule"
+  ],
+  "tasks": [
+    {
+      "task_id": "matplotlib__matplotlib-13989",
+      "off": {
+        "run_id": "matplotlib__matplotlib-13989-790ab5d1819c-without_galaxy",
+        "verified_success": true,
+        "input_tokens": 167663,
+        "cached_input_tokens": 147456,
+        "uncached_input_tokens": 20207,
+        "output_tokens": 978,
+        "total_processed_tokens": 168641,
+        "duration_ms": 195220.4247189993,
+        "usage_events_sha256": "a03e8d2c9d28025802d595f8211c7cb84fd8a5c09349dde0822a9c1c3480c4f9",
+        "evaluator_report_sha256": "2134d3bd6c17447c4f7d4c1a995c853252c18059d8e72a262ce74e02d3a42dfd",
+        "evaluator_resolved": true,
+        "evidence_integrity_valid": true
+      },
+      "on": {
+        "run_id": "matplotlib__matplotlib-13989-790ab5d1819c-with_galaxy",
+        "verified_success": true,
+        "input_tokens": 251640,
+        "cached_input_tokens": 217856,
+        "uncached_input_tokens": 33784,
+        "output_tokens": 1180,
+        "total_processed_tokens": 252820,
+        "duration_ms": 214024.75593299913,
+        "usage_events_sha256": "83c2294b395182c7ca3012d960e5a6ad92378a4c0bfe526b790953c2d3a3257a",
+        "evaluator_report_sha256": "2134d3bd6c17447c4f7d4c1a995c853252c18059d8e72a262ce74e02d3a42dfd",
+        "evaluator_resolved": true,
+        "evidence_integrity_valid": true
+      },
+      "verified_outcome_delta": 0,
+      "total_processed_token_delta_on_minus_off": 84179,
+      "duration_ms_delta_on_minus_off": 18804.33121399983
+    },
+    {
+      "task_id": "django__django-13033",
+      "off": {
+        "run_id": "django__django-13033-e3805ad06095-without_galaxy",
+        "verified_success": true,
+        "input_tokens": 370128,
+        "cached_input_tokens": 337664,
+        "uncached_input_tokens": 32464,
+        "output_tokens": 1468,
+        "total_processed_tokens": 371596,
+        "duration_ms": 166737.64170600133,
+        "usage_events_sha256": "43761a26c77ddc48cc9ea73dfcd8a1c822956b0bfe96b53139013913d614b1bc",
+        "evaluator_report_sha256": "a8107135b35e005d71ae9a8526e93fe6a547765a0bb8b588c7700ee311d9d993",
+        "evaluator_resolved": true,
+        "evidence_integrity_valid": true
+      },
+      "on": {
+        "run_id": "django__django-13033-e3805ad06095-with_galaxy",
+        "verified_success": true,
+        "input_tokens": 387065,
+        "cached_input_tokens": 355840,
+        "uncached_input_tokens": 31225,
+        "output_tokens": 1805,
+        "total_processed_tokens": 388870,
+        "duration_ms": 160867.30586200065,
+        "usage_events_sha256": "56a56e79f406d5249bd7489d2d3d9cb7694638f8a56b03886cb385d62f0731db",
+        "evaluator_report_sha256": "a8107135b35e005d71ae9a8526e93fe6a547765a0bb8b588c7700ee311d9d993",
+        "evaluator_resolved": true,
+        "evidence_integrity_valid": true
+      },
+      "verified_outcome_delta": 0,
+      "total_processed_token_delta_on_minus_off": 17274,
+      "duration_ms_delta_on_minus_off": -5870.335844000685
+    },
+    {
+      "task_id": "sphinx-doc__sphinx-8548",
+      "off": {
+        "run_id": "sphinx-doc__sphinx-8548-a4380489780b-without_galaxy",
+        "verified_success": false,
+        "input_tokens": 492773,
+        "cached_input_tokens": 459520,
+        "uncached_input_tokens": 33253,
+        "output_tokens": 1867,
+        "total_processed_tokens": 494640,
+        "duration_ms": 109687.87178500043,
+        "usage_events_sha256": "65e9aa2d081dac4cfa971dbf227e4caad8fcfa0f0af84fedf181580182613c94",
+        "evaluator_report_sha256": "c5c5e81c10f37a2b2260ab08178950ebd0703f3d4f3d4a54c334830803f69686",
+        "evaluator_resolved": false,
+        "evidence_integrity_valid": true
+      },
+      "on": {
+        "run_id": "sphinx-doc__sphinx-8548-a4380489780b-with_galaxy",
+        "verified_success": false,
+        "input_tokens": 431110,
+        "cached_input_tokens": 403456,
+        "uncached_input_tokens": 27654,
+        "output_tokens": 1691,
+        "total_processed_tokens": 432801,
+        "duration_ms": 117858.07834100068,
+        "usage_events_sha256": "61765df6c9a52d57301ae9a5c3c96a5eace52152a806d210902ef9eb8b9eca75",
+        "evaluator_report_sha256": "c5c5e81c10f37a2b2260ab08178950ebd0703f3d4f3d4a54c334830803f69686",
+        "evaluator_resolved": false,
+        "evidence_integrity_valid": true
+      },
+      "verified_outcome_delta": 0,
+      "total_processed_token_delta_on_minus_off": -61839,
+      "duration_ms_delta_on_minus_off": 8170.206556000252
+    },
+    {
+      "task_id": "sympy__sympy-13878",
+      "off": {
+        "run_id": "sympy__sympy-13878-714e877fa2a4-without_galaxy",
+        "verified_success": false,
+        "input_tokens": 355923,
+        "cached_input_tokens": 310528,
+        "uncached_input_tokens": 45395,
+        "output_tokens": 2810,
+        "total_processed_tokens": 358733,
+        "duration_ms": 138306.67907000042,
+        "usage_events_sha256": "e293af350c0a9c24dd84db1db45a4ee03f11e65d0a9bfaba7dcb530d02bdb924",
+        "evaluator_report_sha256": "bb43026d6aa6a787c81ecf1bd7b924c811d8b03bc7260f668abb7b21d6beebf5",
+        "evaluator_resolved": false,
+        "evidence_integrity_valid": true
+      },
+      "on": {
+        "run_id": "sympy__sympy-13878-714e877fa2a4-with_galaxy",
+        "verified_success": false,
+        "input_tokens": 1019943,
+        "cached_input_tokens": 975872,
+        "uncached_input_tokens": 44071,
+        "output_tokens": 5692,
+        "total_processed_tokens": 1025635,
+        "duration_ms": 178900.64505900047,
+        "usage_events_sha256": "e5794fac5c99310170c1d7758afba97549e56580879a65244e076446339396d8",
+        "evaluator_report_sha256": "bb43026d6aa6a787c81ecf1bd7b924c811d8b03bc7260f668abb7b21d6beebf5",
+        "evaluator_resolved": false,
+        "evidence_integrity_valid": true
+      },
+      "verified_outcome_delta": 0,
+      "total_processed_token_delta_on_minus_off": 666902,
+      "duration_ms_delta_on_minus_off": 40593.96598900005
+    },
+    {
+      "task_id": "django__django-13406",
+      "off": {
+        "run_id": "django__django-13406-8dcc9f6e1a4e-without_galaxy",
+        "verified_success": true,
+        "input_tokens": 234162,
+        "cached_input_tokens": 210688,
+        "uncached_input_tokens": 23474,
+        "output_tokens": 1319,
+        "total_processed_tokens": 235481,
+        "duration_ms": 92092.50567800063,
+        "usage_events_sha256": "72076650e91b7a8c596d996b8413d0f26675421f9d0a3402b4d1ed8869cd7e0b",
+        "evaluator_report_sha256": "7752938641e35e4f6e5e5f6ce4feced1736618b8a62991886fe71b2d2e96a8fe",
+        "evaluator_resolved": true,
+        "evidence_integrity_valid": true
+      },
+      "on": {
+        "run_id": "django__django-13406-8dcc9f6e1a4e-with_galaxy",
+        "verified_success": true,
+        "input_tokens": 367322,
+        "cached_input_tokens": 341504,
+        "uncached_input_tokens": 25818,
+        "output_tokens": 1721,
+        "total_processed_tokens": 369043,
+        "duration_ms": 143261.7745409998,
+        "usage_events_sha256": "9b45fe0b8313883e8bd24e3241629d256d81695e8586a6b4c9e253155bcbd5d1",
+        "evaluator_report_sha256": "7752938641e35e4f6e5e5f6ce4feced1736618b8a62991886fe71b2d2e96a8fe",
+        "evaluator_resolved": true,
+        "evidence_integrity_valid": true
+      },
+      "verified_outcome_delta": 0,
+      "total_processed_token_delta_on_minus_off": 133562,
+      "duration_ms_delta_on_minus_off": 51169.26886299916
+    }
+  ],
+  "all_evaluator_report_hashes_reconciled": true
+}

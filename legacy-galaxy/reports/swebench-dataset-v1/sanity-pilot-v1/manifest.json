@@ -1,0 +1,21 @@
+{
+  "benchmark_version": "galaxy-swebench-dataset-v1-sanity-pilot",
+  "dataset_manifest_path": "benchmarks/datasets/dataset-v1-manifest.json",
+  "dataset_sha256": "9f0dd9bc9644e2b1ca6ee4965291487e884d873c2f291a06aa773d936f0ae278",
+  "selection_path": "reports/swebench-dataset-v1/sanity-pilot-v1/selection.json",
+  "tasks": [
+    "matplotlib__matplotlib-13989",
+    "django__django-13033",
+    "sphinx-doc__sphinx-8548",
+    "sympy__sympy-13878",
+    "django__django-13406"
+  ],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "repetitions_per_arm": 1,
+  "arms": [
+    "without_galaxy",
+    "with_galaxy"
+  ],
+  "status": "complete"
+}

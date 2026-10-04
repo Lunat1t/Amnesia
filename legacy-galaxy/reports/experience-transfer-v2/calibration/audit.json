@@ -1,0 +1,283 @@
+{
+  "status": "single-repetition calibration",
+  "pairs": [
+    {
+      "pair": "expiry",
+      "A": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [],
+        "agent_usage": {
+          "input_tokens": 49466,
+          "output_tokens": 517,
+          "total_tokens": 49983
+        },
+        "agent_duration_ms": 17756.857184999717,
+        "experience_extraction_usage": {
+          "input_tokens": 17118,
+          "cached_input_tokens": 12032,
+          "output_tokens": 112
+        },
+        "experience_extraction_ms": 9425.201647999984
+      },
+      "B_experience": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [
+          "EXP-7b3c0fc0ab33bb5a"
+        ],
+        "agent_usage": {
+          "input_tokens": 49855,
+          "output_tokens": 575,
+          "total_tokens": 50430
+        },
+        "agent_duration_ms": 19715.188348999618,
+        "experience_extraction_usage": {
+          "input_tokens": 17031,
+          "cached_input_tokens": 12032,
+          "output_tokens": 136
+        },
+        "experience_extraction_ms": 18522.56836100014
+      },
+      "B_context_only": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [],
+        "agent_usage": {
+          "input_tokens": 82353,
+          "output_tokens": 525,
+          "total_tokens": 82878
+        },
+        "agent_duration_ms": 27550.9990139999,
+        "experience_extraction_usage": null,
+        "experience_extraction_ms": null
+      },
+      "B_baselines": [
+        {
+          "verified_success": true,
+          "verification_completed": true,
+          "error": null,
+          "experience_ids_supplied": [],
+          "agent_usage": {
+            "input_tokens": 62991,
+            "output_tokens": 380,
+            "total_tokens": 63371
+          },
+          "agent_duration_ms": 19601.86246300009,
+          "experience_extraction_usage": null,
+          "experience_extraction_ms": null
+        },
+        {
+          "verified_success": true,
+          "verification_completed": true,
+          "error": null,
+          "experience_ids_supplied": [],
+          "agent_usage": {
+            "input_tokens": 68144,
+            "output_tokens": 285,
+            "total_tokens": 68429
+          },
+          "agent_duration_ms": 17193.1465749999,
+          "experience_extraction_usage": null,
+          "experience_extraction_ms": null
+        }
+      ],
+      "same_nonexperience_items": true,
+      "same_commit": true,
+      "A_provenance_linked": true,
+      "A_verified_success": true,
+      "transfer_contrast_available": true,
+      "success_effect": "no_success_change"
+    },
+    {
+      "pair": "copy-isolation",
+      "A": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [],
+        "agent_usage": {
+          "input_tokens": 82394,
+          "output_tokens": 634,
+          "total_tokens": 83028
+        },
+        "agent_duration_ms": 21229.672515999937,
+        "experience_extraction_usage": {
+          "input_tokens": 18736,
+          "cached_input_tokens": 15104,
+          "output_tokens": 115
+        },
+        "experience_extraction_ms": 10418.59203299964
+      },
+      "B_experience": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [
+          "EXP-8867fceb89e68a08"
+        ],
+        "agent_usage": {
+          "input_tokens": 127795,
+          "output_tokens": 773,
+          "total_tokens": 128568
+        },
+        "agent_duration_ms": 31937.8042430003,
+        "experience_extraction_usage": {
+          "input_tokens": 19102,
+          "cached_input_tokens": 15104,
+          "output_tokens": 113
+        },
+        "experience_extraction_ms": 10834.674636999807
+      },
+      "B_context_only": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [],
+        "agent_usage": {
+          "input_tokens": 65753,
+          "output_tokens": 605,
+          "total_tokens": 66358
+        },
+        "agent_duration_ms": 20727.410108000186,
+        "experience_extraction_usage": null,
+        "experience_extraction_ms": null
+      },
+      "B_baselines": [
+        {
+          "verified_success": true,
+          "verification_completed": true,
+          "error": null,
+          "experience_ids_supplied": [],
+          "agent_usage": {
+            "input_tokens": 62838,
+            "output_tokens": 366,
+            "total_tokens": 63204
+          },
+          "agent_duration_ms": 18711.671286000183,
+          "experience_extraction_usage": null,
+          "experience_extraction_ms": null
+        },
+        {
+          "verified_success": true,
+          "verification_completed": true,
+          "error": null,
+          "experience_ids_supplied": [],
+          "agent_usage": {
+            "input_tokens": 78485,
+            "output_tokens": 334,
+            "total_tokens": 78819
+          },
+          "agent_duration_ms": 16611.138610000125,
+          "experience_extraction_usage": null,
+          "experience_extraction_ms": null
+        }
+      ],
+      "same_nonexperience_items": true,
+      "same_commit": true,
+      "A_provenance_linked": true,
+      "A_verified_success": true,
+      "transfer_contrast_available": true,
+      "success_effect": "no_success_change"
+    },
+    {
+      "pair": "normalized-collision",
+      "A": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [],
+        "agent_usage": {
+          "input_tokens": 65855,
+          "output_tokens": 646,
+          "total_tokens": 66501
+        },
+        "agent_duration_ms": 18720.442528999683,
+        "experience_extraction_usage": {
+          "input_tokens": 17186,
+          "cached_input_tokens": 14080,
+          "output_tokens": 124
+        },
+        "experience_extraction_ms": 6899.417760000233
+      },
+      "B_experience": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [
+          "EXP-7e24748fdc2cb36e"
+        ],
+        "agent_usage": {
+          "input_tokens": 118250,
+          "output_tokens": 851,
+          "total_tokens": 119101
+        },
+        "agent_duration_ms": 24786.621876000027,
+        "experience_extraction_usage": {
+          "input_tokens": 17593,
+          "cached_input_tokens": 12032,
+          "output_tokens": 119
+        },
+        "experience_extraction_ms": 8713.306102999923
+      },
+      "B_context_only": {
+        "verified_success": true,
+        "verification_completed": true,
+        "error": null,
+        "experience_ids_supplied": [],
+        "agent_usage": {
+          "input_tokens": 82292,
+          "output_tokens": 640,
+          "total_tokens": 82932
+        },
+        "agent_duration_ms": 20225.76372200001,
+        "experience_extraction_usage": null,
+        "experience_extraction_ms": null
+      },
+      "B_baselines": [
+        {
+          "verified_success": true,
+          "verification_completed": true,
+          "error": null,
+          "experience_ids_supplied": [],
+          "agent_usage": {
+            "input_tokens": 62778,
+            "output_tokens": 355,
+            "total_tokens": 63133
+          },
+          "agent_duration_ms": 18151.032784999643,
+          "experience_extraction_usage": null,
+          "experience_extraction_ms": null
+        },
+        {
+          "verified_success": true,
+          "verification_completed": true,
+          "error": null,
+          "experience_ids_supplied": [],
+          "agent_usage": {
+            "input_tokens": 62885,
+            "output_tokens": 422,
+            "total_tokens": 63307
+          },
+          "agent_duration_ms": 17084.023903999878,
+          "experience_extraction_usage": null,
+          "experience_extraction_ms": null
+        }
+      ],
+      "same_nonexperience_items": true,
+      "same_commit": true,
+      "A_provenance_linked": true,
+      "A_verified_success": true,
+      "transfer_contrast_available": true,
+      "success_effect": "no_success_change"
+    }
+  ],
+  "limitations": [
+    "Synthetic tasks, one repetition; no general benefit claim.",
+    "File access is not evidence of semantic use.",
+    "Extraction costs are separate from agent execution."
+  ]
+}

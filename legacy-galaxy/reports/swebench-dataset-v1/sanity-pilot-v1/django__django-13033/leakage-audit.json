@@ -1,0 +1,30 @@
+{
+  "instance_id": "django__django-13033",
+  "checks": [
+    {
+      "instance_id": "django__django-13033",
+      "mode": "without_galaxy",
+      "gold_visible": false,
+      "test_patch_visible": false,
+      "reference_indexed": false,
+      "hidden_verifier_indexed": false,
+      "fail_to_pass_identifiers_indexed": false,
+      "pass_to_pass_identifiers_indexed": false,
+      "evaluator_files_absent_during_agent": true,
+      "passed": true
+    },
+    {
+      "instance_id": "django__django-13033",
+      "mode": "with_galaxy",
+      "gold_visible": false,
+      "test_patch_visible": false,
+      "reference_indexed": false,
+      "hidden_verifier_indexed": false,
+      "fail_to_pass_identifiers_indexed": false,
+      "pass_to_pass_identifiers_indexed": false,
+      "evaluator_files_absent_during_agent": true,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

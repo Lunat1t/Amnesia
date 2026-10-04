@@ -1,0 +1,46 @@
+{
+  "benchmark_version": "galaxy-benchmark-swebench-pilot-v1",
+  "dataset_source": "SWE-bench/SWE-bench_Verified",
+  "dataset_revision": "8db12b107a1abfd10808f023ed233890b4d7cbae",
+  "instance_id": "sympy__sympy-13878",
+  "repository": "sympy/sympy",
+  "base_commit": "7b127bdf71a36d85216315f80c1b54d22b060818",
+  "snapshot_hash": "cd5cc788abbc1368ca3cce5ef66bd514b6fc175b",
+  "gold_patch_hash": "ed22192763dcd7277e313588c9792eaf52a7513574be95592fe597c26e8214c3",
+  "test_patch_hash": "1d3b8456d196a822d7ab9903af873bd005077b8f03cc184fd4ea8f29037c94fc",
+  "accepted_dataset_audit": {
+    "base_validated": true,
+    "base_target_failure_observed": true,
+    "base_pass_to_pass_preserved": true,
+    "gold_patch_applied": true,
+    "gold_verified": true,
+    "overlay_hash": "1d3b8456d196a822d7ab9903af873bd005077b8f03cc184fd4ea8f29037c94fc",
+    "reference_patch_hash": "ed22192763dcd7277e313588c9792eaf52a7513574be95592fe597c26e8214c3",
+    "base_patch_sha256": "0fac902c1677a10c66c1e5307aa4179fe6fe27af65c4c603df10a115a2f62b64",
+    "audit_status": "accepted",
+    "reason": "both baseline-failure and gold-pass policies satisfied"
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "agent_runtime": "/home/bah/.local/bin/codex",
+  "container_runtime": "docker-compatible-api",
+  "container_api_endpoint": "unix:///run/user/1000/podman/podman.sock",
+  "python_version": "3.14.7 (main, Aug 10 2026, 00:00:00) [GCC 16.1.1 20260515 (Red Hat 16.1.1-2)]",
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "swebench": "4.1.0"
+  },
+  "timeout_seconds": 1800,
+  "arm_order": [
+    "with_galaxy"
+  ],
+  "context_variant": {
+    "arm": "D",
+    "name": "top1",
+    "keep_top_k": 1,
+    "description": "Keep only the highest-ranked Galaxy evidence item."
+  },
+  "trace_schema": "galaxy-agent-trajectory-v1.1",
+  "hidden_artifact_paths_excluded_from_agent_cwd": true,
+  "created_at": "2026-10-02T17:53:32.441789+00:00"
+}

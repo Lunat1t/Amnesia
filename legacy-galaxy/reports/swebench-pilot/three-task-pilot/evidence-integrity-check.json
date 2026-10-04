@@ -1,0 +1,67 @@
+{
+  "method": "SHA-256 of run-local verification.log; appended mutation evaluated in memory and originals preserved",
+  "checks": [
+    {
+      "run_id": "pallets__flask-5014-d2d21eb574d7-without_galaxy",
+      "original_sha256": "99e98ff113d4d74de0dbaa5d4c9c6d829a31723618d3d4a05c4d0b06f696f517",
+      "recomputed_sha256": "99e98ff113d4d74de0dbaa5d4c9c6d829a31723618d3d4a05c4d0b06f696f517",
+      "original_integrity_valid": true,
+      "mutated_copy_sha256": "d592ce116d84ed85a255ccfaab3dcd59d9ac0271dd9e5e3767db102481022ba2",
+      "mutated_copy_integrity_valid": false,
+      "trust_revoked": true,
+      "verified_success": true
+    },
+    {
+      "run_id": "pallets__flask-5014-d2d21eb574d7-with_galaxy",
+      "original_sha256": "1e4a3e41ec5148bcad66db6c6379c2790f0f35406a60ddc2c9be73904dbefa33",
+      "recomputed_sha256": "1e4a3e41ec5148bcad66db6c6379c2790f0f35406a60ddc2c9be73904dbefa33",
+      "original_integrity_valid": true,
+      "mutated_copy_sha256": "e3a0199fdf728474d9fc060450ea9b739b19940dcc859d3fe0e0ce522d56745d",
+      "mutated_copy_integrity_valid": false,
+      "trust_revoked": true,
+      "verified_success": true
+    },
+    {
+      "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-without_galaxy",
+      "original_sha256": "c48081e51171384de7d76544c257d329533e988184eaa2feb052ccfc1c7f3da0",
+      "recomputed_sha256": "c48081e51171384de7d76544c257d329533e988184eaa2feb052ccfc1c7f3da0",
+      "original_integrity_valid": true,
+      "mutated_copy_sha256": "21b0529dadbb1a2419176b53c2ce71f9fdcc277dfeea89dd48ae9f8c3cac74c3",
+      "mutated_copy_integrity_valid": false,
+      "trust_revoked": true,
+      "verified_success": false
+    },
+    {
+      "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-with_galaxy",
+      "original_sha256": "03a1afa36f69573db87d07f0b577e1ed9c47143d971a0337e50900c05fef2f03",
+      "recomputed_sha256": "03a1afa36f69573db87d07f0b577e1ed9c47143d971a0337e50900c05fef2f03",
+      "original_integrity_valid": true,
+      "mutated_copy_sha256": "2dbc925e50b63aa71e4365cc6ecca27f263dadee2f0413cbb75a639b474a61aa",
+      "mutated_copy_integrity_valid": false,
+      "trust_revoked": true,
+      "verified_success": false
+    },
+    {
+      "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-without_galaxy",
+      "original_sha256": "a95cca622c682e997bbb380d7a6194be408b743c5ad44fab66f48c93dbac1564",
+      "recomputed_sha256": "a95cca622c682e997bbb380d7a6194be408b743c5ad44fab66f48c93dbac1564",
+      "original_integrity_valid": true,
+      "mutated_copy_sha256": "f894f1abecc981cd95f24d004a04179dba5307c998d676479b692a373aabae8c",
+      "mutated_copy_integrity_valid": false,
+      "trust_revoked": true,
+      "verified_success": false
+    },
+    {
+      "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-with_galaxy",
+      "original_sha256": "f315c43c917e78f7f20028637d1c6e454992d74edec0a5f634c8bf6095507f89",
+      "recomputed_sha256": "f315c43c917e78f7f20028637d1c6e454992d74edec0a5f634c8bf6095507f89",
+      "original_integrity_valid": true,
+      "mutated_copy_sha256": "0e44bffbc58b29e75f98e0b867fc5d6750f0eb8284881686c849353ff92b6193",
+      "mutated_copy_integrity_valid": false,
+      "trust_revoked": true,
+      "verified_success": false
+    }
+  ],
+  "all_originals_valid": true,
+  "all_mutated_copies_revoked": true
+}

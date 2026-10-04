@@ -1,0 +1,62 @@
+{
+  "benchmark_version": "galaxy-benchmark-swebench-pilot-v1",
+  "dataset_source": "SWE-bench/SWE-bench_Verified",
+  "dataset_revision": "8db12b107a1abfd10808f023ed233890b4d7cbae",
+  "instance_id": "sphinx-doc__sphinx-7590",
+  "repository": "sphinx-doc/sphinx",
+  "base_commit": "2e506c5ab457cba743bb47eb5b8c8eb9dd51d23d",
+  "snapshot_hash": "e3c9d6e97ffa9ecf8df8de72fd00c898f2987e57",
+  "gold_patch_hash": "23c3b2333c3512be7350376c631bbbb079684b7ce1563c5a30ddf665c0f1ec7a",
+  "test_patch_hash": "77ee427a569addb63364093290096af046dffd77fa65fcc6f60197db7021d8da",
+  "accepted_dataset_audit": {
+    "base_validated": true,
+    "base_target_failure_observed": true,
+    "base_pass_to_pass_preserved": true,
+    "gold_patch_applied": true,
+    "gold_verified": true,
+    "overlay_hash": "77ee427a569addb63364093290096af046dffd77fa65fcc6f60197db7021d8da",
+    "reference_patch_hash": "23c3b2333c3512be7350376c631bbbb079684b7ce1563c5a30ddf665c0f1ec7a",
+    "base_patch_sha256": "7031425252359a6f9f33f07d20c0aa1993eb49c6cce3d63d37532f579487b9c0",
+    "audit_status": "accepted",
+    "reason": "both baseline-failure and gold-pass policies satisfied"
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "agent_runtime": "/home/bah/.local/bin/codex",
+  "container_runtime": "docker-compatible-api",
+  "container_api_endpoint": "unix:///run/user/1000/podman/podman.sock",
+  "python_version": "3.14.7 (main, Aug 10 2026, 00:00:00) [GCC 16.1.1 20260515 (Red Hat 16.1.1-2)]",
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "swebench": "4.1.0"
+  },
+  "timeout_seconds": 1800,
+  "arm_order": [
+    "with_galaxy",
+    "without_galaxy"
+  ],
+  "context_variant": {
+    "name": "lean-parser-context",
+    "omit_duplicate_task": true,
+    "exclude_paths": [
+      "doc/conf.py",
+      "doc/development/tutorials/examples/recipe.py",
+      "sphinx/__init__.py",
+      "sphinx/__main__.py",
+      "sphinx/addnodes.py",
+      "sphinx/application.py",
+      "sphinx/builders/__init__.py",
+      "sphinx/cmd/__init__.py",
+      "sphinx/cmd/build.py",
+      "sphinx/cmd/make_mode.py",
+      "sphinx/directives/__init__.py",
+      "sphinx/setup_command.py"
+    ]
+  },
+  "experience_condition": null,
+  "context_contract": "galaxy-core-context-package-v1",
+  "context_backend": "legacy-context-compiler-through-compatibility-adapter",
+  "trace_schema": "galaxy-agent-trajectory-v1.1",
+  "hidden_artifact_paths_excluded_from_agent_cwd": true,
+  "created_at": "2026-10-04T10:29:55.990823+00:00"
+}

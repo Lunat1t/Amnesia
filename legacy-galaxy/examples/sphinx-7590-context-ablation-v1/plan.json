@@ -1,0 +1,62 @@
+{
+  "status": "frozen_before_lean_context_run",
+  "purpose": "single diagnostic ablation on a previously observed potential token-amplification case; not a causal estimate or broad efficacy claim",
+  "task_id": "sphinx-doc__sphinx-7590",
+  "dataset_root": "benchmarks/imports/swebench-verified-v1",
+  "base_commit": "2e506c5ab457cba743bb47eb5b8c8eb9dd51d23d",
+  "dataset_revision": "8db12b107a1abfd10808f023ed233890b4d7cbae",
+  "gold_patch_hash": "23c3b2333c3512be7350376c631bbbb079684b7ce1563c5a30ddf665c0f1ec7a",
+  "test_patch_hash": "77ee427a569addb63364093290096af046dffd77fa65fcc6f60197db7021d8da",
+  "comparison_runs": {
+    "without_galaxy": "sphinx-doc__sphinx-7590-bee6c17af1ef-without_galaxy",
+    "current_context": "sphinx-doc__sphinx-7590-bee6c17af1ef-with_galaxy"
+  },
+  "new_arm": {
+    "name": "lean-parser-context",
+    "mode": "with_galaxy",
+    "context_variant": {
+      "name": "lean-parser-context",
+      "omit_duplicate_task": true,
+      "exclude_paths": [
+        "doc/conf.py",
+        "doc/development/tutorials/examples/recipe.py",
+        "sphinx/__init__.py",
+        "sphinx/__main__.py",
+        "sphinx/addnodes.py",
+        "sphinx/application.py",
+        "sphinx/builders/__init__.py",
+        "sphinx/cmd/__init__.py",
+        "sphinx/cmd/build.py",
+        "sphinx/cmd/make_mode.py",
+        "sphinx/directives/__init__.py",
+        "sphinx/setup_command.py"
+      ]
+    },
+    "must_preserve_paths": [
+      "sphinx/domains/cpp.py",
+      "tests/test_domain_cpp.py"
+    ]
+  },
+  "settings": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "timeout_seconds": 1800,
+    "context_budget_tokens": 5000,
+    "max_files": 16,
+    "repetitions": 1
+  },
+  "primary_diagnostic": "compare latest cumulative input, cached input, uncached input, output, tool calls, duration, context rendered hash, and official evaluator result against the two historical runs; do not infer dollar cost",
+  "hypothesis": "removing duplicated task text and off-task CLI/project file entries may reduce extra agent exploration without reducing verified success",
+  "stopping_rule": "do not alter default retrieval or claim a general Galaxy effect from this single ablation; if the official evaluator or evidence integrity is unavailable, preserve and stop",
+  "source_artifacts": {
+    "historical_on_context_sha256": "5d503380cd5f453512f4c111bb6023f609ea957b95c2e5a752b1f7493f08caf6",
+    "historical_on_legacy_context_package_hash": "8be547753572b11e5b442520c7cd76046db6df66f0b35da18c1bcd8bfe1682d8",
+    "historical_on_evaluator_report_sha256": "491d1ae3164ae60cdf9494857b7fd2f59d197751fa131d20c072622e1007566b"
+  },
+  "code_sha256": {
+    "galaxy_core/benchmark/swebench_verified.py": "7afbb9a2eff2fddda03099554250ea44a213358ec46c4629feefbb0dc614b15f",
+    "galaxy_core/benchmark/suite.py": "50ed4b4f4bf69b62d715efa7deae73afb00f806a56929304d0ec8791942bbc23",
+    "scripts/analyze_swebench_trajectory.py": "1219178d104967ff1d83fd3c995d7199e18ff1e77c050b39048cf9d4a4f72d57"
+  },
+  "frozen_at": "2026-10-04"
+}

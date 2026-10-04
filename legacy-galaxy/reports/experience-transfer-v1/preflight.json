@@ -1,0 +1,33 @@
+{
+  "verifier_calibration": [
+    {
+      "variant": "baseline",
+      "task": "prices",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmph_duumrn/check_importer.py\", line 9, in <module>\n    assert fn(f'{column},note\\n,empty\\n\"   \",space\\n2,t\\n') == [2], 'blank fields'\n           ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmph_duumrn/importers.py\", line 11, in import_prices\n    return [float(row['price']) for row in _rows(text) if row['price']]\n            ~~~~~^^^^^^^^^^^^^^\nValueError: could not convert string to float: '   '\n"
+    },
+    {
+      "variant": "baseline",
+      "task": "quantities",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmph_duumrn/check_importer.py\", line 9, in <module>\n    assert fn(f'{column},note\\n,empty\\n\"   \",space\\n2,t\\n') == [2], 'blank fields'\n           ~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmph_duumrn/importers.py\", line 15, in import_quantities\n    return [int(row['quantity']) for row in _rows(text) if row['quantity']]\n            ~~~^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: '   '\n"
+    },
+    {
+      "variant": "reference-fix",
+      "task": "prices",
+      "exit_code": 0,
+      "stdout": "prices: all checks passed\n",
+      "stderr": ""
+    },
+    {
+      "variant": "reference-fix",
+      "task": "quantities",
+      "exit_code": 0,
+      "stdout": "quantities: all checks passed\n",
+      "stderr": ""
+    }
+  ],
+  "agent_runs": 0
+}

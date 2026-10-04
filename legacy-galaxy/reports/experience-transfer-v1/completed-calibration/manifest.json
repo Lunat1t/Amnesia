@@ -1,0 +1,63 @@
+{
+  "benchmark_version": "galaxy-benchmark-v1.0",
+  "run_id": "71a64df99a77454a81c864c7c0c87875",
+  "created_at": "2026-10-03T12:06:30.334897+00:00",
+  "config_sha256": "fbe93557028acecc4df3dc4b07482874a143993b1a65db07309394fec1812369",
+  "repo_commit": "aaf70ea59ce47d538b7a8ad6016364b680261331",
+  "repositories": {
+    "csv-importers": {
+      "path": "/tmp/galaxy-transfer-v1-prepared/repo",
+      "commit": "aaf70ea59ce47d538b7a8ad6016364b680261331",
+      "dirty": false
+    }
+  },
+  "repo_dirty": false,
+  "galaxy_commit": null,
+  "galaxy_tree": "/home/bah/Documents/Codex/galaxy-3.2.1-alpha.19-evidence-integrity",
+  "python": "3.14.7 (main, Aug 10 2026, 00:00:00) [GCC 16.1.1 20260515 (Red Hat 16.1.1-2)]",
+  "os": "Linux-7.2.8-200.fc44.x86_64-x86_64-with-glibc2.43",
+  "model": "gpt-6-luna",
+  "provider": "codex",
+  "temperature": null,
+  "reasoning_effort": null,
+  "seed": null,
+  "agent_runtime": "Codex CLI (/home/bah/.local/bin/codex)",
+  "tool_configuration": "same Codex CLI tools in both arms",
+  "input_token_limit": null,
+  "output_token_limit": null,
+  "timeout_seconds": 60,
+  "repetitions": 1,
+  "task_count": 2,
+  "galaxy_runtime_root": "/tmp/galaxy-transfer-v1-state-v3",
+  "notes": "A/B uses the same CLI/model/repository commit/tools/timeout; WITH adds a compiled context packet. API token/temperature/seed controls are unavailable here.",
+  "protocol": {
+    "path": "/home/bah/Documents/Codex/galaxy-3.2.1-alpha.19-evidence-integrity/benchmarks/protocol-v1.md",
+    "sha256": "872bcd1464c62eda26d3310ac88e1cdc4473400bf56a47a0d209973a32903330"
+  },
+  "counterbalance": {
+    "method": "alternating paired order by repetition",
+    "seed": null,
+    "schedule": "OFF->ON for odd repetitions; ON->OFF for even repetitions"
+  },
+  "arm_order_by_repetition": {
+    "1": [
+      "without_galaxy",
+      "with_galaxy"
+    ]
+  },
+  "controls_applied": {
+    "model": true,
+    "reasoning_effort": false,
+    "temperature": false,
+    "seed": false,
+    "input_token_limit": false,
+    "output_token_limit": false,
+    "timeout_seconds": true,
+    "same_agent_cli": true,
+    "same_tools": true
+  },
+  "verifier_overlay_sha256": {
+    "A-prices:check_importer.py": "1324be2eddaa91d47019c68366df972cb96299180550f526c579b01a2d82e244",
+    "B-quantities:check_importer.py": "1324be2eddaa91d47019c68366df972cb96299180550f526c579b01a2d82e244"
+  }
+}

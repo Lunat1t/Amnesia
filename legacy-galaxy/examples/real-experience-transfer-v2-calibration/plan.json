@@ -1,0 +1,37 @@
+{
+  "schema": "real-experience-transfer-v2-calibration",
+  "purpose": "One-repetition pipeline and relevance calibration only; not the primary Experience benefit study.",
+  "repository": "sympy/sympy",
+  "source_task": "sympy__sympy-13091",
+  "intervening_task": "sympy__sympy-22914",
+  "target_task": "sympy__sympy-17139",
+  "pair_hypothesis": "An episode about respecting comparison protocol when a value cannot safely be reduced to a boolean may help a later symbolic simplification avoid forcing an ordering comparison on a complex exponent. The tasks use different subsystems; transfer relevance is uncertain and must be supported by the actual extracted lesson.",
+  "source_lesson_scope": "Extract only a strategy supported by the source run, patch, and passing evidence. If no relevant lesson is supported, mark the relevant arm unavailable.",
+  "conditions": ["control", "relevant", "irrelevant"],
+  "condition_order_repetitions": [["control", "relevant", "irrelevant"]],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 900,
+  "context_budget_tokens": 5000,
+  "context_max_files": 16,
+  "initial_repetitions": 1,
+  "measurement_repetitions": 3,
+  "obsolete_condition": {
+    "included": false,
+    "reason": "No verified source episode with independently documented target-specific supersession exists."
+  },
+  "primary": "official evaluator resolution and preservation of every PASS_TO_PASS test",
+  "secondary": ["agent execution tokens", "tool calls and searches", "duration to verified completion"],
+  "unavailable": [
+    "currency cost without a dated applicable price schedule",
+    "semantic usefulness from file opens or delivery alone",
+    "general benefit claims from one repetition"
+  ],
+  "delivery_design": "Forced audited exposure through the existing Experience condition adapter. Every target arm uses the same ordinary Galaxy context; control has an empty Experience store. Native retrieval is a separate replay and is not inferred from forced delivery.",
+  "freeze_policy": "Freeze task IDs, source commits, public task hashes, hidden evaluator hashes, model, reasoning effort, context budget, evaluator version, and condition order before the first agent run. Preserve all failed runs. This batch remains calibration regardless of outcome.",
+  "selection_rationale": {
+    "internal_evidence": "Local base snapshots are pinned and clean, and each task has an accepted base/gold evaluator audit. Companion preflight records exact commit, prompt, snapshot, hidden-artifact hashes, and runtime versions.",
+    "external_evidence": "None used to claim Galaxy benefit. The public issue reports are dataset inputs, not independent experimental evidence.",
+    "galaxy_hypothesis": "Comparison protocol and symbolic ordering share a possible failure mode around forcing unsupported decisions, but source and target subsystems differ. A null result is plausible."
+  }
+}

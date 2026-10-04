@@ -1,0 +1,58 @@
+{
+  "benchmark_version": "galaxy-benchmark-swebench-verified-pilot-v1",
+  "dataset": "SWE-bench Verified",
+  "dataset_records_loaded": 500,
+  "accepted_audits": 3,
+  "pilot_instances": [
+    "pallets__flask-5014",
+    "pytest-dev__pytest-10356",
+    "sphinx-doc__sphinx-7590"
+  ],
+  "arms": [
+    "without_galaxy",
+    "with_galaxy"
+  ],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "execution_host": "Fedora 44 / rootless Podman Docker API 5.8.7",
+  "official_harness": "swebench 4.1.0",
+  "created_at": "2026-10-01T06:17:41.091564+00:00",
+  "runs": [
+    {
+      "run_id": "pallets__flask-5014-d2d21eb574d7-without_galaxy",
+      "task_id": "pallets__flask-5014",
+      "mode": "without_galaxy"
+    },
+    {
+      "run_id": "pallets__flask-5014-d2d21eb574d7-with_galaxy",
+      "task_id": "pallets__flask-5014",
+      "mode": "with_galaxy"
+    },
+    {
+      "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-without_galaxy",
+      "task_id": "pytest-dev__pytest-10356",
+      "mode": "without_galaxy"
+    },
+    {
+      "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-with_galaxy",
+      "task_id": "pytest-dev__pytest-10356",
+      "mode": "with_galaxy"
+    },
+    {
+      "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-without_galaxy",
+      "task_id": "sphinx-doc__sphinx-7590",
+      "mode": "without_galaxy"
+    },
+    {
+      "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-with_galaxy",
+      "task_id": "sphinx-doc__sphinx-7590",
+      "mode": "with_galaxy"
+    }
+  ],
+  "limitations": [
+    "One repetition per task and arm; descriptive only.",
+    "Files opened, commands and tests run are unavailable from Codex trace.",
+    "External currency cost was not measured."
+  ],
+  "metrics_note": "Usage extraction uses the latest cumulative Codex trace snapshot; cumulative snapshots are not summed."
+}

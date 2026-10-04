@@ -1,0 +1,40 @@
+{
+  "benchmark_version": "galaxy-benchmark-swebench-pilot-v1",
+  "dataset_source": "SWE-bench/SWE-bench_Verified",
+  "dataset_revision": "8db12b107a1abfd10808f023ed233890b4d7cbae",
+  "instance_id": "pallets__flask-5014",
+  "repository": "pallets/flask",
+  "base_commit": "7ee9ceb71e868944a46e1ff00b506772a53a4f1d",
+  "snapshot_hash": "c3d16a156c9206389b230b2884557c486e871589",
+  "gold_patch_hash": "087d51d66413bfa35111ac0eca31f1db1636572702cfd967c428049b453f451d",
+  "test_patch_hash": "e16f06b260b5169a49397e9d571b5af70317cd23792e1437232fabf718fe8871",
+  "accepted_dataset_audit": {
+    "base_validated": true,
+    "base_target_failure_observed": true,
+    "base_pass_to_pass_preserved": true,
+    "gold_patch_applied": true,
+    "gold_verified": true,
+    "overlay_hash": "e16f06b260b5169a49397e9d571b5af70317cd23792e1437232fabf718fe8871",
+    "reference_patch_hash": "087d51d66413bfa35111ac0eca31f1db1636572702cfd967c428049b453f451d",
+    "base_patch_sha256": "f32a238bd2c8272de67246b2b43a9a0be737f3a6046f00258d2272cf6fa3d776",
+    "audit_status": "accepted",
+    "reason": "both baseline-failure and gold-pass policies satisfied"
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "agent_runtime": "/home/bah/.local/bin/codex",
+  "container_runtime": "docker-compatible-api",
+  "container_api_endpoint": "unix:///run/user/1000/podman/podman.sock",
+  "python_version": "3.14.7 (main, Aug 10 2026, 00:00:00) [GCC 16.1.1 20260515 (Red Hat 16.1.1-2)]",
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "swebench": "4.1.0"
+  },
+  "timeout_seconds": 1800,
+  "arm_order": [
+    "without_galaxy",
+    "with_galaxy"
+  ],
+  "hidden_artifact_paths_excluded_from_agent_cwd": true,
+  "created_at": "2026-10-01T05:55:59.290054+00:00"
+}

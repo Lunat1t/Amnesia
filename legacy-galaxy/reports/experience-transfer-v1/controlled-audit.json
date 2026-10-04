@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "experiment": "experience-5000",
+      "run": "A-prices-rep-01-with_galaxy",
+      "verified_success": true,
+      "evidence_intact": true,
+      "experience_ids": [],
+      "total_tokens": 72303,
+      "duration_ms": 27832.443708000028
+    },
+    {
+      "experiment": "experience-5000",
+      "run": "A-prices-rep-01-without_galaxy",
+      "verified_success": false,
+      "evidence_intact": true,
+      "experience_ids": [],
+      "total_tokens": 50975,
+      "duration_ms": 16627.67089199997
+    },
+    {
+      "experiment": "experience-5000",
+      "run": "B-quantities-rep-01-with_galaxy",
+      "verified_success": true,
+      "evidence_intact": true,
+      "experience_ids": [
+        "EXP-87e8c977355b3d4d"
+      ],
+      "total_tokens": 129956,
+      "duration_ms": 33132.39124500024
+    },
+    {
+      "experiment": "experience-5000",
+      "run": "B-quantities-rep-01-without_galaxy",
+      "verified_success": true,
+      "evidence_intact": true,
+      "experience_ids": [],
+      "total_tokens": 86260,
+      "duration_ms": 19566.82323599989
+    },
+    {
+      "experiment": "context-only-5000",
+      "run": "B-quantities-rep-01-with_galaxy",
+      "verified_success": true,
+      "evidence_intact": true,
+      "experience_ids": [],
+      "total_tokens": 91564,
+      "duration_ms": 27757.694559000127
+    },
+    {
+      "experiment": "context-only-5000",
+      "run": "B-quantities-rep-01-without_galaxy",
+      "verified_success": true,
+      "evidence_intact": true,
+      "experience_ids": [],
+      "total_tokens": 62955,
+      "duration_ms": 16746.530610000038
+    }
+  ],
+  "same_nonexperience_items": true,
+  "same_file_inventory": true,
+  "delivered_source_runs": [
+    "A-prices-rep-01-with_galaxy"
+  ],
+  "claim": "Single calibration; delivery verified, benefit not established."
+}

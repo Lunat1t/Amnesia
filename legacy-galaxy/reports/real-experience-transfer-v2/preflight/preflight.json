@@ -1,0 +1,154 @@
+{
+  "plan": {
+    "schema": "real-experience-transfer-v2",
+    "repository": "sympy/sympy",
+    "source_task": "sympy__sympy-13091",
+    "intervening_task": "sympy__sympy-22914",
+    "target_task": "sympy__sympy-15875",
+    "pair_hypothesis": "A verified lesson from symmetric comparison with unknown Python types may transfer to conservative three-valued zero inference: do not collapse an unknown result into False. This is a relevance hypothesis, not an observed transfer result.",
+    "source_lesson_scope": "Extract only the strategy actually supported by the source trajectory and patch; do not force the preregistered hypothesis if the run does not support it.",
+    "conditions": [
+      "control",
+      "relevant",
+      "irrelevant"
+    ],
+    "condition_order_repetitions": [
+      [
+        "control",
+        "relevant",
+        "irrelevant"
+      ],
+      [
+        "relevant",
+        "irrelevant",
+        "control"
+      ],
+      [
+        "irrelevant",
+        "control",
+        "relevant"
+      ]
+    ],
+    "model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "timeout_seconds": 900,
+    "context_budget_tokens": 5000,
+    "context_max_files": 16,
+    "initial_repetitions": 1,
+    "measurement_repetitions": 3,
+    "obsolete_condition": {
+      "included": false,
+      "reason": "No verified source episode with independently documented target-specific supersession exists. Do not invent or infer obsolete advice from age or a different task."
+    },
+    "primary": "official evaluator resolves target issue and preserves all PASS_TO_PASS tests",
+    "secondary": [
+      "agent execution tokens",
+      "tool calls and searches",
+      "duration to verified completion",
+      "independently annotated repeated-error category",
+      "harm from irrelevant advice"
+    ],
+    "unavailable": [
+      "currency cost without a dated applicable price schedule",
+      "semantic usefulness from file opens or delivery alone",
+      "wrong-patch counts without an independent fixed rubric"
+    ],
+    "delivery_design": "Forced audited exposure using the existing Galaxy ContextCompiler and Experience condition adapter. Every target arm uses the same ordinary Galaxy context; control has an empty Experience store. Native retrieval is a separate replay and is not inferred from forced delivery.",
+    "freeze_policy": "Freeze task IDs, source commits, hidden evaluator hashes, public task hashes, model, reasoning effort, context budget, evaluator version, and target-arm order before the first agent run. Keep all failed attempts. Abort any contrast if source provenance or non-Experience packet differs.",
+    "selection_rationale": {
+      "internal_evidence": "All three local SWE-bench snapshots have clean pinned base commits and accepted base/gold audits; exact checksums are recorded in the companion preflight report.",
+      "external_evidence": "None used to claim Galaxy benefit. The public issue reports are dataset inputs, not external experimental evidence.",
+      "galaxy_hypothesis": "A narrow lesson about preserving unknown comparison results may help avoid false-negative property inference. It may instead be too narrow or irrelevant to Add.is_zero."
+    }
+  },
+  "plan_sha256": "ed0f632bd3693c59e36e7266b0f83bdb8758a4ad879c43c97afe647ce53a7bfc",
+  "dataset_revision": "8db12b107a1abfd10808f023ed233890b4d7cbae",
+  "dataset_manifest_sha256": "0326ad742dd8bf6d6a859a4a237b5e3f872c0c6e9e8a2e8a8411f05d28330a08",
+  "evaluator_versions": {
+    "swebench": "4.1.0",
+    "datasets": "4.8.5"
+  },
+  "tasks": [
+    {
+      "role": "source_task",
+      "id": "sympy__sympy-13091",
+      "base_commit": "d1320814eda6549996190618a21eaf212cfd4d1e",
+      "public_task_sha256": "81cbfc47df7763462a3a8c60ca034cae8974dc6dd893c11396d2dfab41a73597",
+      "snapshot_hash": "5f10f1fc2ecf5d58cb24cd430364df7e25fae5c0",
+      "accepted_audit": {
+        "base_validated": true,
+        "base_target_failure_observed": true,
+        "base_pass_to_pass_preserved": true,
+        "gold_patch_applied": true,
+        "gold_verified": true,
+        "overlay_hash": "c2538c896b3b100b37a19c12a586bef01370f77e8a9d17290f02cd5536390aec",
+        "reference_patch_hash": "8e7c1c0d19cf5a7196900c0819b839051b2ed43a8fc797a7ba2103587e60d635",
+        "base_patch_sha256": "0fac902c1677a10c66c1e5307aa4179fe6fe27af65c4c603df10a115a2f62b64",
+        "audit_status": "accepted",
+        "reason": "both baseline-failure and gold-pass policies satisfied"
+      },
+      "hidden_artifact_sha256": {
+        "gold": "8e7c1c0d19cf5a7196900c0819b839051b2ed43a8fc797a7ba2103587e60d635",
+        "overlay": "c2538c896b3b100b37a19c12a586bef01370f77e8a9d17290f02cd5536390aec"
+      }
+    },
+    {
+      "role": "intervening_task",
+      "id": "sympy__sympy-22914",
+      "base_commit": "c4e836cdf73fc6aa7bab6a86719a0f08861ffb1d",
+      "public_task_sha256": "f187b4f85e0e72c6cd8f3d02a27edfe42f3341562e78e5256b0ca7b67a82705e",
+      "snapshot_hash": "8570ad33b6a6f9e4e6b84e8a9e48aee09954895d",
+      "accepted_audit": {
+        "base_validated": true,
+        "base_target_failure_observed": true,
+        "base_pass_to_pass_preserved": true,
+        "gold_patch_applied": true,
+        "gold_verified": true,
+        "overlay_hash": "95e580cdfb748ead82b4e87d89ac8a8195e4dc6abded0f046028be5191b867f5",
+        "reference_patch_hash": "9bf076ac9ded3e486c10a22e70156aa2299a72dea087233cde48a5de6dbb74df",
+        "base_patch_sha256": "4da77fa0c1223d13918297727a3ce3b6731195695cfc00e2862aa0ee69ffdd9c",
+        "audit_status": "accepted",
+        "reason": "both baseline-failure and gold-pass policies satisfied"
+      },
+      "hidden_artifact_sha256": {
+        "gold": "9bf076ac9ded3e486c10a22e70156aa2299a72dea087233cde48a5de6dbb74df",
+        "overlay": "95e580cdfb748ead82b4e87d89ac8a8195e4dc6abded0f046028be5191b867f5"
+      }
+    },
+    {
+      "role": "target_task",
+      "id": "sympy__sympy-15875",
+      "base_commit": "b506169ad727ee39cb3d60c8b3ff5e315d443d8e",
+      "public_task_sha256": "fb2809758992b6ebe7804c52b68965bbab2b0286d9bbc6b600e3700e668e6ed1",
+      "snapshot_hash": "cb2e71a8734560a1433ca337586649c56667ccb1",
+      "accepted_audit": {
+        "base_validated": true,
+        "base_target_failure_observed": true,
+        "base_pass_to_pass_preserved": true,
+        "gold_patch_applied": true,
+        "gold_verified": true,
+        "overlay_hash": "b3de4109fa8bbb9b6266f5df4b262d41f3b1ed25cf2196dc1ede6fd65abe8db8",
+        "reference_patch_hash": "19cccea449ce5f295cdc31aa50f5b72ed56a9d0c0baac92d109e01c1d77a5578",
+        "base_patch_sha256": "839b37e7fc67ccdd9991dd69311d435e3a42a5c903c10a4014fd0e83764ccfc3",
+        "audit_status": "accepted",
+        "reason": "both baseline-failure and gold-pass policies satisfied"
+      },
+      "hidden_artifact_sha256": {
+        "gold": "19cccea449ce5f295cdc31aa50f5b72ed56a9d0c0baac92d109e01c1d77a5578",
+        "overlay": "b3de4109fa8bbb9b6266f5df4b262d41f3b1ed25cf2196dc1ede6fd65abe8db8"
+      }
+    }
+  ],
+  "runtime": {
+    "swebench_installed": true,
+    "docker_sdk_installed": true,
+    "podman_api_ping": true,
+    "podman_api_version": "5.8.7",
+    "cached_image_tags": [
+      "quay.io/podman/hello:latest"
+    ]
+  },
+  "status": "source snapshots audited; episodes and target-specific obsolete evidence pending",
+  "agent_runs": 0,
+  "target_calls": 0
+}

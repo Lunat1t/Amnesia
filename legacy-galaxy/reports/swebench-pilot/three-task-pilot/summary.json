@@ -1,0 +1,2123 @@
+{
+  "benchmark_version": "galaxy-benchmark-v1.0",
+  "manifest": {
+    "benchmark_version": "galaxy-benchmark-swebench-verified-pilot-v1",
+    "dataset": "SWE-bench Verified",
+    "dataset_records_loaded": 500,
+    "accepted_audits": 3,
+    "pilot_instances": [
+      "pallets__flask-5014",
+      "pytest-dev__pytest-10356",
+      "sphinx-doc__sphinx-7590"
+    ],
+    "arms": [
+      "without_galaxy",
+      "with_galaxy"
+    ],
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "execution_host": "Fedora 44 / rootless Podman Docker API 5.8.7",
+    "official_harness": "swebench 4.1.0",
+    "created_at": "2026-10-01T06:17:41.091564+00:00",
+    "runs": [
+      {
+        "run_id": "pallets__flask-5014-d2d21eb574d7-without_galaxy",
+        "task_id": "pallets__flask-5014",
+        "mode": "without_galaxy"
+      },
+      {
+        "run_id": "pallets__flask-5014-d2d21eb574d7-with_galaxy",
+        "task_id": "pallets__flask-5014",
+        "mode": "with_galaxy"
+      },
+      {
+        "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-without_galaxy",
+        "task_id": "pytest-dev__pytest-10356",
+        "mode": "without_galaxy"
+      },
+      {
+        "run_id": "pytest-dev__pytest-10356-2f8663ddd79c-with_galaxy",
+        "task_id": "pytest-dev__pytest-10356",
+        "mode": "with_galaxy"
+      },
+      {
+        "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-without_galaxy",
+        "task_id": "sphinx-doc__sphinx-7590",
+        "mode": "without_galaxy"
+      },
+      {
+        "run_id": "sphinx-doc__sphinx-7590-bee6c17af1ef-with_galaxy",
+        "task_id": "sphinx-doc__sphinx-7590",
+        "mode": "with_galaxy"
+      }
+    ],
+    "limitations": [
+      "One repetition per task and arm; descriptive only.",
+      "Files opened, commands and tests run are unavailable from Codex trace.",
+      "External currency cost was not measured."
+    ],
+    "metrics_note": "Usage extraction uses the latest cumulative Codex trace snapshot; cumulative snapshots are not summed."
+  },
+  "run_count": 6,
+  "modes": {
+    "without_galaxy": {
+      "task_success": {
+        "successes": 3,
+        "failures": 0,
+        "n": 3,
+        "rate": 1.0,
+        "ci95_wilson": [
+          0.4385029682449546,
+          1.0
+        ]
+      },
+      "verified_success": {
+        "successes": 1,
+        "failures": 2,
+        "n": 3,
+        "rate": 0.3333333333333333,
+        "ci95_wilson": [
+          0.06149194472039621,
+          0.7923403991979522
+        ]
+      },
+      "metrics": {
+        "input_tokens": {
+          "mean": 303504.3333333333,
+          "median": 369785.0,
+          "stdev": 141969.5325917971,
+          "p25": 255150.5,
+          "p75": 384998.5,
+          "p95": 397169.3,
+          "min": 140516.0,
+          "max": 400212.0
+        },
+        "cached_input_tokens": {
+          "mean": 276224.0,
+          "median": 339456.0,
+          "stdev": 131613.13296172232,
+          "p25": 232192.0,
+          "p75": 351872.0,
+          "p95": 361804.8,
+          "min": 124928.0,
+          "max": 364288.0
+        },
+        "uncached_input_tokens": {
+          "mean": 27280.333333333332,
+          "median": 30329.0,
+          "stdev": 10505.189209782628,
+          "p25": 22958.5,
+          "p75": 33126.5,
+          "p95": 35364.5,
+          "min": 15588.0,
+          "max": 35924.0
+        },
+        "output_tokens": {
+          "mean": 1461.6666666666667,
+          "median": 1774.0,
+          "stdev": 612.4657813570758,
+          "p25": 1265.0,
+          "p75": 1814.5,
+          "p95": 1846.9,
+          "min": 756.0,
+          "max": 1855.0
+        },
+        "total_tokens": {
+          "mean": 304966.0,
+          "median": 371559.0,
+          "stdev": 142581.48106609075,
+          "p25": 256415.5,
+          "p75": 386813.0,
+          "p95": 399016.2,
+          "min": 141272.0,
+          "max": 402067.0
+        },
+        "duration_ms": {
+          "mean": 176898.23461966685,
+          "median": 181855.95066500036,
+          "stdev": 21946.464675592317,
+          "p25": 167376.4706155,
+          "p75": 188898.8566465005,
+          "p95": 194533.1814317005,
+          "min": 152896.99056599964,
+          "max": 195941.76262800055
+        },
+        "time_to_verified_completion_ms": {
+          "mean": 152896.99056599964,
+          "median": 152896.99056599964,
+          "stdev": 0.0,
+          "p25": 152896.9905659996,
+          "p75": 152896.9905659996,
+          "p95": 152896.9905659996,
+          "min": 152896.99056599964,
+          "max": 152896.99056599964
+        },
+        "tool_calls": {
+          "mean": 13.0,
+          "median": 14.0,
+          "stdev": 4.58257569495584,
+          "p25": 11.0,
+          "p75": 15.5,
+          "p95": 16.7,
+          "min": 8.0,
+          "max": 17.0
+        },
+        "files_opened": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "unique_files_opened": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "repeated_file_reads": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "search_calls": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "commands_run": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "tests_run": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "context_assembly_ms": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "context_tokens": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "context_rendered_characters": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "experience_items_retrieved": {
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "experience_items_supplied": {
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "experience_items_cited": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "experience_items_used": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "memory_helped": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "memory_harmed": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "known_error_repeated": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "human_interventions": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "errors": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "retries": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        }
+      }
+    },
+    "with_galaxy": {
+      "task_success": {
+        "successes": 3,
+        "failures": 0,
+        "n": 3,
+        "rate": 1.0,
+        "ci95_wilson": [
+          0.4385029682449546,
+          1.0
+        ]
+      },
+      "verified_success": {
+        "successes": 1,
+        "failures": 2,
+        "n": 3,
+        "rate": 0.3333333333333333,
+        "ci95_wilson": [
+          0.06149194472039621,
+          0.7923403991979522
+        ]
+      },
+      "metrics": {
+        "input_tokens": {
+          "mean": 372059.0,
+          "median": 270772.0,
+          "stdev": 289969.19034442265,
+          "p25": 208545.5,
+          "p75": 484929.0,
+          "p95": 656254.6,
+          "min": 146319.0,
+          "max": 699086.0
+        },
+        "cached_input_tokens": {
+          "mean": 343552.0,
+          "median": 249856.0,
+          "stdev": 278330.6359565903,
+          "p25": 187008.0,
+          "p75": 453248.0,
+          "p95": 615961.6,
+          "min": 124160.0,
+          "max": 656640.0
+        },
+        "uncached_input_tokens": {
+          "mean": 28507.0,
+          "median": 22159.0,
+          "stdev": 12087.516411571072,
+          "p25": 21537.5,
+          "p75": 32302.5,
+          "p95": 40417.3,
+          "min": 20916.0,
+          "max": 42446.0
+        },
+        "output_tokens": {
+          "mean": 1746.3333333333333,
+          "median": 1392.0,
+          "stdev": 1244.9121789641763,
+          "p25": 1054.5,
+          "p75": 2261.0,
+          "p95": 2956.2,
+          "min": 717.0,
+          "max": 3130.0
+        },
+        "total_tokens": {
+          "mean": 373805.3333333333,
+          "median": 272164.0,
+          "stdev": 291211.99937731505,
+          "p25": 209600.0,
+          "p75": 487190.0,
+          "p95": 659210.8,
+          "min": 147036.0,
+          "max": 702216.0
+        },
+        "duration_ms": {
+          "mean": 177439.75706766683,
+          "median": 156347.75055399997,
+          "stdev": 37398.83690766612,
+          "p25": 155849.4452445,
+          "p75": 188484.0656340002,
+          "p95": 214193.1176980005,
+          "min": 155351.13993499998,
+          "max": 220620.3807140005
+        },
+        "time_to_verified_completion_ms": {
+          "mean": 155351.13993499998,
+          "median": 155351.13993499998,
+          "stdev": 0.0,
+          "p25": 155351.139935,
+          "p75": 155351.139935,
+          "p95": 155351.139935,
+          "min": 155351.13993499998,
+          "max": 155351.13993499998
+        },
+        "tool_calls": {
+          "mean": 13.0,
+          "median": 11.0,
+          "stdev": 8.18535277187245,
+          "p25": 8.5,
+          "p75": 16.5,
+          "p95": 20.9,
+          "min": 6.0,
+          "max": 22.0
+        },
+        "files_opened": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "unique_files_opened": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "repeated_file_reads": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "search_calls": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "commands_run": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "tests_run": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "context_assembly_ms": {
+          "mean": 2868.768576333423,
+          "median": 3594.2811959998835,
+          "stdev": 1924.1838099330369,
+          "p25": 2140.7916145001,
+          "p75": 3959.5018479999,
+          "p95": 4251.6783696,
+          "min": 687.3020330003783,
+          "max": 4324.722500000007
+        },
+        "context_tokens": {
+          "mean": 4273.0,
+          "median": 4073.0,
+          "stdev": 507.4731519991969,
+          "p25": 3984.5,
+          "p75": 4461.5,
+          "p95": 4772.3,
+          "min": 3896.0,
+          "max": 4850.0
+        },
+        "context_rendered_characters": {
+          "mean": 4990.0,
+          "median": 4335.0,
+          "stdev": 1551.8856272290172,
+          "p25": 4104.0,
+          "p75": 5548.5,
+          "p95": 6519.3,
+          "min": 3873.0,
+          "max": 6762.0
+        },
+        "experience_items_retrieved": {
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "experience_items_supplied": {
+          "mean": 0.0,
+          "median": 0.0,
+          "stdev": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "experience_items_cited": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "experience_items_used": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "memory_helped": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "memory_harmed": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "known_error_repeated": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "human_interventions": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "errors": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        },
+        "retries": {
+          "mean": null,
+          "median": null,
+          "stdev": null,
+          "p25": null,
+          "p75": null,
+          "p95": null,
+          "min": null,
+          "max": null
+        }
+      }
+    }
+  },
+  "paired_effects": {
+    "verified_success": {
+      "without_galaxy": {
+        "successes": 1,
+        "failures": 2,
+        "n": 3,
+        "rate": 0.3333333333333333,
+        "ci95_wilson": [
+          0.06149194472039621,
+          0.7923403991979522
+        ]
+      },
+      "with_galaxy": {
+        "successes": 1,
+        "failures": 2,
+        "n": 3,
+        "rate": 0.3333333333333333,
+        "ci95_wilson": [
+          0.06149194472039621,
+          0.7923403991979522
+        ]
+      },
+      "absolute_delta": 0.0,
+      "paired_delta_mean": 0,
+      "paired_delta_ci95_bootstrap": [
+        0.0,
+        0.0
+      ],
+      "discordant_pairs": {
+        "off_only_success": 0,
+        "on_only_success": 0
+      },
+      "complete_pairs": 3
+    },
+    "input_tokens": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 303504.3333333333,
+        "median": 369785.0,
+        "stdev": 141969.5325917971,
+        "p25": 255150.5,
+        "p75": 384998.5,
+        "p95": 397169.3,
+        "min": 140516.0,
+        "max": 400212.0
+      },
+      "with_galaxy": {
+        "mean": 372059.0,
+        "median": 270772.0,
+        "stdev": 289969.19034442265,
+        "p25": 208545.5,
+        "p75": 484929.0,
+        "p95": 656254.6,
+        "min": 146319.0,
+        "max": 699086.0
+      },
+      "marginal_median_difference": -99013.0,
+      "delta_with_minus_without": {
+        "mean": 68554.66666666667,
+        "median": 5803.0,
+        "stdev": 206232.50215311197,
+        "p25": -46605.0,
+        "p75": 152338.5,
+        "p95": 269566.9,
+        "min": -99013.0,
+        "max": 298874.0
+      },
+      "paired_median_delta": 5803.0,
+      "paired_mean_delta": 68554.66666666667,
+      "relative_delta": 0.22587706051423762
+    },
+    "cached_input_tokens": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 276224.0,
+        "median": 339456.0,
+        "stdev": 131613.13296172232,
+        "p25": 232192.0,
+        "p75": 351872.0,
+        "p95": 361804.8,
+        "min": 124928.0,
+        "max": 364288.0
+      },
+      "with_galaxy": {
+        "mean": 343552.0,
+        "median": 249856.0,
+        "stdev": 278330.6359565903,
+        "p25": 187008.0,
+        "p75": 453248.0,
+        "p95": 615961.6,
+        "min": 124160.0,
+        "max": 656640.0
+      },
+      "marginal_median_difference": -89600.0,
+      "delta_with_minus_without": {
+        "mean": 67328.0,
+        "median": -768.0,
+        "stdev": 199874.03905460058,
+        "p25": -45184.0,
+        "p75": 145792.0,
+        "p95": 263040.0,
+        "min": -89600.0,
+        "max": 292352.0
+      },
+      "paired_median_delta": -768.0,
+      "paired_mean_delta": 67328.0,
+      "relative_delta": 0.24374420759962928
+    },
+    "uncached_input_tokens": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 27280.333333333332,
+        "median": 30329.0,
+        "stdev": 10505.189209782628,
+        "p25": 22958.5,
+        "p75": 33126.5,
+        "p95": 35364.5,
+        "min": 15588.0,
+        "max": 35924.0
+      },
+      "with_galaxy": {
+        "mean": 28507.0,
+        "median": 22159.0,
+        "stdev": 12087.516411571072,
+        "p25": 21537.5,
+        "p75": 32302.5,
+        "p95": 40417.3,
+        "min": 20916.0,
+        "max": 42446.0
+      },
+      "marginal_median_difference": -8170.0,
+      "delta_with_minus_without": {
+        "mean": 1226.6666666666667,
+        "median": 6522.0,
+        "stdev": 9214.254193006254,
+        "p25": -1445.5,
+        "p75": 6546.5,
+        "p95": 6566.1,
+        "min": -9413.0,
+        "max": 6571.0
+      },
+      "paired_median_delta": 6522.0,
+      "paired_mean_delta": 1226.6666666666667,
+      "relative_delta": 0.04496523747266041
+    },
+    "output_tokens": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 1461.6666666666667,
+        "median": 1774.0,
+        "stdev": 612.4657813570758,
+        "p25": 1265.0,
+        "p75": 1814.5,
+        "p95": 1846.9,
+        "min": 756.0,
+        "max": 1855.0
+      },
+      "with_galaxy": {
+        "mean": 1746.3333333333333,
+        "median": 1392.0,
+        "stdev": 1244.9121789641763,
+        "p25": 1054.5,
+        "p75": 2261.0,
+        "p95": 2956.2,
+        "min": 717.0,
+        "max": 3130.0
+      },
+      "marginal_median_difference": -382.0,
+      "delta_with_minus_without": {
+        "mean": 284.6666666666667,
+        "median": -39.0,
+        "stdev": 874.6326848073614,
+        "p25": -210.5,
+        "p75": 618.0,
+        "p95": 1143.6,
+        "min": -382.0,
+        "max": 1275.0
+      },
+      "paired_median_delta": -39.0,
+      "paired_mean_delta": 284.6666666666667,
+      "relative_delta": 0.19475484606613455
+    },
+    "total_tokens": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 304966.0,
+        "median": 371559.0,
+        "stdev": 142581.48106609075,
+        "p25": 256415.5,
+        "p75": 386813.0,
+        "p95": 399016.2,
+        "min": 141272.0,
+        "max": 402067.0
+      },
+      "with_galaxy": {
+        "mean": 373805.3333333333,
+        "median": 272164.0,
+        "stdev": 291211.99937731505,
+        "p25": 209600.0,
+        "p75": 487190.0,
+        "p95": 659210.8,
+        "min": 147036.0,
+        "max": 702216.0
+      },
+      "marginal_median_difference": -99395.0,
+      "delta_with_minus_without": {
+        "mean": 68839.33333333333,
+        "median": 5764.0,
+        "stdev": 207105.58959220134,
+        "p25": -46815.5,
+        "p75": 152956.5,
+        "p95": 270710.5,
+        "min": -99395.0,
+        "max": 300149.0
+      },
+      "paired_median_delta": 5764.0,
+      "paired_mean_delta": 68839.33333333333,
+      "relative_delta": 0.22572789535008272
+    },
+    "duration_ms": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 176898.23461966685,
+        "median": 181855.95066500036,
+        "stdev": 21946.464675592317,
+        "p25": 167376.4706155,
+        "p75": 188898.8566465005,
+        "p95": 194533.1814317005,
+        "min": 152896.99056599964,
+        "max": 195941.76262800055
+      },
+      "with_galaxy": {
+        "mean": 177439.75706766683,
+        "median": 156347.75055399997,
+        "stdev": 37398.83690766612,
+        "p25": 155849.4452445,
+        "p75": 188484.0656340002,
+        "p95": 214193.1176980005,
+        "min": 155351.13993499998,
+        "max": 220620.3807140005
+      },
+      "marginal_median_difference": -25508.20011100039,
+      "delta_with_minus_without": {
+        "mean": 541.5224479999646,
+        "median": 2454.149369000341,
+        "stdev": 25148.017545899966,
+        "p25": -11527.025371,
+        "p75": 13566.3837275001,
+        "p95": 22456.1712143,
+        "min": -25508.20011100039,
+        "max": 24678.618085999944
+      },
+      "paired_median_delta": 2454.149369000341,
+      "paired_mean_delta": 541.5224479999646,
+      "relative_delta": 0.003061208887495366
+    },
+    "time_to_verified_completion_ms": {
+      "n_pairs": 1,
+      "without_galaxy": {
+        "mean": 152896.99056599964,
+        "median": 152896.99056599964,
+        "stdev": 0.0,
+        "p25": 152896.9905659996,
+        "p75": 152896.9905659996,
+        "p95": 152896.9905659996,
+        "min": 152896.99056599964,
+        "max": 152896.99056599964
+      },
+      "with_galaxy": {
+        "mean": 155351.13993499998,
+        "median": 155351.13993499998,
+        "stdev": 0.0,
+        "p25": 155351.139935,
+        "p75": 155351.139935,
+        "p95": 155351.139935,
+        "min": 155351.13993499998,
+        "max": 155351.13993499998
+      },
+      "marginal_median_difference": 2454.149369000341,
+      "delta_with_minus_without": {
+        "mean": 2454.149369000341,
+        "median": 2454.149369000341,
+        "stdev": 0.0,
+        "p25": 2454.1493690003,
+        "p75": 2454.1493690003,
+        "p95": 2454.1493690003,
+        "min": 2454.149369000341,
+        "max": 2454.149369000341
+      },
+      "paired_median_delta": 2454.149369000341,
+      "paired_mean_delta": 2454.149369000341,
+      "relative_delta": 0.016050998518123093
+    },
+    "tool_calls": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 13.0,
+        "median": 14.0,
+        "stdev": 4.58257569495584,
+        "p25": 11.0,
+        "p75": 15.5,
+        "p95": 16.7,
+        "min": 8.0,
+        "max": 17.0
+      },
+      "with_galaxy": {
+        "mean": 13.0,
+        "median": 11.0,
+        "stdev": 8.18535277187245,
+        "p25": 8.5,
+        "p75": 16.5,
+        "p95": 20.9,
+        "min": 6.0,
+        "max": 22.0
+      },
+      "marginal_median_difference": -3.0,
+      "delta_with_minus_without": {
+        "mean": 0.0,
+        "median": -2.0,
+        "stdev": 4.358898943540674,
+        "p25": -2.5,
+        "p75": 1.5,
+        "p95": 4.3,
+        "min": -3.0,
+        "max": 5.0
+      },
+      "paired_median_delta": -2.0,
+      "paired_mean_delta": 0.0,
+      "relative_delta": 0.0
+    },
+    "files_opened": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "unique_files_opened": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "repeated_file_reads": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "search_calls": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "commands_run": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "tests_run": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "context_assembly_ms": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "context_tokens": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "context_rendered_characters": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "experience_items_retrieved": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 0.0,
+        "median": 0.0,
+        "stdev": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "with_galaxy": {
+        "mean": 0.0,
+        "median": 0.0,
+        "stdev": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "marginal_median_difference": 0.0,
+      "delta_with_minus_without": {
+        "mean": 0.0,
+        "median": 0.0,
+        "stdev": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "paired_median_delta": 0.0,
+      "paired_mean_delta": 0.0,
+      "relative_delta": null
+    },
+    "experience_items_supplied": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 0.0,
+        "median": 0.0,
+        "stdev": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "with_galaxy": {
+        "mean": 0.0,
+        "median": 0.0,
+        "stdev": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "marginal_median_difference": 0.0,
+      "delta_with_minus_without": {
+        "mean": 0.0,
+        "median": 0.0,
+        "stdev": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p95": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "paired_median_delta": 0.0,
+      "paired_mean_delta": 0.0,
+      "relative_delta": null
+    },
+    "experience_items_cited": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "experience_items_used": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "memory_helped": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "memory_harmed": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "known_error_repeated": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "human_interventions": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "errors": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    },
+    "retries": {
+      "n_pairs": 0,
+      "without_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "with_galaxy": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "marginal_median_difference": null,
+      "delta_with_minus_without": {
+        "mean": null,
+        "median": null,
+        "stdev": null,
+        "p25": null,
+        "p75": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "paired_median_delta": null,
+      "paired_mean_delta": null,
+      "relative_delta": null
+    }
+  },
+  "breakdowns": {
+    "difficulty": {
+      "1-4 hours": {
+        "without_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "with_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        }
+      },
+      "<15 min fix": {
+        "without_galaxy": {
+          "successes": 1,
+          "failures": 0,
+          "n": 1,
+          "rate": 1.0,
+          "ci95_wilson": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "with_galaxy": {
+          "successes": 1,
+          "failures": 0,
+          "n": 1,
+          "rate": 1.0,
+          "ci95_wilson": [
+            0.20654931437723745,
+            1.0
+          ]
+        }
+      },
+      ">4 hours": {
+        "without_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "with_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        }
+      }
+    },
+    "category": {
+      "bug_fix": {
+        "without_galaxy": {
+          "successes": 1,
+          "failures": 2,
+          "n": 3,
+          "rate": 0.3333333333333333,
+          "ci95_wilson": [
+            0.06149194472039621,
+            0.7923403991979522
+          ]
+        },
+        "with_galaxy": {
+          "successes": 1,
+          "failures": 2,
+          "n": 3,
+          "rate": 0.3333333333333333,
+          "ci95_wilson": [
+            0.06149194472039621,
+            0.7923403991979522
+          ]
+        }
+      }
+    },
+    "repository": {
+      "pallets/flask": {
+        "without_galaxy": {
+          "successes": 1,
+          "failures": 0,
+          "n": 1,
+          "rate": 1.0,
+          "ci95_wilson": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "with_galaxy": {
+          "successes": 1,
+          "failures": 0,
+          "n": 1,
+          "rate": 1.0,
+          "ci95_wilson": [
+            0.20654931437723745,
+            1.0
+          ]
+        }
+      },
+      "pytest-dev/pytest": {
+        "without_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "with_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        }
+      },
+      "sphinx-doc/sphinx": {
+        "without_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "with_galaxy": {
+          "successes": 0,
+          "failures": 1,
+          "n": 1,
+          "rate": 0.0,
+          "ci95_wilson": [
+            0.0,
+            0.7934506856227626
+          ]
+        }
+      }
+    },
+    "task_set": {
+      "independent": {
+        "without_galaxy": {
+          "successes": 1,
+          "failures": 2,
+          "n": 3,
+          "rate": 0.3333333333333333,
+          "ci95_wilson": [
+            0.06149194472039621,
+            0.7923403991979522
+          ]
+        },
+        "with_galaxy": {
+          "successes": 1,
+          "failures": 2,
+          "n": 3,
+          "rate": 0.3333333333333333,
+          "ci95_wilson": [
+            0.06149194472039621,
+            0.7923403991979522
+          ]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Metrics unavailable from provider traces remain null.",
+    "Agent-reported memory use/help/harm requires an independent blinded audit.",
+    "Cross-project transfer and ablation arms are not implemented in this v1 runner.",
+    "Codex CLI does not receive API-level temperature, seed, or token-budget controls here."
+  ],
+  "paired_outcome_matrix": {
+    "off_pass_on_pass": 1,
+    "off_pass_on_fail": 0,
+    "off_fail_on_pass": 0,
+    "off_fail_on_fail": 2
+  },
+  "completion_time": {
+    "all_attempts_duration_ms": {
+      "n_pairs": 3,
+      "without_galaxy": {
+        "mean": 176898.23461966685,
+        "median": 181855.95066500036,
+        "stdev": 21946.464675592317,
+        "p25": 167376.4706155,
+        "p75": 188898.8566465005,
+        "p95": 194533.1814317005,
+        "min": 152896.99056599964,
+        "max": 195941.76262800055
+      },
+      "with_galaxy": {
+        "mean": 177439.75706766683,
+        "median": 156347.75055399997,
+        "stdev": 37398.83690766612,
+        "p25": 155849.4452445,
+        "p75": 188484.0656340002,
+        "p95": 214193.1176980005,
+        "min": 155351.13993499998,
+        "max": 220620.3807140005
+      },
+      "marginal_median_difference": -25508.20011100039,
+      "delta_with_minus_without": {
+        "mean": 541.5224479999646,
+        "median": 2454.149369000341,
+        "stdev": 25148.017545899966,
+        "p25": -11527.025371,
+        "p75": 13566.3837275001,
+        "p95": 22456.1712143,
+        "min": -25508.20011100039,
+        "max": 24678.618085999944
+      },
+      "paired_median_delta": 2454.149369000341,
+      "paired_mean_delta": 541.5224479999646,
+      "relative_delta": 0.003061208887495366
+    },
+    "verified_successful_attempts_ms": {
+      "n_pairs": 1,
+      "without_galaxy": {
+        "mean": 152896.99056599964,
+        "median": 152896.99056599964,
+        "stdev": 0.0,
+        "p25": 152896.9905659996,
+        "p75": 152896.9905659996,
+        "p95": 152896.9905659996,
+        "min": 152896.99056599964,
+        "max": 152896.99056599964
+      },
+      "with_galaxy": {
+        "mean": 155351.13993499998,
+        "median": 155351.13993499998,
+        "stdev": 0.0,
+        "p25": 155351.139935,
+        "p75": 155351.139935,
+        "p95": 155351.139935,
+        "min": 155351.13993499998,
+        "max": 155351.13993499998
+      },
+      "marginal_median_difference": 2454.149369000341,
+      "delta_with_minus_without": {
+        "mean": 2454.149369000341,
+        "median": 2454.149369000341,
+        "stdev": 0.0,
+        "p25": 2454.1493690003,
+        "p75": 2454.1493690003,
+        "p95": 2454.1493690003,
+        "min": 2454.149369000341,
+        "max": 2454.149369000341
+      },
+      "paired_median_delta": 2454.149369000341,
+      "paired_mean_delta": 2454.149369000341,
+      "relative_delta": 0.016050998518123093
+    },
+    "successful_complete_pairs": 1,
+    "successful_pair_off_median_ms": 152896.99056599964,
+    "successful_pair_on_median_ms": 155351.13993499998,
+    "successful_pair_median_delta_ms": 2454.149369000341,
+    "successful_pair_mean_delta_ms": 2454.149369000341
+  },
+  "context_amplification": {
+    "pallets__flask-5014": {
+      "trajectory_token_delta": 5764.0,
+      "galaxy_context_tokens": 3896,
+      "trajectory_delta_per_context_token": 1.4794661190965093,
+      "interpretation": "debugging_signal_only"
+    },
+    "pytest-dev__pytest-10356": {
+      "trajectory_token_delta": -99395.0,
+      "galaxy_context_tokens": 4850,
+      "trajectory_delta_per_context_token": -20.49381443298969,
+      "interpretation": "debugging_signal_only"
+    },
+    "sphinx-doc__sphinx-7590": {
+      "trajectory_token_delta": 300149.0,
+      "galaxy_context_tokens": 4073,
+      "trajectory_delta_per_context_token": 73.69236435060152,
+      "interpretation": "debugging_signal_only"
+    }
+  },
+  "potential_memory_harm_cases": [],
+  "telemetry_completeness": {
+    "input_tokens": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "latest cumulative Codex JSONL usage snapshot"
+      ],
+      "all_auditable": true
+    },
+    "cached_input_tokens": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "latest cumulative Codex JSONL usage snapshot"
+      ],
+      "all_auditable": true
+    },
+    "uncached_input_tokens": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "input minus cached input from latest cumulative snapshot"
+      ],
+      "all_auditable": true
+    },
+    "output_tokens": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "latest cumulative Codex JSONL usage snapshot"
+      ],
+      "all_auditable": true
+    },
+    "total_tokens": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "input plus output from latest cumulative Codex JSONL usage snapshot"
+      ],
+      "all_auditable": true
+    },
+    "tool_calls": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "codex_trace.item.started"
+      ],
+      "all_auditable": true
+    },
+    "files_opened": {
+      "available": 0,
+      "total": 6,
+      "coverage": 0.0,
+      "sources": [
+        "unreported"
+      ],
+      "all_auditable": true
+    },
+    "search_calls": {
+      "available": 0,
+      "total": 6,
+      "coverage": 0.0,
+      "sources": [
+        "unreported"
+      ],
+      "all_auditable": true
+    },
+    "duration_ms": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "monotonic_clock"
+      ],
+      "all_auditable": true
+    },
+    "context_assembly_ms": {
+      "available": 3,
+      "total": 6,
+      "coverage": 0.5,
+      "sources": [
+        "unreported"
+      ],
+      "all_auditable": false
+    },
+    "context_tokens": {
+      "available": 3,
+      "total": 6,
+      "coverage": 0.5,
+      "sources": [
+        "ContextPackage.token_estimate from ContextCompiler serialized packet estimate",
+        "unreported"
+      ],
+      "all_auditable": true
+    },
+    "context_rendered_characters": {
+      "available": 3,
+      "total": 6,
+      "coverage": 0.5,
+      "sources": [
+        "len(rendered context Markdown codepoints)",
+        "unreported"
+      ],
+      "all_auditable": true
+    },
+    "experience_items_retrieved": {
+      "available": 6,
+      "total": 6,
+      "coverage": 1.0,
+      "sources": [
+        "unreported"
+      ],
+      "all_auditable": false
+    }
+  },
+  "cost_per_verified_success": {
+    "without_galaxy": {
+      "processed_tokens_per_verified_success": 914898.0,
+      "token_cost": 914898.0,
+      "token_cost_semantics": "legacy compatibility alias for processed_tokens_per_verified_success; not currency or billed cost",
+      "currency_cost": null,
+      "currency_cost_reason": "No provider price schedule configured."
+    },
+    "with_galaxy": {
+      "processed_tokens_per_verified_success": 1121416.0,
+      "token_cost": 1121416.0,
+      "token_cost_semantics": "legacy compatibility alias for processed_tokens_per_verified_success; not currency or billed cost",
+      "currency_cost": null,
+      "currency_cost_reason": "No provider price schedule configured."
+    }
+  }
+}

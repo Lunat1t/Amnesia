@@ -1,0 +1,20 @@
+{
+  "schema": "real-experience-transfer-v1",
+  "repository": "sympy/sympy",
+  "source_task": "sympy__sympy-14711",
+  "intervening_task": "sympy__sympy-16766",
+  "target_task": "sympy__sympy-17630",
+  "pair_hypothesis": "Experience with zero identity and typed symbolic operations in Vector may help diagnose lost ZeroMatrix shape in repeated block multiplication. This relevance is a preregistered hypothesis, not an observed transfer result.",
+  "conditions": ["control", "relevant", "irrelevant", "obsolete"],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "timeout_seconds": 900,
+  "initial_repetitions": 1,
+  "measurement_repetitions": 3,
+  "obsolete_gate": "Require a historically verified extracted episode plus reviewed evidence of target-specific supersession. Age or a changed commit alone does not qualify.",
+  "primary": "official evaluator resolved target issue with PASS_TO_PASS preservation",
+  "secondary": ["agent tokens", "searches", "tool calls", "duration", "verified repeated error category"],
+  "unavailable": ["wrong patch count without independent labels", "semantic usefulness from file opens", "pricing without known cached input rates"],
+  "delivery_design": "Four arms use forced audited exposure over the same base context. Native retrieval and obsolete exclusion are measured separately, not inferred from supplied episodes.",
+  "freeze_policy": "Freeze task IDs, commits, hidden evaluator hashes, model, episode hashes and condition order before B calls. Abort on packet-budget overflow rather than change other context. Publish missing sources and failures."
+}

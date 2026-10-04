@@ -1,0 +1,62 @@
+{
+  "status": "frozen_before_paired_repeat",
+  "purpose": "one matched OFF/lean-ON pair to check whether the single-arm token reduction signal reproduces; still diagnostic and not a general efficacy estimate",
+  "task_id": "sphinx-doc__sphinx-7590",
+  "dataset_root": "benchmarks/imports/swebench-verified-v1",
+  "base_commit": "2e506c5ab457cba743bb47eb5b8c8eb9dd51d23d",
+  "dataset_revision": "8db12b107a1abfd10808f023ed233890b4d7cbae",
+  "gold_patch_hash": "23c3b2333c3512be7350376c631bbbb079684b7ce1563c5a30ddf665c0f1ec7a",
+  "test_patch_hash": "77ee427a569addb63364093290096af046dffd77fa65fcc6f60197db7021d8da",
+  "context_variant": {
+    "name": "lean-parser-context",
+    "omit_duplicate_task": true,
+    "exclude_paths": [
+      "doc/conf.py",
+      "doc/development/tutorials/examples/recipe.py",
+      "sphinx/__init__.py",
+      "sphinx/__main__.py",
+      "sphinx/addnodes.py",
+      "sphinx/application.py",
+      "sphinx/builders/__init__.py",
+      "sphinx/cmd/__init__.py",
+      "sphinx/cmd/build.py",
+      "sphinx/cmd/make_mode.py",
+      "sphinx/directives/__init__.py",
+      "sphinx/setup_command.py"
+    ]
+  },
+  "must_preserve_paths": [
+    "sphinx/domains/cpp.py",
+    "tests/test_domain_cpp.py"
+  ],
+  "arm_order": [
+    "with_galaxy",
+    "without_galaxy"
+  ],
+  "rationale_for_order": "reverse of the historical OFF-then-ON order; both arms receive fresh isolated worktrees from the same frozen snapshot",
+  "settings": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "timeout_seconds": 1800,
+    "context_budget_tokens": 5000,
+    "max_files": 16,
+    "repetitions": 1
+  },
+  "comparison_runs": [
+    "sphinx-doc__sphinx-7590-bee6c17af1ef-without_galaxy",
+    "sphinx-doc__sphinx-7590-bee6c17af1ef-with_galaxy",
+    "sphinx-doc__sphinx-7590-3154a37df731-with_galaxy"
+  ],
+  "primary_diagnostic": "within-pair OFF versus lean-ON input, cached and uncached input, output, total processed tokens, tool calls, duration, and official evaluator; compare direction to first lean arm",
+  "stopping_rule": "preserve both arms even if one fails; no default retrieval change or broad causal claim from two lean observations; stop if evaluator or evidence integrity fails",
+  "source_artifacts": {
+    "single_arm_plan": "examples/sphinx-7590-context-ablation-v1/plan.json",
+    "single_arm_outcome": "reports/swebench-pilot/sphinx-7590-lean-context-v1/outcome.json"
+  },
+  "code_sha256": {
+    "galaxy_core/benchmark/swebench_verified.py": "f52c20c646abc035babb19e47290a146ec118e269d7f4990c1cd2ac0be2c256a",
+    "galaxy_core/benchmark/suite.py": "dd3fb68e9c2e86dc4ef925f85aa03eebf42860eb856f00394de9dd14d0f0e97d",
+    "scripts/analyze_swebench_trajectory.py": "1219178d104967ff1d83fd3c995d7199e18ff1e77c050b39048cf9d4a4f72d57"
+  },
+  "frozen_at": "2026-10-04"
+}

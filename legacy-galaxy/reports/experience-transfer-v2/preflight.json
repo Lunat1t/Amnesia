@@ -1,0 +1,122 @@
+{
+  "candidate_sha256": "fc0d267eb0d25f5992704aaf075ea1f510e4575c9236666d37fb7628895a5dae",
+  "status": "evaluator-calibrated candidate, no agent runs",
+  "checks": [
+    {
+      "pair": "expiry",
+      "task": "A-active_sessions",
+      "variant": "baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmpbd8w6vx2/verify.py\", line 7, in <module>\n    assert fn(records, 10) == [records[0], records[3]]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "pair": "expiry",
+      "task": "A-active_sessions",
+      "variant": "reference",
+      "exit_code": 0,
+      "stdout": "all checks passed\n",
+      "stderr": ""
+    },
+    {
+      "pair": "expiry",
+      "task": "B-active_tokens",
+      "variant": "baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmp7yqc2xqr/verify.py\", line 7, in <module>\n    assert fn(records, 10) == [records[0], records[3]]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "pair": "expiry",
+      "task": "B-active_tokens",
+      "variant": "reference",
+      "exit_code": 0,
+      "stdout": "all checks passed\n",
+      "stderr": ""
+    },
+    {
+      "pair": "copy-isolation",
+      "task": "A-clone_profiles",
+      "variant": "baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmphp1zezqq/verify.py\", line 11, in <module>\n    assert records == original\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "pair": "copy-isolation",
+      "task": "A-clone_profiles",
+      "variant": "reference",
+      "exit_code": 0,
+      "stdout": "all checks passed\n",
+      "stderr": ""
+    },
+    {
+      "pair": "copy-isolation",
+      "task": "B-clone_policies",
+      "variant": "baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmpzje5x_5r/verify.py\", line 11, in <module>\n    assert records == original\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "pair": "copy-isolation",
+      "task": "B-clone_policies",
+      "variant": "reference",
+      "exit_code": 0,
+      "stdout": "all checks passed\n",
+      "stderr": ""
+    },
+    {
+      "pair": "normalized-collision",
+      "task": "A-normalize_users",
+      "variant": "baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmp_8o002nn/verify.py\", line 7, in <module>\n    assert fn(records) == {'strasse': 0, 'other': None}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "pair": "normalized-collision",
+      "task": "A-normalize_users",
+      "variant": "reference",
+      "exit_code": 0,
+      "stdout": "all checks passed\n",
+      "stderr": ""
+    },
+    {
+      "pair": "normalized-collision",
+      "task": "B-normalize_groups",
+      "variant": "baseline",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/tmpabqnjh71/verify.py\", line 7, in <module>\n    assert fn(records) == {'strasse': 0, 'other': None}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "pair": "normalized-collision",
+      "task": "B-normalize_groups",
+      "variant": "reference",
+      "exit_code": 0,
+      "stdout": "all checks passed\n",
+      "stderr": ""
+    }
+  ],
+  "files": {
+    "copy-isolation/context-only.json": "7618c4b1d08da0a531a9ddfb47e3f9499dc7617ddee213756888dabc8e23f017",
+    "copy-isolation/repo/README.md": "48ffb829ff68c23379d5bc12449045e415fbf7ffdbd4225fa2a681d99090118a",
+    "copy-isolation/repo/service.py": "32d6db4975e5b57820af5eebdab668fb70cfedbc993fac7d528dda7130f9d081",
+    "copy-isolation/suite.json": "01b91d00a75c4b5b4968bb43b377ac20b2c97ea10c879eea03c451da7ae18773",
+    "copy-isolation/verify-0.py": "fc768510a75201abd44087db80de85db9edd4be4d471e0f37fec767265e6fafe",
+    "copy-isolation/verify-1.py": "0c28466ba1ddee7462250f86d179e0553bf7a0c26c5864ca201e4af80429c6b1",
+    "expiry/context-only.json": "ee1dc7168605b127cebdcf9c41c282d6228d2dc44699cf07767bf363d188b0f8",
+    "expiry/repo/README.md": "f47a1c42759b0bc7605fbfed059266646f58ece5d71ea54375b490e01dbfa8fc",
+    "expiry/repo/service.py": "cfd666759587a548bf6f5908fde21a7ef9482daae5bc24bc4eabed20d00375a1",
+    "expiry/suite.json": "554e5442ddd38efa3ca4ee04245112e563a3be8fe58f1e53a5933b7a5e1218a0",
+    "expiry/verify-0.py": "044bf250aaf981055481998cc6f44f91ec4730f807f5c830d4cb6f83b70d1549",
+    "expiry/verify-1.py": "b8ffd6a81ff15059e12eabbf0694435fec7ac034a05c719df0d3379c0dee7303",
+    "normalized-collision/context-only.json": "19f6af66b26649ed5e78ecbaee8a23e703b0ea83d7580a3da270637bb2153a4f",
+    "normalized-collision/repo/README.md": "a6addcb80451832fcbde84cb731072a7b2dbc2f08966be6296f4473acf3556a9",
+    "normalized-collision/repo/service.py": "486c3a85ab2a755ce33d860c9c5734011f880fc3776b6e321dfa83aa9789a17b",
+    "normalized-collision/suite.json": "26d1e0f7c7168425c4cceb9ab555120d125e6b364d11d076b58d732a25f56648",
+    "normalized-collision/verify-0.py": "532af17a7c8c20b5040f61e6c3994f95f8cb9277dd0c901f3d0a180f53f8b876",
+    "normalized-collision/verify-1.py": "f8d349200028e61aacf39db47966a3f8149505a63ce6530cfa713d12b9f4f4c4"
+  }
+}

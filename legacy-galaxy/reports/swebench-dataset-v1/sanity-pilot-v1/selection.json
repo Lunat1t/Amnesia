@@ -1,0 +1,47 @@
+{
+  "status": "frozen_before_first_agent_run",
+  "purpose": "5-task OFF/ON infrastructure and artifact sanity check; descriptive, one repetition per arm",
+  "selection_basis": "cover all four actual difficulty categories, all four repositories where Dataset v1 contains an accepted task, then add one second <15 minute Django task",
+  "selection_excludes": [
+    "Galaxy pilot outcomes",
+    "retrieval scores",
+    "expected treatment effect",
+    "agent-generated patches"
+  ],
+  "dataset_sha256": "9f0dd9bc9644e2b1ca6ee4965291487e884d873c2f291a06aa773d936f0ae278",
+  "tasks_in_run_order": [
+    {
+      "instance_id": "matplotlib__matplotlib-13989",
+      "repository": "matplotlib/matplotlib",
+      "difficulty": "<15 min fix"
+    },
+    {
+      "instance_id": "django__django-13033",
+      "repository": "django/django",
+      "difficulty": "15 min - 1 hour"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8548",
+      "repository": "sphinx-doc/sphinx",
+      "difficulty": "1-4 hours"
+    },
+    {
+      "instance_id": "sympy__sympy-13878",
+      "repository": "sympy/sympy",
+      "difficulty": ">4 hours"
+    },
+    {
+      "instance_id": "django__django-13406",
+      "repository": "django/django",
+      "difficulty": "<15 min fix"
+    }
+  ],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "repetitions_per_arm": 1,
+  "arms": [
+    "without_galaxy",
+    "with_galaxy"
+  ],
+  "created_at": "2026-10-02T16:50:49.591320+00:00"
+}

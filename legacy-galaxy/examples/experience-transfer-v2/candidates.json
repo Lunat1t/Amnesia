@@ -1,0 +1,29 @@
+{
+  "status": "candidate; evaluator preflight before model runs",
+  "pairs": [
+    {
+      "id": "expiry",
+      "contract": "Expiration timestamps are exclusive: expired at now >= deadline. None means no expiration; zero is a valid deadline. Preserve input records; return active records in input order.",
+      "source": "def active_sessions(records, now):\n    return [r for r in records if not r.get('expires_at') or r['expires_at'] >= now]\n\ndef active_tokens(records, now):\n    return [r for r in records if not r.get('expires_at') or r['expires_at'] >= now]\n",
+      "functions": ["active_sessions", "active_tokens"],
+      "verification": "records = [{'expires_at': None}, {'expires_at': 0}, {'expires_at': 10}, {'expires_at': 11}]\noriginal = copy.deepcopy(records)\nassert fn(records, 10) == [records[0], records[3]]\nassert records == original\nassert fn([{'expires_at': 0}], -1) == [{'expires_at': 0}]\nassert fn([{}], 100) == [{}]\n",
+      "reference": "return [r for r in records if r.get('expires_at') is None or now < r['expires_at']]"
+    },
+    {
+      "id": "copy-isolation",
+      "contract": "Return an independently editable copy of each configuration: nested lists/dicts must not alias originals or other returned records. Preserve values and input order; never mutate inputs.",
+      "source": "def clone_profiles(records):\n    return [dict(r) for r in records]\n\ndef clone_policies(records):\n    return [dict(r) for r in records]\n",
+      "functions": ["clone_profiles", "clone_policies"],
+      "verification": "shared = {'nested': {'items': [1, {'value': 2}]}}\nrecords = [shared, shared]\noriginal = copy.deepcopy(records)\nresult = fn(records)\nassert result == original\nresult[0]['nested']['items'][1]['value'] = 9\nassert records == original\nassert result[1] == original[1]\nassert fn([]) == []\n",
+      "reference": "return [__import__('copy').deepcopy(r) for r in records]"
+    },
+    {
+      "id": "normalized-collision",
+      "contract": "Normalize identifier keys by stripping whitespace and casefolding. Reject blank normalized keys and any collision with ValueError even if values agree. Preserve values; never mutate inputs.",
+      "source": "def normalize_users(records):\n    return {key.strip().lower(): value for key, value in records}\n\ndef normalize_groups(records):\n    return {key.strip().lower(): value for key, value in records}\n",
+      "functions": ["normalize_users", "normalize_groups"],
+      "verification": "records = [('Straße', 0), (' other ', None)]\noriginal = copy.deepcopy(records)\nassert fn(records) == {'strasse': 0, 'other': None}\nassert records == original\nfor bad in [[(' X ', 1), ('x', 1)], [('Straße', 1), ('STRASSE', 2)], [('   ', 3)]]:\n    try:\n        fn(bad)\n    except ValueError:\n        pass\n    else:\n        raise AssertionError('blank or colliding identifier accepted')\n",
+      "reference": "result = {}\nfor key, value in records:\n    normalized = key.strip().casefold()\n    if not normalized or normalized in result:\n        raise ValueError('invalid identifier')\n    result[normalized] = value\nreturn result"
+    }
+  ]
+}

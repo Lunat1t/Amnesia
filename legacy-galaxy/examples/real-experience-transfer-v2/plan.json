@@ -1,0 +1,46 @@
+{
+  "schema": "real-experience-transfer-v2",
+  "repository": "sympy/sympy",
+  "source_task": "sympy__sympy-13091",
+  "intervening_task": "sympy__sympy-22914",
+  "target_task": "sympy__sympy-15875",
+  "pair_hypothesis": "A verified lesson from symmetric comparison with unknown Python types may transfer to conservative three-valued zero inference: do not collapse an unknown result into False. This is a relevance hypothesis, not an observed transfer result.",
+  "source_lesson_scope": "Extract only the strategy actually supported by the source trajectory and patch; do not force the preregistered hypothesis if the run does not support it.",
+  "conditions": ["control", "relevant", "irrelevant"],
+  "condition_order_repetitions": [
+    ["control", "relevant", "irrelevant"],
+    ["relevant", "irrelevant", "control"],
+    ["irrelevant", "control", "relevant"]
+  ],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 900,
+  "context_budget_tokens": 5000,
+  "context_max_files": 16,
+  "initial_repetitions": 1,
+  "measurement_repetitions": 3,
+  "obsolete_condition": {
+    "included": false,
+    "reason": "No verified source episode with independently documented target-specific supersession exists. Do not invent or infer obsolete advice from age or a different task."
+  },
+  "primary": "official evaluator resolves target issue and preserves all PASS_TO_PASS tests",
+  "secondary": [
+    "agent execution tokens",
+    "tool calls and searches",
+    "duration to verified completion",
+    "independently annotated repeated-error category",
+    "harm from irrelevant advice"
+  ],
+  "unavailable": [
+    "currency cost without a dated applicable price schedule",
+    "semantic usefulness from file opens or delivery alone",
+    "wrong-patch counts without an independent fixed rubric"
+  ],
+  "delivery_design": "Forced audited exposure using the existing Galaxy ContextCompiler and Experience condition adapter. Every target arm uses the same ordinary Galaxy context; control has an empty Experience store. Native retrieval is a separate replay and is not inferred from forced delivery.",
+  "freeze_policy": "Freeze task IDs, source commits, hidden evaluator hashes, public task hashes, model, reasoning effort, context budget, evaluator version, and target-arm order before the first agent run. Keep all failed attempts. Abort any contrast if source provenance or non-Experience packet differs.",
+  "selection_rationale": {
+    "internal_evidence": "All three local SWE-bench snapshots have clean pinned base commits and accepted base/gold audits; exact checksums are recorded in the companion preflight report.",
+    "external_evidence": "None used to claim Galaxy benefit. The public issue reports are dataset inputs, not external experimental evidence.",
+    "galaxy_hypothesis": "A narrow lesson about preserving unknown comparison results may help avoid false-negative property inference. It may instead be too narrow or irrelevant to Add.is_zero."
+  }
+}
