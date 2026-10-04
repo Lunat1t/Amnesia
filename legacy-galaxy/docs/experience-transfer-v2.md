@@ -1,63 +1,61 @@
-# Experience transfer v2: independent candidate pairs
+# Перенос опыта v2: независимые пары-кандидаты
 
-Status: single-repetition agent calibration completed; no B success improvement observed. This protocol
-is fixed before agent results. Dataset: `examples/experience-transfer-v2/candidates.json`.
+Статус: завершена калибровка агента с одним повтором; улучшения успешности B не наблюдалось. Протокол
+зафиксирован до получения результатов агента. Набор данных: `examples/experience-transfer-v2/candidates.json`.
 
-Three isolated pairs cover exclusive expiration boundaries (None versus zero),
-independent copying of nested data with repeated input aliases, and collision
-rejection after Unicode casefolding. A and B operate on different functions in
-the same frozen source. The external verifier checks the specified behavior,
-input preservation and the unchanged AST of the other function. Reference fixes
-are evaluator calibration only and never enter agent repositories or prompts.
-These candidates cover more edge cases than v1; difficulty is not established.
+Три изолированные пары охватывают исключительные границы срока действия (None и ноль),
+независимое копирование вложенных данных с повторяющимися ссылками на входные данные и отказ
+при коллизии после Unicode casefolding. A и B работают с разными функциями
+одного зафиксированного исходника. Внешний оценщик проверяет заданное поведение,
+сохранность входных данных и неизменность AST другой функции. Эталонные исправления
+служат только калибровке оценщика и никогда не попадают в репозитории агентов или prompts.
+Эти кандидаты охватывают больше граничных случаев, чем v1; сложность не установлена.
 
-Prepare once into a fresh directory:
+Подготовьте набор один раз в новом каталоге:
 
 ```bash
 PYTHONPATH=. python scripts/prepare_experience_transfer_v2.py /tmp/galaxy-transfer-v2-prepared
 ```
 
-Each pair directory contains a clean Git fixture, suite config and a B-only
-context-only control. Each suite uses three repetitions and 5000 context tokens.
-Use separate output/runtime directories for every pair and condition, the same
-explicit model and 60-second per-invocation timeout for initial calibration.
-Do not reuse another pair's Experience. Run the existing `benchmark run` CLI
-with that pair's `suite.json`, then its `context-only.json`. Initial calibration
-may override repetitions to one; frozen measurement uses three.
+Каталог каждой пары содержит чистый Git fixture, конфигурацию набора и контроль B только с контекстом. Каждый набор использует три повтора и 5000 токенов контекста.
+Для каждой пары и условия используйте отдельные каталоги результата/runtime, одну и ту же
+явно заданную модель и тайм-аут 60 секунд на вызов для начальной калибровки.
+Не переиспользуйте Experience другой пары. Запустите существующий CLI `benchmark run`
+с файлом `suite.json` этой пары, затем с её `context-only.json`. Для начальной калибровки
+число повторов можно уменьшить до одного; зафиксированное измерение использует три.
 
-Primary comparison is B verified success with context + Experience versus B
-with context only. OFF is an additional baseline. Audit matching source commit,
-non-Experience context items, source A verifier-log hashes, delivered episode
-IDs, and an uncontaminated empty control store. Missing A extraction or delivery
-makes the transfer contrast unavailable, not a treatment failure. A failed run
-may produce a failure hypothesis; do not label it verified-success advice.
-Infrastructure failures remain separately reported. Preserve all runs and ties.
-Do not tune criteria against results. Packet differences beyond Experience
-invalidate the intended isolated contrast and must be reported.
+Основное сравнение — подтверждённая успешность B с контекстом + Experience против B
+только с контекстом. OFF — дополнительный базовый вариант. Проверьте совпадение исходного коммита,
+элементов контекста вне Experience, хешей журналов проверки источника A, ID переданного эпизода
+и незагрязнённого пустого контрольного хранилища. Отсутствие извлечения или передачи A
+делает сравнение переноса недоступным, а не провалом воздействия. Неудачный запуск
+может дать гипотезу сбоя; не помечайте её как совет с подтверждённым успехом.
+Инфраструктурные сбои учитывайте отдельно. Сохраняйте все запуски и ничьи.
+Не подгоняйте критерии под результаты. Различия пакета за пределами Experience
+нарушают задуманное изолированное сравнение и должны быть отражены в отчёте.
 
-Secondary measures: `agent_usage` and `agent_duration_ms` for task execution;
-`experience_extraction_usage` and `experience_extraction_ms` for learning cost.
-Existing top-level tokens/duration retain legacy combined accounting. Compare
-agent costs only at equal verified completion; report learning overhead separately.
-Unknown provider prices and semantic usefulness remain unavailable. A small
-synthetic suite cannot establish general benefit. Three repetitions support
-an initial diagnostic signal, not statistical certainty. Advance only with
-intact evidence, independent history, delivered experience and repeatable benefit
-without unexplained regressions; otherwise report null effect or harm.
+Дополнительные показатели: `agent_usage` и `agent_duration_ms` для выполнения задачи;
+`experience_extraction_usage` и `experience_extraction_ms` для стоимости обучения.
+Существующие верхнеуровневые токены/длительность сохраняют унаследованный общий учёт. Сравнивайте
+расход агента только при одинаковом подтверждённом результате; накладные расходы обучения приводите отдельно.
+Неизвестные цены провайдера и семантическая полезность остаются недоступными. Небольшой
+синтетический набор не доказывает общую пользу. Три повтора дают начальный диагностический сигнал,
+но не статистическую уверенность. Продолжайте только при целых доказательствах, независимой истории, переданном опыте и повторяемой пользе
+без необъяснимых регрессий; иначе сообщайте об отсутствии эффекта или вреде.
 
-`reports/experience-transfer-v2/preflight.json` contains all twelve baseline /
-reference checks: every baseline failed and every reference passed. No agent
-outcome was measured in this verifier calibration.
+`reports/experience-transfer-v2/preflight.json` содержит все двенадцать проверок базового/
+эталонного вариантов: каждый базовый вариант завершился неудачей, каждый эталонный прошёл. Результат агента
+в этой калибровке проверяющего не измерялся.
 
 
-## Agent calibration result (2026-10-03)
+## Результат калибровки агента (2026-10-03)
 
-All three experience suites and context-only controls completed: 18 agent task runs.
-All verifier logs passed SHA-256 audit; every pair delivered linked A experience
-to B with matching non-Experience context and identical source commits. All B
-conditions passed, giving no success improvement. Agent token differences were
-mixed (expiry lower, copying and normalization higher with Experience).
-Complete results: `reports/experience-transfer-v2/calibration/results.md` and
-`audit.json`, with raw traces and extraction costs. These fixtures are retained
-as calibration; the next benefit study should use harder real repository pairs
-and irrelevant/stale-memory controls before increasing repetitions.
+Все три набора Experience и контроли только с контекстом завершены: 18 запусков задач агента.
+Все журналы оценщика прошли аудит SHA-256; в каждой паре опыт A с привязкой к источнику передан
+в B при совпадающем контексте вне Experience и одинаковых коммитах источников. Все условия B
+пройдены, улучшения успешности нет. Различия в токенах агента неоднозначны (для срока действия меньше,
+для копирования и нормализации больше токенов с Experience).
+Полные результаты: `reports/experience-transfer-v2/calibration/results.md` и
+`audit.json`, вместе с исходными трассировками и стоимостью извлечения. Эти fixtures остаются
+калибровочными; перед увеличением числа повторов в следующем исследовании пользы следует использовать более сложные пары реальных репозиториев
+и контроль нерелевантной/устаревшей памяти.

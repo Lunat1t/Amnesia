@@ -1,81 +1,76 @@
 # ExperienceBench v0.1 protocol
 
-This is a **calibration protocol**, not a claim that Galaxy beats baseline.
-The CLI compares the same ordered task suite and read-only repository snapshot
-in three independent arms:
+Это **протокол калибровки**, а не утверждение, что Galaxy лучше базового варианта.
+CLI сравнивает один и тот же упорядоченный набор задач и снимок репозитория только для чтения
+в трёх независимых группах:
 
-| Arm | Agent input | Question answered |
+| Группа | Вход агента | На какой вопрос отвечает |
 |---|---|---|
-| `baseline` | Task + repository access | How does Codex do without Galaxy memory/context? |
-| `raw` | Baseline + retrieved episode records | Does retrieved prior experience help or harm? |
-| `compiled` | Baseline + bounded Galaxy Context Packet | Does compilation preserve useful experience more efficiently? |
+| `baseline` | Задача + доступ к репозиторию | Как Codex справляется без памяти/контекста Galaxy? |
+| `raw` | Базовый вариант + извлечённые записи эпизодов | Помогает или вредит извлечённый прошлый опыт? |
+| `compiled` | Базовый вариант + ограниченный пакет контекста Galaxy | Сохраняет ли компиляция полезный опыт эффективнее? |
 
-The primary contrasts are baseline-vs-raw (experience utility) and raw-vs-
-compiled (compression/selection loss). Retrieval recall is reported separately;
-retrieving a memory never counts as task success by itself.
+Основные сравнения: baseline и raw (полезность опыта), raw и compiled (потери при сжатии/отборе).
+Полнота извлечения памяти приводится отдельно; само извлечение памяти не считается успехом задачи.
 
-## Evaluators
+## Оценщики
 
-1. **Deterministic criteria/checks:** `must_include`, `must_include_any`,
+1. **Детерминированные критерии/проверки:** `must_include`, `must_include_any`,
    `must_not_include`, structured `json_subset`, repository `file_exists` /
-   `file_contains`, and optional authored commands. Phrase matching is a
-   lexical check, not semantic understanding. Commands run only with
-   `--run-checks`, in a disposable copy of the repository, without a shell.
-2. **Semantic rubric:** per-task `semantic_rubric` with a prose criterion,
-   pass/fail conditions, and evidence. `--semantic-judge` invokes Codex as a
-   separate blinded evaluator. It saves the criterion, answer, full judge
-   prompt, raw result, reason and model. This is an auditable model judgment,
-   not ground truth; use a different judge model when feasible.
-3. **Memory/provenance:** the same optional judge labels episode IDs used,
-   helpful, or presented as fact while `verified=false`. These are explicitly
-   heuristic labels. Exact source verification and future/stale-memory gates
-   remain deterministic.
+   `file_contains` и необязательные заданные вручную команды. Сопоставление фраз — лексическая проверка, а не понимание смысла. Команды запускаются только с
+   `--run-checks`, во временной копии репозитория, без shell.
+2. **Семантическая рубрика:** `semantic_rubric` для каждой задачи с текстовым критерием,
+   условиями pass/fail и доказательствами. `--semantic-judge` запускает Codex как
+   отдельного ослеплённого оценщика. Сохраняются критерий, ответ, полный prompt оценщика,
+   исходный результат, объяснение и модель. Это проверяемое суждение модели,
+   а не эталонная истина; по возможности используйте другую модель-оценщик.
+3. **Память/происхождение:** тот же необязательный оценщик помечает ID эпизодов как использованные,
+   полезные или представленные как факт при `verified=false`. Эти метки явно эвристические.
+   Точная проверка источника и блокировка будущей/устаревшей памяти остаются детерминированными.
 
-If a semantic rubric is present but no semantic judge is enabled, semantic and
-overall task success are `null`, not silently inferred from string criteria.
-Metrics the runner cannot observe (for example provider tool-call events) are
-`null`, not guessed.
+Если семантическая рубрика задана, но семантический оценщик не включён, семантический и
+общий успех задачи равны `null`; их нельзя молча выводить из строковых критериев.
+Метрики, которые runner не может наблюдать (например события вызова инструментов провайдера),
+имеют значение `null`, а не угадываются.
 
-## Temporal and arm isolation
+## Временная изоляция и изоляция групп
 
-- Every task gets an ISO UTC `memory_cutoff` before any arm is executed.
-- Only observations from earlier completed task entries can be eligible.
-- Dataset references to future/missing memories fail validation before model
-  calls. At runtime, eligible/retrieved/delivered IDs are checked against the
-  prior-observation set; any leak aborts the run.
-- `stale_prior` must also appear in `retire_prior`; those IDs are retracted
-  before the cutoff and recorded as stale candidates. A corrected observation
-  is not available until after its own source task finishes.
-- Each repetition and arm has a distinct ExperienceStore/cache directory.
-  Codex uses independent ephemeral, read-only sessions on the same unchanged
-  repository snapshot. Repository content is hashed before and after each
-  repetition; a change aborts the run.
+- Для каждой задачи до запуска любой группы задаётся `memory_cutoff` в формате ISO UTC.
+- Допустимыми могут быть только наблюдения из более ранних завершённых записей задач.
+- Ссылки набора данных на будущую/отсутствующую память приводят к ошибке проверки до вызова модели.
+  Во время выполнения ID допустимой/извлечённой/переданной памяти сверяются с набором
+  предыдущих наблюдений; при любой утечке запуск прерывается.
+- `stale_prior` также должен присутствовать в `retire_prior`; эти ID отзываются
+  до отсечки и фиксируются как кандидаты на устаревание. Исправленное наблюдение становится
+  доступным только после завершения исходной задачи.
+- У каждого повтора и группы свой каталог ExperienceStore/cache.
+  Codex использует независимые эфемерные сессии только для чтения на одном неизменённом
+  снимке репозитория. Содержимое репозитория хешируется до и после каждого повтора;
+  любое изменение прерывает запуск.
 
-Each arm/task artifact records `eligible_memory_ids`, `retrieved_memory_ids`,
-`delivered_memory_ids`, stale candidates and the cutoff. The funnel reports
-eligible → retrieved → delivered → used → helpful. `used/helpful` are null
-without the semantic judge. Benefit, harm and no-effect are paired task-level
-comparisons against baseline, never proxies for Recall@K.
+Артефакт каждой группы/задачи записывает `eligible_memory_ids`, `retrieved_memory_ids`,
+`delivered_memory_ids`, кандидатов на устаревание и отсечку. Воронка показывает
+допустимая → извлечённая → переданная → использованная → полезная память. Без семантического
+оценщика `used/helpful` равны null. Польза, вред и отсутствие эффекта — парные сравнения задач
+с базовым вариантом, а не заменители Recall@K.
 
-## Dataset schema and controlled candidate
+## Схема набора данных и контролируемый кандидат
 
-Dataset tasks are ordered. An `observation` attached to a task becomes
-available only after that task; it may include outcome, lesson, evidence,
-confidence and `verified`. Synthetic annotations must stay unverified. Later
-tasks name applicable memories with `gold_prior`; stale entries use
-`stale_prior` and `retire_prior`.
+Задачи набора данных упорядочены. Связанное с задачей `observation` становится доступным
+только после неё; оно может включать результат, урок, доказательство, уверенность и `verified`.
+Синтетические аннотации должны оставаться непроверенными. Более поздние задачи указывают
+подходящую память через `gold_prior`; для устаревших записей используются `stale_prior` и `retire_prior`.
 
-`examples/experience-bench/experiencebench-v0.1-candidate.json` contains 12
-controlled scenarios covering useful transfer, unrelated work, partial
-transfer across webhook/token domains, a repeated failure hypothesis,
-superseded advice, correction, and unverified provenance. Its paired fixture
-repository is `examples/experience-bench/refresh-service/`. This is a
-candidate dataset and must be calibrated before freezing; do not tune its
-criteria after inspecting a frozen result.
+`examples/experience-bench/experiencebench-v0.1-candidate.json` содержит 12
+контролируемых сценариев: полезный перенос, несвязанная работа, частичный
+перенос между доменами webhook/token, повторяющаяся гипотеза сбоя,
+заменённая рекомендация, исправление и непроверенное происхождение. Парный тестовый
+репозиторий: `examples/experience-bench/refresh-service/`. Это кандидатный набор, его
+нужно откалибровать до фиксации; не подстраивайте критерии после просмотра зафиксированного результата.
 
-## Calibration and frozen run
+## Калибровка и зафиксированный запуск
 
-Calibration (small prefix, not a result claim):
+Калибровка (небольшой начальный фрагмент, не заявление о результате):
 
 ```bash
 galaxy experience-bench examples/experience-bench/experiencebench-v0.1-candidate.json \
@@ -84,8 +79,8 @@ galaxy experience-bench examples/experience-bench/experiencebench-v0.1-candidate
   --limit 2 --repetitions 1 --semantic-judge
 ```
 
-After auditing prompts, rubrics, evaluator disagreements, token counters and
-all failures, freeze the dataset and launch the planned experiment:
+Проверив prompts, рубрики, расхождения оценщиков, счётчики токенов и
+все сбои, зафиксируйте набор данных и запустите запланированный эксперимент:
 
 ```bash
 galaxy experience-bench examples/experience-bench/experiencebench-v0.1-candidate.json \
@@ -94,28 +89,27 @@ galaxy experience-bench examples/experience-bench/experiencebench-v0.1-candidate
   --repetitions 3 --semantic-judge --model YOUR_CODEX_MODEL --freeze-manifest
 ```
 
-Every new output directory receives an immutable `manifest.json` with dataset
-SHA-256, repository commit/tree hash and dirty status, Galaxy commit/tree hash,
-Codex version/config hash, model, evaluator configuration, repetitions and
-timestamp. A frozen run requires an explicit model and identifiable snapshots.
-The manifest is written before calls; an existing manifest is never
-overwritten. `summary.json` and `summary.md` aggregate mean/median/min/max and
-standard deviation across repetitions. Per-task/per-arm/per-run folders keep
-the prompt, answer, Codex JSONL events, metrics, evaluation and memory
-eligible/retrieved/delivered artifacts.
+Каждый новый выходной каталог получает неизменяемый `manifest.json` с SHA-256 набора данных,
+коммитом/хешем дерева репозитория и статусом изменений, коммитом/хешем дерева Galaxy,
+версией Codex/хешем конфигурации, моделью, настройками оценщика, числом повторов и
+временем. Для зафиксированного запуска необходимы явно заданная модель и идентифицируемые снимки.
+Манифест записывается до вызовов; существующий манифест не перезаписывается. `summary.json` и
+`summary.md` агрегируют среднее/медиану/минимум/максимум и стандартное отклонение между повторами.
+Папки каждой задачи/группы/попытки хранят prompt, ответ, события Codex JSONL, метрики, оценку и
+артефакты допустимой/извлечённой/переданной памяти.
 
-## Metrics and limits
+## Метрики и ограничения
 
-The report includes task/criterion/semantic pass rates, input/cached-input/
-output/total tokens, wall time, tool-call counts, memory funnel counts and
-transition rates, experience hit/precision, false-memory injections, stale
-memory delivery, future leakage, unverified-as-fact rate, and baseline-paired
-Memory Benefit/Harm/No Effect rates. Unsupported counters and unrun judges are
-null. Judge token usage is kept separate from agent token usage.
+Отчёт содержит доли прохождения задач/критериев/семантических проверок, input/cached-input/
+output/total tokens, общее время, число вызовов инструментов, количество памяти на каждом этапе воронки
+и частоту переходов, попадание/точность опыта, ложные вставки памяти, передачу устаревшей
+памяти, утечку будущей памяти, частоту представления непроверенного как факта и парные с базой
+доли пользы/вреда/отсутствия эффекта памяти. Неподдерживаемые счётчики и незапущенные оценщики
+равны null. Использование токенов оценщиком учитывается отдельно от токенов агента.
 
-This v0.1 runner is read-only: it does not evaluate successful code edits or
-claim deterministic test-pass rates for agent changes. Tool-call telemetry
-depends on Codex JSONL event coverage. A 12-task candidate and one calibration
-run are not statistically powered evidence of a general Galaxy Effect. Keep
-the complete manifest, outputs, and failures; do not claim Galaxy is better
-from a positive-looking calibration.
+Этот runner v0.1 работает только для чтения: он не оценивает успешность изменений кода и
+не заявляет доли прохождения детерминированных тестов для изменений агента. Телеметрия вызовов
+инструментов зависит от полноты событий Codex JSONL. Кандидатный набор из 12 задач и один
+калибровочный запуск не дают статистически достаточных доказательств общего эффекта Galaxy.
+Сохраняйте полный манифест, выходные данные и сбои; не заявляйте о превосходстве Galaxy
+на основании благоприятно выглядящей калибровки.

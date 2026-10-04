@@ -7,12 +7,12 @@ circuit_breaker_count: 0
 tags:
   - task
 ---
-## Requirements (Immutable)
+## Требования (неизменяемые)
 {{raw_user_request}}
 
-## Context & Artifacts
+## Контекст и артефакты
 - [[note_link]]
-- files / diffs
+- файлы / различия
 
-## Execution Log
-- [{{date}} {{time}}] [Role]: Action summary
+## Журнал выполнения
+- [{{date}} {{time}}] [Роль]: краткое описание действия

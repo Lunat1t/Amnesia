@@ -1,20 +1,20 @@
-# Migration from Galaxy to Amnesia
+# Перенос Galaxy в Amnesia
 
-- **Source checkout:** `/home/bah/Documents/Codex/galaxy-3.2.1-alpha.19-evidence-integrity`
-- **Migrated on:** 2026-10-04
-- **Destination:** Amnesia standalone repository
-- **Source checkout changed or deleted:** no
+- **Исходная копия:** `/home/bah/Documents/Codex/galaxy-3.2.1-alpha.19-evidence-integrity`
+- **Дата переноса:** 2026-10-04
+- **Назначение:** отдельный репозиторий Amnesia
+- **Исходная копия изменена или удалена:** нет
 
-## Included
+## Перенесено
 
-- All files under `docs/`, copied without editing to `legacy-galaxy/docs/` (all source cards, architecture notes, roadmaps, and team harness documents).
-- Original `README.md` and `AGENTS.md`, all seven Galaxy Codex role definitions, and examples, preserved under `legacy-galaxy/`.
-- Active Amnesia README, agent instructions, charter, source map, and seven Amnesia-named Codex roles.
-- Benchmark README/dataset manifest and 126 compact protocol/report/evidence files and three source-code citation snapshots copied with their paths under `legacy-galaxy/`.
-- `migration-manifest.json` contains SHA-256 for every migrated file.
+- Все файлы из `docs/` скопированы без изменений в `legacy-galaxy/docs/` (все карточки источников, заметки по архитектуре, дорожные карты и документы командного процесса).
+- Исходные `README.md` и `AGENTS.md`, все семь определений ролей Galaxy для Codex и примеры сохранены в `legacy-galaxy/`.
+- Добавлены активные README, инструкции агентам, устав, карта источников Amnesia и семь определений ролей Codex с названием Amnesia.
+- README бенчмарка, манифест набора данных, 126 компактных файлов протоколов/отчётов/свидетельств и три снимка фрагментов исходного кода с цитатами скопированы в `legacy-galaxy/` с сохранением путей.
+- `migration-manifest.json` содержит SHA-256 каждого файла на момент переноса.
 
-## Kept in the Galaxy checkout
+## Осталось в копии Galaxy
 
-Galaxy source code/runtime, hidden benchmark patches, repository snapshots, databases, event traces, evaluator logs, and other bulk run state were not copied. The original checkout remains intact and is the provenance location for these artifacts. Compact reports and manifests were included where available. This is a complete transfer of documentation/source cards/agent definitions, not a code or raw-data fork.
+Исходный код и среда выполнения Galaxy, скрытые изменения бенчмарков, снимки репозиториев, базы данных, трассы событий, журналы оценщика и другие объёмные данные запусков не копировались. Исходная копия осталась нетронутой и сохраняет происхождение этих артефактов. Где были доступны компактные отчёты и манифесты, они перенесены. Это полный перенос документации, карточек источников и определений агентов, но не кода и не необработанных данных.
 
-Historical Galaxy references remain verbatim to preserve citations and provenance. The old absolute-path Codex hook config was not copied or enabled; active Amnesia `.codex/config.toml` only enables agent definitions.
+При переносе исторические материалы Galaxy скопированы дословно для сохранения цитат и происхождения; по запросу PM их текст локализуется на русский отдельным изменением. Хеши в манифесте относятся к версиям на момент переноса, а не подтверждают побайтовое соответствие текущих локализованных файлов. Старая конфигурация Codex hook с абсолютными путями не копировалась и не включалась; активный `.codex/config.toml` Amnesia включает только определения агентов.

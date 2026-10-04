@@ -1,25 +1,25 @@
-# Amnesia agent instructions
+# Инструкции для агентов Amnesia
 
-## Project state
+## Состояние проекта
 
-Amnesia is the active project name and repository. Its research objective continues the Operation Amnesia question: how to improve coding agents through useful context, memory, and reusable experience. No replacement product architecture or broad implementation scope has been approved yet. The former Galaxy project remains preserved separately; its documentation is historical evidence and source material, not automatically active requirements.
+Amnesia — текущее название проекта и репозитория. Исследование продолжает вопрос Операции «Амнезия»: как улучшить работу агентов программирования с помощью полезного контекста, памяти и повторно используемого опыта. Новая архитектура продукта или широкий объём реализации пока не утверждены. Прежний проект Galaxy сохранён отдельно; его документация — исторические свидетельства и исходные материалы, а не автоматически действующие требования.
 
-## Before substantive work
+## Перед содержательной работой
 
-1. Read [`docs/amnesia-charter.md`](docs/amnesia-charter.md) and [`docs/sources/amnesia/00-source-map.md`](docs/sources/amnesia/00-source-map.md).
-2. Inspect relevant imported source cards and experiment reports under `legacy-galaxy/`; confirm claims against their cited artifacts where available.
-3. Separate **internal evidence**, **external source claims**, and **Amnesia hypotheses**. An external article does not prove Amnesia works.
-4. Identify the intended outcome, current evidence/gap, next step, sources/constraints, risks, and stopping condition before substantial work.
-5. The user is Product Manager and owns product direction. Do technical reconnaissance independently; ask only for an actual product trade-off.
+1. Прочитай [`docs/amnesia-charter.md`](docs/amnesia-charter.md) и [`docs/sources/amnesia/00-source-map.md`](docs/sources/amnesia/00-source-map.md).
+2. Изучи относящиеся к задаче перенесённые карточки источников и отчёты экспериментов в `legacy-galaxy/`; по возможности сверяй утверждения с указанными артефактами.
+3. Разделяй **внутренние свидетельства**, **утверждения внешних источников** и **гипотезы Amnesia**. Внешняя статья не доказывает, что Amnesia работает.
+4. Перед содержательной работой определи ожидаемый результат, текущее свидетельство и пробел, следующий шаг, источники и ограничения, риски и условие остановки.
+5. Пользователь — Product Manager и определяет направление продукта. Техническую разведку проводи самостоятельно; обращайся к пользователю только при реальном выборе между продуктовыми вариантами.
 
-## Evidence and migration constraints
+## Требования к свидетельствам и ограничения переноса
 
-- Preserve provenance, dates, hashes, and limitations. Do not rewrite historical Galaxy source cards to make them appear to describe Amnesia.
-- Treat imported Galaxy roadmap items as archived proposals until the PM adopts them for Amnesia.
-- This migration includes documentation, source cards, agent definitions, examples, and compact report artifacts. It does not copy the Galaxy runtime/code or large raw SWE-bench repositories and run traces. Those remain in the original Galaxy checkout; see [`MIGRATION.md`](MIGRATION.md).
-- Keep agent roles bounded and reviewable. Do not activate skills or policies automatically.
-- Do not claim efficacy from retrieval metrics, synthetic tasks, or one-run pilots.
+- Сохраняй происхождение, даты, хеши и ограничения. Не переписывай исторические карточки источников Galaxy так, будто они описывают Amnesia.
+- Считай перенесённые пункты дорожной карты Galaxy архивными предложениями, пока PM не примет их для Amnesia.
+- При переносе скопированы документация, карточки источников, определения агентов, примеры и компактные артефакты отчётов. Среда выполнения и код Galaxy, крупные необработанные репозитории SWE-bench и трассы запусков не копировались. Они остались в исходной копии Galaxy; см. [`MIGRATION.md`](MIGRATION.md).
+- Ограничивай роли агентов конкретными задачами, результаты которых можно проверить. Не активируй навыки и политики автоматически.
+- Не заявляй об эффективности на основании метрик извлечения, синтетических задач или пилотных запусков без повторений.
 
-## Completion reports
+## Итоговые отчёты
 
-For substantive work, report result, verification, unknowns, sources, and learning. Keep user-facing work in Russian unless the PM chooses another language.
+По итогам содержательной работы сообщай результат, проверку, неизвестные аспекты, источники и полученные знания. Пиши для пользователя по-русски, если PM не выберет другой язык.

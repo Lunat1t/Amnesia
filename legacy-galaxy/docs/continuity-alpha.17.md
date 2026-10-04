@@ -1,29 +1,29 @@
-# Galaxy 3.2.1 alpha 17 — continuity slice
+# Galaxy 3.2.1 alpha 17 — срез непрерывности
 
-## What executes today
+## Что выполняется сейчас
 
-1. The existing World Model and Attention Engine select repository evidence. Alpha 16's component capsules and packet cache remain in use.
-2. Each completed DAG node with a result is stored once by `(run_id, node_id)` in a repository-scoped SQLite experience ledger. It records task, role, model-independent agent identity, outcome, lesson candidate, confidence, evidence, source run and visibility. Failed completed DAGs also invoke the learning hook.
-3. A new agent's `ContextCompiler` ranks visible episodes by task overlap and a small role/verification preference. It can reuse another role's experience. An independent experience budget is at most 10% of the packet budget, capped at 900 tokens. The packet still enforces its overall budget.
-4. The cache key includes the source snapshot, stable project memory, a constant-cost SQLite experience revision and requesting identity/scope. Recording or retracting experience prevents reuse of stale packets.
-5. `experience-search` shows candidate procedures after two *distinct*, evidence-backed verified success runs with the same explicit lesson. A failure with that lesson blocks a candidate. Candidates are inspectable and never silently written into Brain as confirmed facts.
+1. Существующие World Model и Attention Engine выбирают свидетельства из репозитория. Capsules компонентов и кэш пакетов из alpha 16 продолжают использоваться.
+2. Каждый завершённый узел DAG с результатом однократно сохраняется по `(run_id, node_id)` в реестре опыта SQLite, привязанном к репозиторию. Записываются задача, роль, не зависящая от модели идентичность агента, результат, кандидат-урок, уверенность, доказательства, исходный запуск и видимость. Для завершённых неудачно DAG также вызывается механизм обучения.
+3. `ContextCompiler` нового агента ранжирует видимые эпизоды по совпадению с задачей и небольшому приоритету роли/проверки. Можно повторно использовать опыт другой роли. Отдельный бюджет опыта составляет не более 10% бюджета пакета и ограничен 900 токенами. Для всего пакета по-прежнему действует общий бюджет.
+4. Ключ кэша включает снимок источника, стабильную память проекта, ревизию опыта SQLite с постоянной стоимостью и идентичность/область запроса. Запись или отзыв опыта предотвращает повторную выдачу устаревших пакетов.
+5. `experience-search` показывает кандидатные процедуры после двух *различных* подтверждённых успешных запусков с доказательствами и одним и тем же явным уроком. Сбой с таким уроком блокирует кандидата. Кандидатов можно проверять; они никогда не записываются молча в Brain как подтверждённые факты.
 
-## Relationship to the six research directions
+## Связь с шестью направлениями исследований
 
-| Direction | Implemented in this slice | Remaining research/work |
+| Направление | Реализовано в этом срезе | Оставшиеся исследования/работа |
 | --- | --- | --- |
-| ACE, evolving context | Source snapshot, delta World Model and cache invalidation keep packets current; episodes append without rewriting a summary | Evidence-aware semantic consolidation and aging |
-| ReasoningBank | Outcome plus lesson and evidence are stored; failures can block candidate procedures | Extract transferable strategies from full tool trajectories |
-| G-Memory | Project/agent episodes link to run and node, with existing World/Brain graph context | Explicit insight/query/interaction graph and trajectory traversal |
-| RCR-Router | Task/role-aware episode ranking with bounded token allocation | Learned allocator and measured utility feedback |
-| Collaborative Memory | Project/private/team predicates, owner and team provenance fields | Authenticated principals, membership service, auditable grants and cross-user security tests |
-| Agent KB | Experience is independent of model/executor and reused by later agents | Framework adapters, serialization contract and cross-framework benchmarks |
+| ACE, развивающийся контекст | Снимок источника, World Model с изменениями и инвалидация кэша поддерживают актуальность пакетов; эпизоды добавляются без переписывания сводки | Семантическая консолидация и устаревание с учётом доказательств |
+| ReasoningBank | Сохраняются результат, урок и доказательства; сбои могут блокировать кандидатные процедуры | Извлечение переносимых стратегий из полных траекторий инструментов |
+| G-Memory | Эпизоды проекта/агента связаны с запуском и узлом, используя существующий графовый контекст World/Brain | Явный граф выводов/запросов/взаимодействий и обход траектории |
+| RCR-Router | Ранжирование эпизодов по задаче/роли с ограниченным распределением токенов | Обучаемый распределитель и измеренная обратная связь о полезности |
+| Collaborative Memory | Условия project/private/team, поля происхождения owner и team | Подтверждённые личности, служба членства, проверяемые разрешения и тесты безопасности между пользователями |
+| Agent KB | Experience не зависит от модели/исполнителя и повторно используется последующими агентами | Адаптеры фреймворков, контракт сериализации и межфреймворковые бенчмарки |
 
-The labels refer to architectural inspiration. Alpha 17 does not reproduce the papers' algorithms or their published performance claims.
+Эти названия обозначают источники архитектурных идей. Alpha 17 не воспроизводит алгоритмы статей или опубликованные в них заявления о производительности.
 
-## Sequential offline experiment
+## Последовательный офлайн-эксперимент
 
-Prepare a JSON file with ordered tasks. Each case's `gold_prior` refers only to observations from earlier cases. The evaluator rejects future references.
+Подготовьте JSON-файл с упорядоченными задачами. `gold_prior` каждого случая может ссылаться только на наблюдения из предыдущих случаев. Оценщик отклоняет ссылки на будущее.
 
 ```json
 {
@@ -45,15 +45,15 @@ Prepare a JSON file with ordered tasks. Each case's `gold_prior` refers only to 
 }
 ```
 
-Run `python galaxy.py experience-eval tasks.json --repo /path/to/repo --out report.json`. `retrieval_recall` is an annotation-based episode recall; token counts are packet estimates; assembly times include local filesystem/cache effects. It does **not** establish faster or more successful agents.
+Run `python galaxy.py experience-eval tasks.json --repo /path/to/repo --out report.json`. `retrieval_recall` — полнота извлечения эпизодов по аннотациям; числа токенов являются оценкой пакета; время сборки включает влияние локальной файловой системы/кэша. Это **не** доказывает, что агенты работают быстрее или успешнее.
 
-## End-to-end A/B protocol
+## Сквозной A/B-протокол
 
-Use several repositories and a held-out series of related tasks, reset each branch to the same state, and alternate run order. Baseline: one agent without Galaxy continuity. Treatment: the same model/harness and task budget with alpha 17 continuity. Compare verified success per task, total model tokens, wall time, redundant file reads, repeated mistakes and transfer when agent/model changes. Preserve full logs and report failures and any private-memory leakage. Only after this experiment should improvement be claimed.
+Используйте несколько репозиториев и отложенную серию связанных задач, возвращайте каждую ветку к одному состоянию и чередуйте порядок запусков. Базовый вариант: агент без непрерывности Galaxy. Экспериментальный вариант: та же модель/harness и бюджет задачи с механизмом непрерывности alpha 17. Сравнивайте подтверждённый успех по каждой задаче, общее число токенов модели, прошедшее время, повторные чтения файлов, повторные ошибки и перенос при смене агента/модели. Сохраняйте полные журналы и сообщайте о сбоях и утечках личной памяти. Заявлять об улучшении можно только после этого эксперимента.
 
-## Boundaries
+## Границы
 
-- Lessons are supplied by the executor or caller; no automatic full-trajectory reflection is implemented.
-- A `PASS` result alone is not verification. The DAG's verification commands must succeed and the result must carry evidence before an episode is marked verified.
-- CLI `--owner-id` and `--team-id` are trusted-local scope selectors, not authentication. Do not serve the multi-user APIs without an identity and authorization layer.
-- Only completed DAGs (`DONE` or `FAILED`) run the hook; interrupted or approval-blocked runs wait for resolution.
+- Уроки предоставляет исполнитель или вызывающая сторона; автоматический анализ полной траектории не реализован.
+- Один результат `PASS` сам по себе не является проверкой. Команды проверки DAG должны завершиться успешно, а результат должен иметь доказательства, прежде чем эпизод будет помечен как подтверждённый.
+- Параметры CLI `--owner-id` и `--team-id` задают область в доверенном локальном окружении, но не являются аутентификацией. Не предоставляйте многопользовательские API без слоя идентификации и авторизации.
+- Механизм вызывается только для завершённых DAG (`DONE` или `FAILED`); прерванные запуски или ожидающие согласования ждут разрешения ситуации.

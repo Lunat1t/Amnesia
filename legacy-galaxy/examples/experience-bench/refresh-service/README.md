@@ -1,14 +1,7 @@
-# Refresh and webhook service fixture
+# Тестовый репозиторий сервиса обновления токенов и вебхуков
 
-This small, fixed repository models three real maintenance areas: opaque
-refresh-token rotation, webhook redelivery, and password-reset privacy.
+Этот небольшой фиксированный репозиторий моделирует три реальные области сопровождения: ротацию непрозрачных токенов обновления, повторную доставку вебхуков и конфиденциальность сброса пароля.
 
-Current refresh behavior revokes a valid token and issues one successor. The
-service does not accept an idempotency key, and retry behavior after a lost
-response is intentionally unspecified. `docs/legacy-refresh.md` describes an
-old grace-window proposal; `docs/security-policy.md` supersedes it and requires
-immediate revocation.
+Текущая логика обновления отзывает действительный токен и выдаёт один новый. Сервис не принимает ключ идемпотентности, а поведение при повторном запросе после потери ответа намеренно не определено. В `docs/legacy-refresh.md` описано старое предложение о льготном периоде; документ `docs/security-policy.md` заменяет его и требует немедленного отзыва токена.
 
-Webhook processing deduplicates by event ID and must commit the event before
-returning a 2xx acknowledgement. Password-reset responses must not reveal
-whether an account exists.
+Обработчик вебхуков устраняет дубликаты по идентификатору события и должен сохранить событие до возврата подтверждения 2xx. Ответы при сбросе пароля не должны раскрывать, существует ли учётная запись.

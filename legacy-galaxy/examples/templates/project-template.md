@@ -7,14 +7,14 @@ lead_agent: Sun
 ---
 # {{title}}
 
-## 1. Goal & Objectives
+## 1. Цель и задачи
 - 
 
-## 2. Deliverables
+## 2. Результаты
 - [ ] 
 
-## 3. Linked Tasks
+## 3. Связанные задачи
 - [[data/plans/plan-example.json]]
 
-## 4. Documentation & Tech Specs
+## 4. Документация и технические спецификации
 - 

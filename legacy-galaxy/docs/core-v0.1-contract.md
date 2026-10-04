@@ -1,123 +1,120 @@
-# Archived experiment contract: experience transfer v0.1
+# Архивный контракт эксперимента: перенос опыта v0.1
 
-> This document predates the narrowed Galaxy direction. It records a prior experiment contract, not an active Core architecture mandate. The current scope is defined by [`architecture/foundation.md`](architecture/foundation.md) and its actual code boundaries by [`architecture/current-state.md`](architecture/current-state.md).
+> Этот документ создан до сужения направления Galaxy. Он фиксирует прежний контракт эксперимента, а не действующее требование к архитектуре Core. Текущий scope определён в [`architecture/foundation.md`](architecture/foundation.md), а его фактические границы в коде — в [`architecture/current-state.md`](architecture/current-state.md).
 
-## Purpose
+## Цель
 
-Core v0.1 demonstrates one narrow claim: **evidence-backed experience from an
-earlier run can improve the context and verified outcome of a later, independent
-run without exceeding its context budget**.
+Core v0.1 проверяет одно узкое утверждение: **подкреплённый доказательствами опыт предыдущего
+запуска может улучшить контекст и проверенный результат более позднего независимого запуска,
+не выходя за пределы бюджета контекста**.
 
-This is a contract over existing Galaxy components, not a replacement architecture.
-The repository already has a persistent World Model and change feed, hybrid
-Attention, a budgeted Context Compiler, sourced experience episodes, a verification
-ledger, and a DAG executor. The v0.1 work connects and evaluates these pieces.
+Это контракт для существующих компонентов Galaxy, а не замена архитектуры.
+В репозитории уже есть постоянная World Model и лента изменений, гибридный
+Attention, Context Compiler с ограниченным бюджетом, эпизоды опыта с указанием источника, журнал проверки
+и исполнитель DAG. Работа над v0.1 связывает и оценивает эти компоненты.
 
-## The vertical slice
+## Сквозной сценарий
 
 ```text
 observe project snapshot
-  → compile bounded ContextPacket (including eligible prior experience)
-  → execute task through an external agent or Galaxy DAG runner
-  → run deterministic verification
-  → record episode with run/node provenance and verified evidence
-  → compile context for a later independent task
-  → compare against an isolated no-experience baseline
+  → собрать ограниченный ContextPacket (включая допустимый прошлый опыт)
+  → выполнить задачу через внешнего агента или runner Galaxy DAG
+  → выполнить детерминированную проверку
+  → записать эпизод с происхождением (запуск/узел) и проверенными доказательствами
+  → собрать контекст для более поздней независимой задачи
+  → сравнить с изолированным базовым вариантом без опыта
 ```
 
-The first acceptance scenario is a small, reproducible series of related coding
-tasks in one repository. A first run encounters or resolves a labeled failure
-pattern. A later task recreates the relevant condition. The enabled run may receive
-the earlier episode; the baseline must not. Both arms use the same task, model,
-harness, repository snapshot, and execution budget.
+Первый сценарий приёмки — небольшая воспроизводимая серия связанных задач разработки
+в одном репозитории. В первом запуске проявляется или устраняется размеченный
+тип сбоя. Более поздняя задача воспроизводит подходящее условие. Включённый вариант может получить
+предыдущий эпизод; базовый — нет. В обоих вариантах одинаковы задача, модель,
+harness, снимок репозитория и бюджет выполнения.
 
-## Contracts
+## Контракты
 
-### Observation and state
+### Наблюдение и состояние
 
-- Every packet identifies its project and stable World Model snapshot.
-- A packet must not mix repository states: if the source changes during compilation,
-  compilation refreshes/retries or returns an explicit error.
-- Incremental observation is an implementation detail; the snapshot and source
-  evidence remain authoritative.
+- Каждый пакет указывает проект и стабильный снимок World Model.
+- Пакет не должен объединять разные состояния репозитория: если источник меняется во время сборки,
+  сборка обновляется/повторяется либо возвращает явную ошибку.
+- Инкрементальное наблюдение — деталь реализации; эталонными остаются снимок и доказательства из источников.
 
-### Context packet
+### Пакет контекста
 
-- `ContextCompiler` is the single assembly path for task context.
-- The packet has a hard caller-supplied token budget. Experience is a bounded,
-  lower-priority allocation and may be trimmed to preserve task/code evidence.
-- Every included episode identifies its source run and node, outcome, confidence,
-  and evidence status. Episodes are advice/observations, not proof of current code.
-- Cache identity includes project snapshot and memory/experience state; stale packets
-  must not be served after any of these inputs change.
+- `ContextCompiler` — единственный путь сборки контекста задачи.
+- Для пакета действует жёсткий бюджет токенов, заданный вызывающей стороной. Опыт занимает
+  ограниченную область более низкого приоритета и может быть сокращён, чтобы сохранить доказательства по задаче/коду.
+- Для каждого включённого эпизода указаны исходные запуск и узел, результат, уверенность
+  и статус доказательств. Эпизоды — это рекомендации/наблюдения, а не доказательство состояния текущего кода.
+- Идентификатор кэша включает снимок проекта и состояние памяти/опыта; после изменения любого
+  из этих входов нельзя выдавать устаревшие пакеты.
 
-### Verification and learning
+### Проверка и обучение
 
-- Agent claims such as `DONE`, `PASS`, and free-form evidence strings do not establish
-  verification.
-- A verified outcome requires a passing deterministic command recorded in the
-  Galaxy ledger, with its saved bytes matching the recorded digest.
-- An experience episode is marked verified only while its linked verification
-  evidence passes that integrity check.
-- Consolidated procedures and rules remain candidates until explicit evaluation
-  and promotion. Contradictory evidence prevents promotion or triggers review;
-  old knowledge remains auditable as historical/superseded rather than silently
-  disappearing.
+- Заявления агента вроде `DONE`, `PASS` и произвольные строки доказательств не подтверждают
+  прохождение проверки.
+- Для подтверждённого результата нужна успешно пройденная детерминированная команда, записанная в
+  журнал Galaxy; сохранённые байты должны совпадать с записанным дайджестом.
+- Эпизод опыта помечается подтверждённым, только пока связанное с ним доказательство проверки
+  проходит контроль целостности.
+- Обобщённые процедуры и правила остаются кандидатами до явной оценки
+  и продвижения. Противоречащие доказательства блокируют продвижение или запускают проверку;
+  старые знания остаются доступными для аудита как исторические/заменённые, а не исчезают молча.
 
-### Isolation
+### Изоляция
 
-- Baseline and experience-enabled benchmark arms use isolated memory/experience
-  stores, so baseline cannot accidentally retrieve the treatment's episodes.
-- Project, owner, and team fields are scope selectors in the local prototype, not
-  authenticated identities. Do not expose them as a multi-user security boundary.
+- В базовой и использующей опыт группах бенчмарка применяются изолированные хранилища памяти/опыта,
+  поэтому базовый вариант не может случайно извлечь эпизоды экспериментальной группы.
+- Поля project, owner и team в локальном прототипе задают область выборки, но не являются
+  аутентифицированными идентификаторами. Не используйте их как границу безопасности многопользовательской системы.
 
-## First benchmark and acceptance gate
+## Первый бенчмарк и критерии приёмки
 
-Start with a small labeled suite (at least 12 ordered task pairs across at least 3
-failure categories; include tasks where prior advice is irrelevant or misleading).
-Freeze task text, repository commits, model/provider, harness, command set, token
-and time budgets before running the paired comparison. Reset both arms between
-independent series. Report per-task results and aggregate results; do not treat
-retrieval alone as evidence of improved agent performance.
+Начните с небольшого размеченного набора (не менее 12 упорядоченных пар задач как минимум по 3
+категориям сбоев; включите задачи, где прошлые рекомендации неуместны или вводят в заблуждение).
+До парного сравнения зафиксируйте текст задач, коммиты репозиториев, модель/провайдера, harness, набор команд, бюджеты токенов
+и времени. Между независимыми сериями сбрасывайте обе группы. Представляйте результаты по задачам и в агрегате; одно лишь
+извлечение памяти не является доказательством улучшения работы агента.
 
 Required measures:
 
-| Measure | Definition |
+| Показатель | Определение |
 | --- | --- |
-| Verified completion | Task succeeds and required deterministic checks pass with intact evidence. |
-| Repeated error rate | Labeled prior error category recurs in a later applicable task. |
-| Experience reuse rate | Applicable prior episode is retrieved and included in the packet. |
-| False-use rate | Irrelevant or contradicted experience is included or causes a worse decision. |
-| False blocks | A learned rule prevents a task that reviewers label as allowed. |
-| Context cost | Packet tokens and total model input tokens, reported separately. |
-| Time to verified completion | Wall time through passing verification, including retries. |
-| Human interventions | Reviewer/user interventions per completed task. |
+| Подтверждённое завершение | Задача выполнена, обязательные детерминированные проверки пройдены, доказательства целы. |
+| Частота повторения ошибок | Размеченная ранее категория ошибки повторяется в более поздней подходящей задаче. |
+| Частота повторного использования опыта | Подходящий предыдущий эпизод извлечён и включён в пакет. |
+| Частота ошибочного использования | Включён не относящийся к задаче или опровергнутый опыт либо он приводит к худшему решению. |
+| Ложные блокировки | Выученное правило блокирует задачу, которую проверяющие считают допустимой. |
+| Стоимость контекста | Число токенов пакета и общее число входных токенов модели, приводимые отдельно. |
+| Время до подтверждённого завершения | Прошедшее время до успешной проверки, включая повторы. |
+| Вмешательства человека | Число вмешательств проверяющего/пользователя на завершённую задачу. |
 
-Acceptance is not a single cherry-picked success. Publish the complete paired
-results, failures, packet traces, and evidence audit. The initial gate is: no
-verification-integrity failures; no baseline contamination; packet budgets obeyed;
-and the experience-enabled arm improves verified completion or repeated-error
-rate without a material regression in false-use, false-block, total token, or
-time measures. If the small suite is underpowered or inconclusive, report that
-and expand it instead of claiming the Galaxy Effect.
+Приёмка не должна основываться на одном выбранном удачном результате. Публикуйте полные парные
+результаты, сбои, трассы пакетов и аудит доказательств. Начальные критерии: нет нарушений целостности
+проверок, базовый вариант не загрязнён, бюджеты пакетов соблюдены;
+группа с опытом улучшает подтверждённое завершение или частоту повторных ошибок без существенного ухудшения
+показателей ошибочного использования, ложных блокировок, общего расхода токенов или
+времени. Если небольшой набор имеет недостаточную мощность или результат неубедителен, сообщите об этом
+и расширьте набор вместо заявления об эффекте Galaxy.
 
-ContextBench remains a separate retrieval-quality evaluation. ScaleBench is a
-later performance evaluation for small/medium/large repositories; neither can
-substitute for this end-to-end paired experience experiment.
+ContextBench остаётся отдельной оценкой качества извлечения. ScaleBench — последующая оценка
+производительности на малых/средних/крупных репозиториях; ни один из них не заменяет этот
+сквозной парный эксперимент переноса опыта.
 
-## Explicitly out of scope for this contract
+## Явно вне scope этого контракта
 
-- Replacing the existing stores with a universal `MemoryObject` schema.
-- A general temporal knowledge graph or arbitrary entity graph.
-- Automatic promotion of model-written skills/rules.
-- Building another agent runtime, IDE, SaaS product, or UI.
-- Claiming authentication from CLI owner/team/reviewer strings.
-- Claiming better outcomes from packet retrieval, synthetic tasks, or heuristic
-  retrieval signals alone.
+- Замена существующих хранилищ универсальной схемой `MemoryObject`.
+- Общий временной граф знаний или произвольный граф сущностей.
+- Автоматическое продвижение навыков/правил, написанных моделью.
+- Создание ещё одного runtime агента, IDE, продукта SaaS или интерфейса.
+- Заявление об аутентификации на основании строк owner/team/reviewer в CLI.
+- Заявление об улучшении результатов только на основании извлечения пакета, синтетических задач или
+  эвристических сигналов поиска.
 
-## Mapping to current implementation
+## Соответствие текущей реализации
 
-| Contract concern | Existing implementation |
+| Аспект контракта | Существующая реализация |
 | --- | --- |
 | Project observation and temporal snapshot | `galaxy_core/world/`, `galaxy_core/kernel/` |
 | Retrieval and bounded packet compilation | `galaxy_core/attention/`, `galaxy_core/context/compiler.py` |
@@ -126,8 +123,8 @@ substitute for this end-to-end paired experience experiment.
 | Deterministic checks and evidence ledger | `galaxy_core/engine/verification.py`, autonomy engine |
 | Candidate rule lifecycle | `rule-suggest`, `rule-eval`, `rule-promote`, `rule-disable` |
 
-The key remaining proof is end-to-end paired execution with an external agent or
-the DAG runner. The current continuity replay measures retrieval and packet cost;
-it does not establish fewer repeated mistakes, faster completion, or higher
-verified success. Current local stores also do not provide authenticated
-multi-user isolation.
+Ключевое недостающее доказательство — сквозной парный запуск с внешним агентом или
+runner DAG. Текущий continuity replay измеряет извлечение и стоимость пакета;
+он не доказывает сокращение повторных ошибок, ускорение выполнения или рост
+подтверждённого успеха. Текущие локальные хранилища также не обеспечивают аутентифицированную
+изоляцию между пользователями.

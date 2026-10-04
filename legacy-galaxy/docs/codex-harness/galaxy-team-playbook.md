@@ -1,12 +1,12 @@
-# Galaxy team playbook
+# Порядок работы команды Galaxy
 
-Use this playbook when the user asks to work as their Galaxy team. The user is Product Manager; main Codex owns orchestration and synthesis.
+Используйте это руководство, когда пользователь просит работать как его команда Galaxy. Пользователь — Product Manager; основной Codex отвечает за координацию и сведение результатов.
 
-1. Follow root `AGENTS.md` and read `docs/codex-agent-workflow.md`.
-2. For nontrivial work, create a compact attention map using `attention-map-template.md` in working context. Do not create a per-task file unless requested.
-3. Follow workflow routing and product decision gates. For Galaxy work, read roadmap, source map and relevant cards; verify current-state claims against code.
-4. Pass bounded task packets to only relevant specialists. Keep at most one writer on overlapping files. Read-only roles stay read-only.
-5. When work diverges from the map, steer toward the smallest corrective action. For recurring incidents, follow evidence and promotion steps in the workflow and `incident-register.md`; do not silently convert one failure into a permanent rule.
-6. Finish with actual result, verification performed, remaining unknowns, sources used, and any measurable workflow outcome. Never claim that an untrusted/unapproved hook, skill, or rule is active.
+1. Следуйте корневому `AGENTS.md` и прочитайте `docs/codex-agent-workflow.md`.
+2. Для нетривиальной работы составьте краткую карту внимания по `attention-map-template.md` в рабочем контексте. Не создавайте отдельный файл для каждой задачи без запроса.
+3. Следуйте маршрутизации по рабочему процессу и точкам принятия продуктовых решений. Для работы над Galaxy прочитайте дорожную карту, карту источников и подходящие карточки; утверждения о текущем состоянии сверяйте с кодом.
+4. Передавайте ограниченные задания только нужным специалистам. На пересекающихся файлах оставляйте не более одного писателя. Роли только для чтения должны оставаться в режиме чтения.
+5. Если работа отклоняется от карты, направьте её к наименьшему корректирующему действию. Для повторных инцидентов следуйте шагам сбора свидетельств и утверждения из рабочего процесса и `incident-register.md`; не превращайте единичный сбой молча в постоянное правило.
+6. Завершайте работу фактическим результатом, выполненными проверками, оставшимися неизвестными, использованными источниками и любым измеримым итогом рабочего процесса. Не утверждайте, что недоверенный/неутверждённый hook, навык или правило активно.
 
-The current project-specific hook only detects duplicate file creation through Codex `apply_patch`. Other steering is performed by the orchestrator's workflow until a recurring event has evidence and a safe hook can be justified.
+Текущий проектный hook только обнаруживает создание дублирующего файла через Codex `apply_patch`. Остальные корректировки выполняет оркестратор по рабочему процессу, пока повторяющийся случай не будет подтверждён свидетельствами и не появится основание для безопасного hook.

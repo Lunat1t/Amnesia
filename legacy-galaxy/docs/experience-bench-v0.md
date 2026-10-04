@@ -1,19 +1,19 @@
 # ExperienceBench v0
 
-ExperienceBench runs three isolated Codex arms against the same ordered tasks
-and repository snapshot:
+ExperienceBench запускает три изолированные группы Codex на одном и том же упорядоченном наборе задач
+и снимке репозитория:
 
-1. **baseline** — task plus repository access, without Galaxy memory/context;
-2. **raw** — task, repository access and retrieved episode records;
-3. **compiled** — task, repository access and the bounded Galaxy Context Packet.
+1. **baseline** — задача и доступ к репозиторию, без памяти/контекста Galaxy;
+2. **raw** — задача, доступ к репозиторию и извлечённые записи эпизодов;
+3. **compiled** — задача, доступ к репозиторию и ограниченный пакет контекста Galaxy.
 
-The runner uses `codex exec --json` in read-only, ephemeral sessions. Each arm
-has a distinct runtime store; annotated observations become available only
-after their source task. `gold_prior` must cite earlier `(run_id, node_id)` pairs.
-The runner rotates arm order deterministically across tasks and retains each
-answer, event stream, stderr log, and `report.json` under `--out-dir`.
+Runner использует `codex exec --json` в эфемерных сессиях только для чтения. У каждой группы
+собственное хранилище runtime; размеченные наблюдения становятся доступными только
+после исходной задачи. `gold_prior` должен ссылаться на более ранние пары `(run_id, node_id)`.
+Порядок групп детерминированно чередуется между задачами; ответы, потоки событий, журналы stderr
+и `report.json` сохраняются в `--out-dir`.
 
-## Dataset
+## Набор данных
 
 ```json
 {
@@ -43,15 +43,15 @@ answer, event stream, stderr log, and `report.json` under `--out-dir`.
 }
 ```
 
-`criteria` are simple case-insensitive answer substring checks, not a code
-verifier. `must_include` terms must all appear, `must_include_any` is a list of
-alternative-term groups (one match per group), and `must_not_include` terms may
-not appear. Prefer multiple accepted phrasings; brittle exact substrings can
-mis-score a semantically correct answer. Criteria are not included in prompts.
-Observations are benchmark annotations, not model-generated learning; keep
-their evidence status honest. Do not mark synthetic lessons verified.
+`criteria` — это простые проверки подстрок ответа без учёта регистра, а не
+проверка кода. Все термины `must_include` должны присутствовать; `must_include_any` — список
+групп альтернативных терминов (достаточно одного совпадения в каждой группе); термины
+`must_not_include` не должны встречаться. Предпочитайте несколько допустимых формулировок:
+хрупкие точные подстроки могут неверно оценить семантически правильный ответ. Критерии не входят в prompt.
+Наблюдения — аннотации бенчмарка, а не обучение, сгенерированное моделью; честно указывайте
+статус доказательств. Не помечайте синтетические уроки как проверенные.
 
-## Run
+## Запуск
 
 ```bash
 galaxy experience-bench tasks.json \
@@ -60,16 +60,16 @@ galaxy experience-bench tasks.json \
   --budget-tokens 5000 --max-files 16
 ```
 
-This invokes Codex once per task per arm. `report.json` records criterion
-success, retrieved/gold episode counts, estimated attached context tokens,
-Codex JSONL input/cached-input/output token counters, compilation time and
-wall time, experience precision/recall, false injections, and counts of
-unverified retrieved episodes. A missing provider counter is reported as zero
-and is not an estimate. Inspect `limitations` before interpreting the results.
+Для каждой задачи в каждой группе Codex вызывается один раз. `report.json` содержит
+успешность по критериям, количество извлечённых/эталонных эпизодов, оценку присоединённых токенов контекста,
+счётчики input/cached-input/output токенов из JSONL Codex, время компиляции
+и общее время, точность/полноту извлечения опыта, ложные добавления и число
+извлечённых непроверенных эпизодов. Отсутствующий счётчик провайдера записывается как ноль,
+но это не оценочное значение. Перед интерпретацией результатов изучите `limitations`.
 
-The benchmark is read-only and evaluates answers, not edits or deterministic
-test passes. Repository access is available to all arms, so Codex may inspect
-files itself even when a packet is supplied. A small successful run is a
-mechanism diagnostic, not evidence of a general Galaxy effect. Use frozen task
-text and commits, multiple failure categories, held-out cases, and publish all
-arms including failures before making outcome claims.
+Бенчмарк работает только для чтения и оценивает ответы, а не изменения кода или прохождение
+детерминированных тестов. Все группы имеют доступ к репозиторию, поэтому Codex может изучать
+файлы самостоятельно даже при наличии пакета. Небольшой успешный запуск диагностирует
+механизм, но не доказывает общий эффект Galaxy. До выводов о результатах зафиксируйте текст задач
+и коммиты, используйте несколько категорий ошибок и отложенные случаи, публикуйте все
+группы, включая неудачные.

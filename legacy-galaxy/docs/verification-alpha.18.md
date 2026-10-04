@@ -1,29 +1,28 @@
-# Galaxy alpha 18 — from experience to executable verification
+# Galaxy alpha 18 — от опыта к исполняемой проверке
 
-## Runtime behavior
+## Поведение runtime
 
-The plan carries an explicit `task_type` (`general`, `bugfix`, or `feature`).
-Before a run starts, active project rules are checked against its DAG. A
-`require_command` rule requires a downstream QA/verification node covering
-every writer, with a verification command containing the rule's literal
-fragment. The existing plan validator still requires deterministic verification
-for any write plan. Rules add a more specific constraint.
+План содержит явный `task_type` (`general`, `bugfix` или `feature`).
+Перед запуском действующие правила проекта сверяются с его DAG. Правило
+`require_command` требует последующий QA-узел/узел проверки для каждого узла, меняющего файлы,
+с командой проверки, содержащей буквальный
+фрагмент правила. Существующий валидатор плана по-прежнему требует детерминированную проверку
+для любого плана с записью. Правила задают дополнительное, более конкретное ограничение.
 
-The agent context includes its acceptance criteria, planned commands and
-active rules. Each command executes in the isolated node workspace. Galaxy
-stores exit code, status, relative log path and SHA-256 of the captured output
-in the verification ledger. A failed command makes the node fail even if the
-agent claimed `PASS`; its log becomes experience evidence. Successful command
-logs become evidence on the QA result. An active `require_evidence` rule rejects
-QA completion when no evidence is present.
+Контекст агента содержит критерии приёмки, запланированные команды и
+действующие правила. Каждая команда выполняется в изолированном рабочем каталоге узла. Galaxy
+сохраняет код выхода, статус, относительный путь к журналу и SHA-256 перехваченного вывода
+в реестре проверок. При неудачной команде узел считается проваленным, даже если
+агент сообщил `PASS`; её журнал становится доказательством для опыта. Журналы успешно выполненных команд
+добавляются к доказательствам результата QA. Действующее правило `require_evidence` запрещает
+завершить QA без доказательств.
 
-## From repeated failure to rule
+## От повторного сбоя к правилу
 
-`rule-suggest` requires at least three different runs with the same explicit
-lesson, project-visible failure outcome, and nonempty evidence. The caller
-specifies a task type and a supported executable check. This is deliberately
-conservative: Galaxy does not transform arbitrary failure prose into shell
-commands or silently activate a rule.
+`rule-suggest` требует не менее трёх различных запусков с одним и тем же явным
+уроком, видимым проекту результатом-сбоем и непустыми доказательствами. Вызывающая сторона
+задаёт тип задачи и поддерживаемую исполняемую проверку. Это намеренно консервативное поведение: Galaxy не преобразует произвольный текст описания сбоя в команды shell
+и не активирует правила молча.
 
 ```bash
 python galaxy.py rule-suggest --project demo \
@@ -31,9 +30,9 @@ python galaxy.py rule-suggest --project demo \
   --check require_command --match 'pytest' --minimum 3
 ```
 
-The returned rule starts as `candidate`. To replay it, create a JSON list of
-examples, each with a valid serialized `ExecutionPlan`, a reviewed
-`should_block` boolean, and optionally `result_evidence` for an evidence rule:
+Возвращённое правило изначально имеет статус `candidate`. Чтобы воспроизвести его, создайте JSON-список
+примеров; каждый должен содержать корректный сериализованный `ExecutionPlan`, проверенное
+булево значение `should_block` и, опционально, `result_evidence` для правила о доказательствах:
 
 ```json
 [
@@ -42,30 +41,30 @@ examples, each with a valid serialized `ExecutionPlan`, a reviewed
 ]
 ```
 
-Run `python galaxy.py rule-eval VR-... cases.json`. A named reviewer can run
-`python galaxy.py rule-promote VR-... --by reviewer` only when the replay has
-both allowed and blocked examples and no classification errors. Run
-`python galaxy.py rule-disable VR-...` to roll back. CLI names identify who
-made a decision but are not authentication.
+Запустите `python galaxy.py rule-eval VR-... cases.json`. Указанный проверяющий может выполнить
+`python galaxy.py rule-promote VR-... --by reviewer`, только если воспроизведение содержит
+как разрешённые, так и заблокированные примеры и не имеет ошибок классификации. Запустите
+`python galaxy.py rule-disable VR-...` для отката. Имена в CLI показывают, кто
+принял решение, но не обеспечивают аутентификацию.
 
-## What is measured and what is not
+## Что измеряется, а что нет
 
-The verification ledger supports inspection of check failures and evidence.
-The tests cover pass, fail, gate, replay, promotion and rollback. They do not
-measure the *Galaxy Effect*. Repeated Error Rate requires labeled error
-categories across real tasks, and Escaped Defects requires independent
-post-completion review. A later A/B experiment should hold model, harness,
-task series and budget fixed, then compare those outcomes against verified
-completion time, tokens, interventions and false rule blocks.
+Реестр проверок позволяет изучать сбои проверок и доказательства.
+Тесты охватывают прохождение, сбой, фильтр, воспроизведение, продвижение и откат. Они не
+измеряют *эффект Galaxy*. Для частоты повторных ошибок нужны размеченные категории ошибок
+в реальных задачах, а для пропущенных дефектов — независимая
+проверка после завершения. В последующем A/B эксперименте следует зафиксировать модель, harness,
+серии задач и бюджет, а затем сравнить эти результаты со временем до подтверждённого
+завершения, токенами, вмешательствами и ложными блокировками правил.
 
-## Current boundaries
+## Текущие границы
 
-- Rule matching uses an explicit task type and literal command fragment. A
-  command's name does not prove that its test reproduces the original bug.
-- Replay labels are supplied by a reviewer; replaying two cases is a gate for
-  a prototype, not statistical proof of generalization.
-- Rules apply only to Galaxy's own DAG runner. External Codex/Claude/OpenHands
-  adapters, app UI checks, browser simulations and CI rule generation are not
-  implemented.
-- Promotion is a trusted-local CLI operation. Multi-user authorization is
-  required before offering it through a shared service.
+- Сопоставление правил использует явный тип задачи и буквальный фрагмент команды. Название
+  команды не доказывает, что её тест воспроизводит исходную ошибку.
+- Метки для воспроизведения задаёт проверяющий; воспроизведение двух примеров служит фильтром
+  прототипа, а не статистическим доказательством обобщения.
+- Правила применяются только в собственном DAG runner Galaxy. Адаптеры внешних Codex/Claude/OpenHands,
+  проверки интерфейса приложения, симуляции браузера и генерация правил CI не
+  реализованы.
+- Продвижение правила — операция CLI для доверенного локального окружения. До предоставления этой возможности через общий сервис
+  требуется авторизация пользователей.

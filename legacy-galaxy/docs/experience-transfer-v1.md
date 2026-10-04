@@ -1,22 +1,20 @@
-# Galaxy 5.0: CSV experience transfer pilot
+# Galaxy 5.0: пилот переноса опыта для CSV
 
-Status: prepared pilot; verifier calibration completed. Initial sandbox agent run failed before task execution because Codex could not write its service state. No benefit claim.
+Статус: пилот подготовлен; калибровка проверяющего завершена. Первый запуск агента в песочнице завершился до выполнения задачи, поскольку Codex не мог записать своё служебное состояние. Польза не заявляется.
 
-## Hypothesis and fixed tasks
+## Гипотеза и зафиксированные задачи
 
-Task A fixes whitespace-only numeric fields in `import_prices`. Task B fixes
-`import_quantities` in a fresh clone of the same baseline. Both preserve zero,
-row order, CSV quoting and errors for invalid nonempty input. Task A must not
-change Task B's importer. Only trajectory-derived experience from completed A
-may enter B; no reference patch or verifier is supplied in agent prompts.
+Задача A исправляет числовые поля, состоящие только из пробелов, в `import_prices`. Задача B исправляет
+`import_quantities` в свежем клоне того же базового состояния. Обе сохраняют ноль,
+порядок строк, экранирование CSV и ошибки для некорректных непустых входных данных. Задача A не должна
+менять импортёр задачи B. В B можно передавать только опыт, извлечённый из завершённой траектории A; эталонный патч или проверяющий не передаются в prompts агента.
 
-The fixture is intentionally easy. This is a plumbing calibration: ceiling
-performance is plausible and a tie cannot establish that memory is ineffective
-on harder tasks. Reference fixes are used only to calibrate the evaluator.
+Тестовый fixture намеренно простой. Это калибровка связующего конвейера: возможен потолочный
+результат, и равенство не доказывает неэффективность памяти на более сложных задачах. Эталонные исправления используются только для калибровки оценщика.
 
-## Preparation and execution
+## Подготовка и выполнение
 
-From the Galaxy checkout:
+Из checkout Galaxy:
 
 ```bash
 PYTHONPATH=. python scripts/prepare_experience_transfer_v1.py /tmp/galaxy-transfer-v1-prepared
@@ -27,123 +25,116 @@ python galaxy.py benchmark run /tmp/galaxy-transfer-v1-prepared/suite.json \
   --model YOUR_MODEL --repetitions 1 --timeout-seconds 60
 ```
 
-Preparation refuses an existing destination, creates a separate clean Git
-fixture, validates the suite config, and hashes fixture/config/verifier files
-in `freeze.json`. This is separate from the Galaxy checkout's missing Git metadata.
-The verifier is installed through the existing overlay after execution. Each
-arm/task runs in a private clone. The existing runner preserves context packages,
-trajectories, patches, verification logs/hashes and experience provenance.
+Подготовка отказывается использовать уже существующий каталог назначения, создаёт отдельный чистый Git
+fixture, проверяет конфигурацию набора и записывает хеши файлов fixture/config/проверяющего
+в `freeze.json`. Это не зависит от отсутствующих метаданных Git в checkout Galaxy.
+Проверяющий устанавливается через существующий overlay после выполнения. Каждая
+группа/задача запускается в отдельном клоне. Существующий runner сохраняет пакеты контекста,
+траектории, патчи, журналы/хеши проверок и происхождение опыта.
 
-## Interpretation fixed before agent results
+## Интерпретация, зафиксированная до результатов агента
 
-Primary observation: Task B verified completion. Secondary: Task B tokens,
-wall time, searches, tool calls and supplied experience IDs. Inspect source run,
-verification evidence and extracted lesson before interpreting transfer.
-Missing telemetry stays null. Failed external-runtime runs are infrastructure
-failures, never evidence against the hypothesis. Costs require known pricing;
-unknown costs must remain unavailable.
+Основное наблюдение: подтверждённое завершение задачи B. Дополнительные: токены B,
+общее время, поиск, вызовы инструментов и ID переданного опыта. Перед интерпретацией переноса изучите исходный запуск,
+доказательства проверки и извлечённый урок. Отсутствующая телеметрия остаётся null. Сбои внешнего runtime — инфраструктурные
+сбои, а не свидетельство против гипотезы. Для оценки стоимости нужен известный тариф;
+неизвестная стоимость должна оставаться недоступной.
 
-The existing OFF/ON suite adds repository context as well as experience in ON.
-Therefore its result measures overall Galaxy effect and cannot isolate Experience.
-Before making an Experience-specific claim, add an isolated context-only control
-using the same packet assembly and no previous episodes. Raw-vs-compiled testing
-is covered separately by ExperienceBench v0.1, whose authored observations must
-not be confused with independently verified coding experience.
+Существующий набор OFF/ON добавляет в ON и контекст репозитория, и опыт.
+Поэтому его результат измеряет общий эффект Galaxy и не позволяет выделить Experience.
+Прежде чем делать вывод именно об Experience, добавьте изолированный контроль только с контекстом
+при той же сборке пакета и без прошлых эпизодов. Сравнение raw и compiled
+рассматривается отдельно в ExperienceBench v0.1; заданные вручную наблюдения там нельзя
+смешивать с независимо проверенным опытом разработки.
 
-Three repetitions are configured for a subsequent frozen pilot. Accept a pilot
-only with intact verification, uncontaminated baseline, no future/stale delivery,
-and inspectable source provenance. Benefit requires improved paired verified
-completion or lower repeated-error rate; efficiency comparisons require equal
-verified completion. Publish all failures and ties. One task pair supports no
-general product claim. Skills remain candidates pending held-out evaluation.
+Для последующего зафиксированного пилота настроены три повтора. Принимайте пилот
+только при целых проверках, незагрязнённом базовом варианте, отсутствии передачи будущей/устаревшей памяти
+и проверяемом происхождении источника. Для заявления о пользе требуется улучшение парного подтверждённого
+завершения или снижение частоты повторных ошибок; сравнение эффективности требует одинакового
+подтверждённого завершения. Публикуйте все сбои и ничьи. Одна пара задач не поддерживает общий
+вывод о продукте. Навыки остаются кандидатами до проверки на отложенных задачах.
 
-## Local verifier calibration
+## Локальная калибровка проверяющего
 
-`reports/experience-transfer-v1/preflight.json` records both original functions
-failing the authored checks and both reference fixes passing. No model executes
-in this calibration. These checks validate the fixture/evaluator, not Galaxy's
-performance.
+`reports/experience-transfer-v1/preflight.json` фиксирует, что обе исходные функции
+не проходят заданные проверки, а оба эталонных исправления проходят. Во время этой калибровки модель
+не запускается. Проверки подтверждают корректность fixture/оценщика, а не производительность Galaxy.
 
-## Agent calibration attempts (2026-10-03)
+## Попытки калибровки агента (2026-10-03)
 
-Initial four agent invocations failed before execution because the sandbox made
-Codex service state read-only; artifacts are retained in
-`reports/experience-transfer-v1/sandbox-calibration`. An approved runtime retry
-reached trace processing but the suite crashed on `targets: null` in an action.
-`annotate_context_usage` now tolerates absent target lists; a direct regression
-check confirmed null opens do not crash and a known edit remains linked.
-The partial retry archive is in `reports/experience-transfer-v1/runtime-calibration`.
-Neither attempt provides a completed paired result or evidence of Experience benefit.
-A fresh full calibration remains necessary after the trace fix.
+Первые четыре вызова агента завершились до выполнения: песочница сделала служебное состояние Codex доступным только для чтения; артефакты сохранены в
+`reports/experience-transfer-v1/sandbox-calibration`. Одобренный повтор runtime
+дошёл до обработки трассировки, но набор аварийно завершился из-за `targets: null` в действии.
+Теперь `annotate_context_usage` допускает отсутствие списков целей; прямая регрессионная
+проверка подтвердила, что null открытия не вызывают сбой и известное редактирование остаётся связанным.
+Частичный архив повтора находится в `reports/experience-transfer-v1/runtime-calibration`.
+Ни одна попытка не дала завершённого парного результата или доказательства пользы Experience.
+После исправления трассировки требуется новая полная калибровка.
 
-## Completed calibration and delivery diagnosis
+## Завершённая калибровка и диагностика передачи
 
-The fresh `completed-calibration` archive contains four completed runs on
-`gpt-6-luna`, one repetition, using the original frozen 2000-token config:
+Свежий архив `completed-calibration` содержит четыре завершённых запуска на
+`gpt-6-luna`, по одному повтору, с исходной зафиксированной конфигурацией на 2000 токенов:
 
 | Task | OFF verifier | ON verifier | ON delivered Experience |
 |---|---|---|---|
 | A prices | pass | pass | 0 |
 | B quantities | fail | pass | 0 |
 
-All four saved verifier logs matched their ledger SHA-256 hashes on audit.
-A created `EXP-15013845a0653347` from its verified ON trajectory. Its lesson
-concerned testing quoted numeric CSV input versus invalid nonempty input,
-rather than the principal whitespace bug. B received no episode: this calibration
-provides no causal evidence of Experience transfer. The single OFF/ON contrast
-also does not establish a general Galaxy benefit.
+Все четыре сохранённых журнала оценщика при аудите совпали с SHA-256 хешами в реестре.
+Для A создан `EXP-15013845a0653347` из проверенной траектории ON. Его урок
+касался проверки заключённых в кавычки числовых CSV-данных в сравнении с некорректными непустыми входными данными,
+а не основной ошибки пробелов. B не получил эпизод: эта калибровка
+не даёт причинных доказательств переноса Experience. Единственное сравнение OFF/ON
+также не устанавливает общую пользу Galaxy.
 
-An isolated offline replay copied the state, retracted B's future episode, and
-compiled B using only A. At 2000 tokens, the compiler allocated 200 tokens to
-Experience and retrieved nothing; at 5000, its 500-token allocation retrieved
-and delivered A. The resulting packet estimated 1996 tokens. The exclusion
-occurred during Experience retrieval allocation, not final packet trimming.
-Evidence: `reports/experience-transfer-v1/A-only-budget-replay.json`.
+Изолированное офлайн-воспроизведение скопировало состояние, отозвало будущий эпизод B и
+собрало контекст B, используя только A. При 2000 токенах компилятор выделил 200 токенов
+для Experience и ничего не извлёк; при 5000 его доля в 500 токенов позволила извлечь
+и передать A. Оценка итогового пакета — 1996 токенов. Исключение произошло
+при распределении бюджета извлечения Experience, а не при финальном сокращении пакета.
+Доказательство: `reports/experience-transfer-v1/A-only-budget-replay.json`.
 
-The preparation script now defaults to 5000 tokens and accepts
-`--context-budget-tokens`; reproduce the completed run's config with 2000.
-The old manifest/config and results remain unchanged. A subsequent run must use
-a new prepared directory and output. Before an Experience benefit claim, add
-context-only treatment as specified above, verify nonempty A delivery to B,
-and calibrate extraction quality on independent task pairs. Token totals in
-sequential ON rows include experience-extraction usage; compare them accordingly.
+Теперь скрипт подготовки по умолчанию использует 5000 токенов и принимает
+`--context-budget-tokens`; для воспроизведения конфигурации завершённого запуска укажите 2000.
+Старые манифест/конфигурация и результаты не изменяются. Для следующего запуска нужны
+новый каталог подготовки и каталог результатов. До заявления о пользе Experience добавьте
+описанный выше контроль только с контекстом, проверьте непустую передачу A в B
+и откалибруйте качество извлечения на независимых парах задач. Суммы токенов
+в последовательных строках ON включают расход на извлечение опыта; сравнивайте их с учётом этого.
 
-## Context-only control
+## Контроль только с контекстом
 
-The paired suite accepts an explicit boolean `use_prior_experience` (default
-true for compatibility). False uses a separate empty context store per task,
-does not extract/store episodes, and aborts if an episode enters the packet.
-Preparation emits `context-only.json` for B and includes it in the freeze hashes.
-Run it with the same model, source fixture, context budget and timeout as
-`suite.json`, using a new report directory and runtime root. Both suites still
-include OFF; compare B's ON context-only outcome with B's ON experience outcome.
-These are independent sessions; one repetition remains calibration, not a causal
-or statistically reliable benefit claim. Verify source/context items as well as
-Experience delivery before treating the prompts as a matched contrast.
+Парный набор принимает явный булев параметр `use_prior_experience` (по умолчанию
+true для совместимости). Значение false использует отдельное пустое хранилище контекста для каждой задачи,
+не извлекает и не сохраняет эпизоды и прерывает запуск, если эпизод попадает в пакет.
+Подготовка создаёт для B файл `context-only.json` и включает его в хеши фиксации.
+Запускайте его с той же моделью, исходным fixture, бюджетом контекста и тайм-аутом, что и
+`suite.json`, используя новый каталог отчёта и корень runtime. В обоих наборах остаётся OFF;
+сравнивайте результат B в ON только с контекстом с результатом B в ON с опытом.
+Это независимые сессии; один повтор остаётся калибровкой и не даёт причинного
+или статистически надёжного заявления о пользе. Перед тем как считать prompts сопоставимыми, проверьте исходные/контекстные элементы и передачу Experience.
 
-## Controlled 5000-token calibration (2026-10-03)
+## Контролируемая калибровка на 5000 токенов (2026-10-03)
 
-`reports/experience-transfer-v1/controlled-audit.json` records six completed
-runs and verifies all six verifier-log hashes. The experience suite produced
-`EXP-87e8c977355b3d4d` from verified A; B received exactly that episode, with
-source run `A-prices-rep-01-with_galaxy`. The separate context-only B received
-zero episodes. B's non-Experience context items and file inventory match exactly
-between treatment and control. Raw archives are `experience-5000` and
+`reports/experience-transfer-v1/controlled-audit.json` фиксирует шесть завершённых
+запусков и проверяет все шесть хешей журналов оценщика. Набор с опытом создал
+`EXP-87e8c977355b3d4d` из проверенной A; B получил ровно этот эпизод из
+исходного запуска `A-prices-rep-01-with_galaxy`. Отдельный B только с контекстом получил
+ноль эпизодов. Элементы контекста B вне Experience и опись файлов полностью совпадают
+между экспериментом и контролем. Исходные архивы: `experience-5000` и
 `context-only-5000`.
 
-| B condition | Verified result | Delivered A episodes |
+| Условие B | Проверенный результат | Переданные эпизоды A |
 |---|---|---|
 | OFF in experience suite | pass | 0 |
 | ON context-only control | pass | 0 |
 | ON context + Experience A | pass | 1 |
 
-A's OFF failed and ON passed in the experience suite. This does not establish
-Experience benefit, because A receives no past episode. B shows no success
-improvement in this one repetition. Extraction costs are included in sequential
-ON token totals; context-only performs no extraction, so these totals must not
-be called an isolated inference-cost contrast. Per-run timings/tokens remain in
-the audit. Memory semantic usefulness and repeated-error measurements remain
-unknown. The delivery/provenance plumbing is calibrated; the fixture is likely
-too easy for a meaningful benefit test. Next evaluation requires independent
-harder task pairs and preregistered repeated runs, with inference and extraction
-costs distinguished.
+OFF для A завершился неудачей, ON прошёл в наборе с опытом. Это не устанавливает
+пользу Experience, так как A не получает прошлый эпизод. Для B улучшения успеха
+в этом единственном повторе нет. Расход на извлечение включён в суммарные токены последовательного
+ON; контроль только с контекстом не выполняет извлечение, поэтому эти суммы нельзя называть изолированным сравнением стоимости вывода. Время/токены каждого запуска приведены в
+аудите. Семантическая полезность Memory и частота повторных ошибок остаются
+неизвестными. Передача/происхождение откалиброваны; вероятно, fixture слишком прост для содержательного теста пользы. Следующая оценка требует независимых
+более сложных пар задач и заранее зарегистрированных повторных запусков с раздельным учётом стоимости вывода и извлечения.

@@ -1,14 +1,14 @@
 # Amnesia
 
-Amnesia is the new working repository for research and development around context, memory, and durable experience for coding agents. It replaces Galaxy as the active project name and workspace; the prior Galaxy checkout remains untouched at its original path for reference and possible return.
+Amnesia — новый рабочий репозиторий для исследований и разработок в области контекста, памяти и долговременного опыта агентов программирования. Это актуальное название и рабочая область проекта вместо Galaxy; прежняя копия Galaxy осталась нетронутой по исходному пути для справки и возможного возвращения к ней.
 
-This repository begins as a documentation, source, and agent-workflow migration. It does not yet contain or endorse a replacement runtime or architecture. The imported Galaxy documentation is preserved under [`legacy-galaxy/`](legacy-galaxy/).
+На начальном этапе в этот репозиторий перенесены документация, источники и рабочие процессы агентов. Здесь пока нет новой среды выполнения или архитектуры, и репозиторий не утверждает их в качестве решения. Перенесённая документация Galaxy находится в [`legacy-galaxy/`](legacy-galaxy/).
 
-## Start here
+## С чего начать
 
-- [Amnesia project charter](docs/amnesia-charter.md)
-- [Amnesia source map](docs/sources/amnesia/00-source-map.md)
-- [Migration inventory and boundaries](MIGRATION.md)
-- [Agent definitions](.codex/agents/)
+- [Устав проекта Amnesia](docs/amnesia-charter.md)
+- [Карта источников Amnesia](docs/sources/amnesia/00-source-map.md)
+- [Опись и границы переноса](MIGRATION.md)
+- [Определения агентов](.codex/agents/)
 
-The migrated benchmark evidence is historical and bounded by its listed tasks and limitations. Do not treat it as proof of general product value.
+Перенесённые свидетельства бенчмарков относятся к прошлым исследованиям и ограничены указанными задачами и оговорками. Не считай их доказательством общей ценности продукта.

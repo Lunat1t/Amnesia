@@ -1,61 +1,61 @@
-# Galaxy Benchmark v1.0
+# Бенчмарк Galaxy v1.0
 
-Pilot analysis: paired Galaxy OFF/ON outcomes
+Пилотный анализ: парные результаты Galaxy OFF/ON
 
-Verified quality effect: 0/3 paired difference. Infrastructure: works. Evidence integrity: works.
-Context efficiency: heterogeneous. Experience effect: not tested.
+Подтверждённый эффект на качество: различие в 0/3 пар. Инфраструктура работает. Целостность свидетельств подтверждена.
+Эффективность контекста: неоднородная. Эффект Experience не проверялся.
 
-## Paired outcomes
+## Парные результаты
 
-| OFF \ ON | PASS | FAIL |
+| OFF \ ON | УСПЕХ | НЕУДАЧА |
 |---|---:|---:|
-| PASS | 1 | 0 |
-| FAIL | 0 | 2 |
+| УСПЕХ | 1 | 0 |
+| НЕУДАЧА | 0 | 2 |
 
-## Numerical metrics: marginal summaries and paired treatment effects
+## Числовые метрики: маргинальные сводки и парные эффекты воздействия
 
-Positive paired Δ means ON used more / took longer; negative means less / faster.
+Положительное парное Δ означает, что режим ON использовал больше ресурсов или занял больше времени; отрицательное — меньше ресурсов или меньше времени.
 
-| Metric | OFF median | ON median | Marginal difference (ON−OFF) | Median paired Δ | Mean paired Δ | Complete pairs |
+| Метрика | Медиана OFF | Медиана ON | Маргинальная разница (ON−OFF) | Медиана парного Δ | Среднее парного Δ | Полных пар |
 |---|---:|---:|---:|---:|---:|---:|
-| Trajectory tokens | 371559.00 | 272164.00 | -99395.00 | 5764.00 | 68839.33 | 3 |
-| Processed input tokens | 369785.00 | 270772.00 | -99013.00 | 5803.00 | 68554.67 | 3 |
-| Cached input tokens | 339456.00 | 249856.00 | -89600.00 | -768.00 | 67328.00 | 3 |
-| Uncached input tokens (not a billing estimate) | 30329.00 | 22159.00 | -8170.00 | 6522.00 | 1226.67 | 3 |
-| Output tokens | 1774.00 | 1392.00 | -382.00 | -39.00 | 284.67 | 3 |
-| Tool calls | 14.00 | 11.00 | -3.00 | -2.00 | 0.00 | 3 |
-| Duration — all attempts (ms) | 181855.95 | 156347.75 | -25508.20 | 2454.15 | 541.52 | 3 |
-| Context assembly (ms) | NA | NA | NA | NA | NA | 0 |
-| Galaxy context token estimate | NA | NA | NA | NA | NA | 0 |
-| Rendered context characters | NA | NA | NA | NA | NA | 0 |
-| Unique files opened | NA | NA | NA | NA | NA | 0 |
+| Токены траектории | 371559.00 | 272164.00 | -99395.00 | 5764.00 | 68839.33 | 3 |
+| Обработанные входные токены | 369785.00 | 270772.00 | -99013.00 | 5803.00 | 68554.67 | 3 |
+| Кэшированные входные токены | 339456.00 | 249856.00 | -89600.00 | -768.00 | 67328.00 | 3 |
+| Некэшированные входные токены (не оценка расходов) | 30329.00 | 22159.00 | -8170.00 | 6522.00 | 1226.67 | 3 |
+| Выходные токены | 1774.00 | 1392.00 | -382.00 | -39.00 | 284.67 | 3 |
+| Вызовы инструментов | 14.00 | 11.00 | -3.00 | -2.00 | 0.00 | 3 |
+| Длительность — все попытки (мс) | 181855.95 | 156347.75 | -25508.20 | 2454.15 | 541.52 | 3 |
+| Сборка контекста (мс) | NA | NA | NA | NA | NA | 0 |
+| Оценка токенов контекста Galaxy | NA | NA | NA | NA | NA | 0 |
+| Символы отрисованного контекста | NA | NA | NA | NA | NA | 0 |
+| Уникальные открытые файлы | NA | NA | NA | NA | NA | 0 |
 
-## Verified completion time
+## Подтверждённое время выполнения
 
-Only runs that passed SWE-bench are included; this is not an all-task completion-time result.
+Учитываются только запуски, прошедшие SWE-bench; это не показатель времени выполнения для всех задач.
 
-Successful complete pairs: 1
-OFF median: 152896.99056599964 ms
-ON median: 155351.13993499998 ms
-Paired Δ median: 2454.149369000341 ms
-Paired Δ mean: 2454.149369000341 ms
+Успешных полных пар: 1
+Медиана OFF: 152896.99056599964 ms
+Медиана ON: 155351.13993499998 ms
+Медиана парного Δ: 2454.149369000341 ms
+Среднее парного Δ: 2454.149369000341 ms
 
-## Interpretation
+## Интерпретация
 
-One repetition per task and arm is descriptive only. The pilot does not establish a Galaxy benefit.
-Usage is read from the latest cumulative Codex trace snapshot; traces and extraction are retained for audit.
-Context amplification is a debugging signal, not a quality KPI.
+По одному повтору на задачу и вариант достаточно лишь для описания результатов. Пилот не доказывает пользу Galaxy.
+Использование ресурсов считывается из последнего накопительного снимка трассы Codex; трассы и результаты извлечения сохранены для аудита.
+Увеличение объёма контекста — диагностический сигнал, а не показатель качества.
 
-## Context amplification diagnostic
+## Диагностика увеличения объёма контекста
 
-| Task | Trajectory token Δ (ON−OFF) | Galaxy context estimate (approx.) | Δ / estimate |
+| Задача | Δ токенов траектории (ON−OFF) | Оценка контекста Galaxy (приблизительная) | Δ / оценка |
 |---|---:|---:|---:|
 | pallets__flask-5014 | 5764.00 | 3896.00 | 1.48 |
 | pytest-dev__pytest-10356 | -99395.00 | 4850.00 | -20.49 |
 | sphinx-doc__sphinx-7590 | 300149.00 | 4073.00 | 73.69 |
 
-| Processed tokens / verified success (all attempts) | 914898.0 | 1121416.0 | 206518.0 |
-| Currency cost / verified success | NA | NA | NA |
+| Обработанные токены на подтверждённый успех (все попытки) | 914898.0 | 1121416.0 | 206518.0 |
+| Денежные расходы на подтверждённый успех | NA | NA | NA |
 
-Runs: 6. Raw records and evidence logs are in `runs/`, `runs.jsonl`, and `runs.csv`.
-Unavailable telemetry and unrun comparisons are shown as NA; no values are imputed.
+Запусков: 6. Исходные записи и журналы свидетельств находятся в `runs/`, `runs.jsonl` и `runs.csv`.
+Недоступная телеметрия и невыполненные сравнения обозначены как NA; пропущенные значения не заменялись оценками.

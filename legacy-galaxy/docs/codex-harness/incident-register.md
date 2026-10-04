@@ -1,55 +1,55 @@
-# Agent steering incidents
+# Журнал инцидентов корректировки работы агентов
 
-This is an evidence log, not an automatic memory. Add an entry only when an observable failure or repeated human correction occurred. Remove sensitive data and avoid storing chat transcripts.
+Это журнал свидетельств, а не автоматическая память. Добавляйте запись только при наблюдаемом сбое или повторной коррекции со стороны человека. Удаляйте чувствительные данные и не сохраняйте переписку.
 
-No user-observed recurring incidents have been recorded yet. The duplicate-file guard is a **pilot hypothesis inspired by the lecture example**, not an incident validated in this project. Measure whether it catches a real mistake and whether it causes false blocks; remove it if it duplicates Codex's native behavior or adds friction without benefit.
+Повторяющихся инцидентов, замеченных пользователями, пока не зафиксировано. Защита от дублирующих файлов — **пилотная гипотеза, навеянная примером из лекции**, а не инцидент, подтверждённый в этом проекте. Измерьте, предотвращает ли она реальную ошибку и вызывает ли ложные блокировки; удалите её, если она дублирует встроенное поведение Codex или создаёт лишние помехи без пользы.
 
-## Entry format
+## Формат записи
 
-### [date] Short incident name
+### [дата] Краткое название инцидента
 
-- **Trigger:** What action/state was observable?
-- **Expected / actual:** What should happen and what happened?
-- **Evidence:** Task/session reference or sanitized concrete example.
-- **Repeat count:** Independent occurrences; mark unknown when unknown.
-- **Likely cause:** Hypothesis, not established fact.
-- **Steering:** Smallest correction (context, standard, skill, hook, or none).
-- **False-positive / cost risk:** How could the correction misfire or slow work?
-- **Check:** Comparable follow-up and observed outcome.
-- **Status:** observed / candidate / validated / rejected / retired.
+- **Триггер:** Какое действие/состояние можно было наблюдать?
+- **Ожидалось / фактически:** Что должно было произойти и что произошло?
+- **Свидетельство:** Ссылка на задачу/сеанс или конкретный пример без чувствительных данных.
+- **Число повторов:** Независимые случаи; если неизвестно, так и укажите.
+- **Вероятная причина:** Гипотеза, а не установленный факт.
+- **Корректировка:** Наименьшее исправление (контекст, стандарт, навык, hook или ничего).
+- **Риск ложного срабатывания / затрат:** Как исправление может сработать неверно или замедлить работу?
+- **Проверка:** Сопоставимое продолжение и наблюдаемый результат.
+- **Статус:** наблюдался / кандидат / подтверждён / отклонён / снят.
 
-### 2026-10-04 Context token estimate conflated with rendered length
+### 2026-10-04 Оценку токенов контекста смешали с длиной отображённого текста
 
-- **Trigger:** A lean-context run stored `len(rendered_markdown) / 4` in the benchmark field `context_tokens`.
-- **Expected / actual:** The field should carry the comparable `ContextPackage.token_estimate`; rendered character count and its rough `/4` proxy should have distinct names. Two independent lean ON runs each saved `419` as `context_tokens`, while their saved ContextPackages declared `2,251` and `2,247`.
-- **Evidence:** `reports/swebench-pilot/sphinx-7590-lean-context-v1/outcome.json`, `reports/swebench-pilot/sphinx-7590-lean-context-paired-v2/outcome.json`, their saved `context-package.json` and `context.md` files, and the Codex traces. Both package/render hashes reconcile. The source packet estimate is approximate and is recorded before the render-only task-block removal.
-- **Repeat count:** 2 independent lean ON runs in the same benchmark path; no post-fix model run yet.
-- **Likely cause:** The trajectory inventory exposed a rendered-character `/4` proxy beside the native packet estimate, and the runner assigned the proxy to a token-named field.
-- **Steering:** Set `context_tokens` from `ContextPackage.token_estimate`; record `context_rendered_characters` and `rendered_context_chars_div4_proxy` separately; repair derived rows/reports from saved packages and traces; state the estimator's approximation and pre-transform timing. Preserve the legacy summary alias while labeling it as processed tokens, not billed cost.
-- **False-positive / cost risk:** The compiler estimate is not provider tokenization and can overstate the final payload after render-only transforms. Treating the estimate as exact would create a new error; codepoint counts are a separate diagnostic only.
-- **Check:** Both saved lean runs now reconcile `context_tokens` with the package estimate and rendered character count with `context.md`; hashes and leakage checks pass. The three-task pilot's six cumulative usage rows also reconcile. A separate post-fix model run has not been made.
-- **Status:** candidate.
+- **Триггер:** В запуске с сокращённым контекстом значение `len(rendered_markdown) / 4` записали в поле бенчмарка `context_tokens`.
+- **Ожидалось / фактически:** В поле должно быть сопоставимое значение `ContextPackage.token_estimate`; число символов отображённого текста и его приблизительную оценку `/4` следует хранить в отдельных полях. В двух независимых запусках lean ON в `context_tokens` записали `419`, тогда как сохранённые ContextPackage содержали оценки `2,251` и `2,247`.
+- **Свидетельство:** `reports/swebench-pilot/sphinx-7590-lean-context-v1/outcome.json`, `reports/swebench-pilot/sphinx-7590-lean-context-paired-v2/outcome.json`, сохранённые рядом файлы `context-package.json` и `context.md`, а также трассы Codex. Хеши пакетов и отображённого текста согласуются. Исходная оценка пакета приблизительна и записана до удаления блока задачи только на этапе отображения.
+- **Число повторов:** 2 независимых запуска lean ON в одном пути бенчмарка; запуск модели после исправления ещё не выполнялся.
+- **Вероятная причина:** В инвентаризации траектории рядом с собственной оценкой пакета появилась оценка `/4` по числу символов отображённого текста, и runner записал её в поле с названием токенов.
+- **Корректировка:** Заполнять `context_tokens` из `ContextPackage.token_estimate`; отдельно записывать `context_rendered_characters` и `rendered_context_chars_div4_proxy`; пересчитать производные строки/отчёты по сохранённым пакетам и трассам; указывать приближённость оценки и момент до преобразования. Сохранить старый псевдоним сводки, обозначив его как обработанные токены, а не стоимость по счёту.
+- **Риск ложного срабатывания / затрат:** Оценка компилятора не равна токенизации провайдера и может завышать конечный объём после преобразований только на этапе отображения. Считать её точной — новая ошибка; число кодовых точек является отдельной диагностикой.
+- **Проверка:** В обоих сохранённых запусках lean значения `context_tokens` теперь совпадают с оценкой пакета, а число символов отображённого текста — с `context.md`; хеши и проверки утечки проходят. Шесть строк суммарного использования токенов пилота на трёх задачах также согласуются. Отдельный запуск модели после исправления не проводился.
+- **Статус:** кандидат.
 
-### 2026-10-04 Duplicate report creation blocked
+### 2026-10-04 Заблокировано создание повторного отчёта
 
-- **Trigger:** An `apply_patch` call tried to add `reports/swebench-pilot/sphinx-7590-lean-context-v1/report.md` after the benchmark runner had already generated it.
-- **Expected / actual:** Add-file was blocked because the target existed. The file was inspected and then reused/edited to hold the diagnostic report.
-- **Evidence:** Auto-steering hook output in the current Codex task; existing file was the runner-generated benchmark report.
-- **Repeat count:** 1 occurrence; this does not establish a recurring user workflow failure.
-- **Likely cause:** The generated report's existence was not checked before drafting an Add File patch.
-- **Steering:** Inspect an existing artifact and update it when the user-requested result belongs at that path. No hook expansion proposed.
-- **False-positive / cost risk:** A legitimate intentional replacement may require an extra inspect/edit step.
-- **Check:** The existing path was preserved and edited; there was no parallel duplicate report.
-- **Status:** observed.
+- **Триггер:** Вызов `apply_patch` попытался добавить `reports/swebench-pilot/sphinx-7590-lean-context-v1/report.md` после того, как бенчмарк уже создал этот файл.
+- **Ожидалось / фактически:** Добавление файла было заблокировано, поскольку путь уже существовал. Файл проверили и использовали повторно для диагностического отчёта.
+- **Свидетельство:** Вывод hook авто-корректировки в текущей задаче Codex; существующий файл был отчётом, созданным runner бенчмарка.
+- **Число повторов:** 1 случай; этого недостаточно, чтобы считать сбой повторяющейся проблемой рабочего процесса пользователя.
+- **Вероятная причина:** Перед подготовкой патча на добавление файла не проверили, существует ли уже созданный артефакт.
+- **Корректировка:** Проверять существующий артефакт и обновлять его, если результат запроса пользователя должен находиться по этому пути. Расширение hook не предлагается.
+- **Риск ложного срабатывания / затрат:** Для намеренной замены файла может потребоваться дополнительный шаг проверки/редактирования.
+- **Проверка:** Существующий путь сохранили и отредактировали; параллельный дублирующий отчёт не создавался.
+- **Статус:** наблюдался.
 
-### 2026-10-04 Usage snapshot and context report regeneration defects
+### 2026-10-04 Ошибки снимка использования и повторной генерации отчёта о контексте
 
-- **Trigger:** Independent review of the telemetry and trajectory-report corrections.
-- **Expected / actual:** A cumulative usage row must reflect one complete latest snapshot; regenerated context diagnostics must preserve the native ContextCompiler estimate and keep rendered-character proxies separate. The parser retained older fields omitted by a later snapshot, while the report script replaced `context_tokens` with rendered Markdown characters divided by four. The v1 diagnostic report also contained a mistyped context SHA-256.
-- **Evidence:** Reviewer findings in the current Codex task; parser and report-builder paths; saved Sphinx v1 `context.md`, metrics, and hashes.
-- **Repeat count:** One independent review pass found three issues; no follow-up recurrence measurement yet.
-- **Likely cause:** Per-field accumulation treated snapshots as patches, and the analysis script reused one field for unlike measurements; report digest was manually transcribed.
-- **Steering:** Replace all usage fields from each valid snapshot (missing means unknown); retain the native estimate and write the `/4` value to a separate proxy field; correct the digest from the saved bytes.
-- **False-positive / cost risk:** A partial but intentionally sparse provider snapshot will now surface missing data as null rather than borrowing the last known value. This is preferable for integrity but may reduce apparent telemetry coverage.
-- **Check:** Changed parser and report derivation; modules compile; v1 rendered-context digest now matches `context.md` and saved metrics. A full trajectory-report regeneration and independent post-fix usage fixture have not been run.
-- **Status:** candidate.
+- **Триггер:** Независимая проверка исправлений телеметрии и отчёта траектории.
+- **Ожидалось / фактически:** Строка суммарного использования должна отражать целиком последний снимок; пересозданная диагностика контекста должна сохранять исходную оценку ContextCompiler и отдельно хранить приблизительные показатели по отображённым символам. Парсер сохранил старые поля, отсутствовавшие в более позднем снимке, а скрипт отчёта заменил `context_tokens` числом отображённых символов Markdown, делённым на четыре. В диагностическом отчёте v1 также была опечатка в SHA-256 контекста.
+- **Свидетельство:** Замечания проверяющего в текущей задаче Codex; пути парсера и сборщика отчётов; сохранённые `context.md`, метрики и хеши Sphinx v1.
+- **Число повторов:** Одна независимая проверка выявила три проблемы; повтор после исправления ещё не измерялся.
+- **Вероятная причина:** Накопление по отдельным полям трактовало снимки как дополнения, а скрипт анализа использовал одно поле для разных измерений; дайджест отчёта переписали вручную.
+- **Корректировка:** Заменять все поля использования по каждому корректному снимку (отсутствующее значение считать неизвестным); сохранять исходную оценку и записывать показатель `/4` в отдельное поле; исправить дайджест по сохранённым байтам.
+- **Риск ложного срабатывания / затрат:** Теперь частичный, намеренно неполный снимок провайдера будет показывать отсутствующие данные как null вместо заимствования последнего известного значения. Это предпочтительнее для целостности, но может снизить видимую полноту телеметрии.
+- **Проверка:** Изменены парсер и расчёт отчёта; модули компилируются; хеш отображённого контекста v1 совпадает с `context.md` и сохранёнными метриками. Полная повторная генерация отчёта траектории и независимый тестовый набор для использования после исправления не выполнялись.
+- **Статус:** кандидат.

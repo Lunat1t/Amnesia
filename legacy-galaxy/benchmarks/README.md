@@ -1,44 +1,16 @@
-# Galaxy Benchmark Suite v1.0
+# Набор бенчмарков Galaxy v1.0
 
-This suite measures the effect of Galaxy context on writable software-engineering
-tasks. Its primary comparison is **the same Codex model, task, repository commit,
-CLI tool set, timeout, and run count**, with Galaxy compiled context added only in
-the treatment arm. Each repetition/mode gets a clean disposable clone. The source
-repository must be a clean Git checkout.
+Этот набор измеряет влияние контекста Galaxy на задачи разработки, в которых агент может изменять код. Основное сравнение проводится при **одинаковых модели Codex, задаче, коммите репозитория, наборе инструментов CLI, тайм-ауте и числе запусков**; в экспериментальной группе добавляется только контекст, собранный Galaxy. Для каждого повтора и режима создаётся чистый временный клон. Исходный репозиторий должен быть чистым Git checkout.
 
-## What it measures
+## Что измеряется
 
-Each task is evaluated by its authored deterministic verifier command. `success`
-means the agent command completed; `verified_success` additionally requires a
-passing verifier and a persisted verification log whose SHA-256 matches the
-evidence ledger. Summary reports include counts, Wilson 95% intervals for
-success rates, mean/median/stdev/P25/P75/P95/min/max for observed numeric
-telemetry, and paired task/repetition differences. Missing provider telemetry
-remains null. Reports include JSON, JSONL, CSV, Markdown, HTML, and SVG/PNG charts.
+Каждая задача оценивается заданной для неё детерминированной командой проверки. `success` означает, что команда агента завершилась; для `verified_success` дополнительно требуется, чтобы проверка прошла, а сохранённый журнал проверки имел SHA-256, совпадающий с реестром доказательств. Сводные отчёты содержат количества, 95%-ные интервалы Уилсона для долей успеха, среднее/медиану/стандартное отклонение/P25/P75/P95/минимум/максимум для наблюдаемых числовых телеметрических данных, а также парные различия по задаче и повтору. Отсутствующие телеметрические данные провайдера остаются `null`. Отчёты включают JSON, JSONL, CSV, Markdown, HTML и диаграммы SVG/PNG.
 
-The current Codex CLI trace supplies token totals and a partial tool/action
-inventory. Provider-specific calls, time to first action, human interventions,
-semantic memory use/help/harm, and known-error recurrence remain null unless
-the trace or authored dataset provides auditable evidence. Do not interpret
-null as zero. This release has no controlled cross-project claim: use separate
-repository suites and do not aggregate them as transfer evidence without a
-pre-registered transfer protocol.
+Текущая трассировка Codex CLI предоставляет суммарное число токенов и неполный перечень инструментов/действий. Вызовы, специфичные для провайдера, время до первого действия, вмешательства человека, семантическое использование/польза/вред памяти и повторение известных ошибок остаются `null`, если трассировка или заданный набор данных не дают проверяемых доказательств. Не трактуйте `null` как ноль. Для этого выпуска нет контролируемого вывода о переносе между проектами: используйте отдельные наборы репозиториев и не объединяйте их как доказательство переноса без заранее зарегистрированного протокола.
 
-## Configuration
+## Настройка
 
-Create a JSON file with an ordered task list. Dataset order is the experience
-cutoff order. Sequential tasks can accumulate experience extracted by a
-separate same-model pass over the actual agent trajectory, resulting patch hash,
-and verifier evidence. Hand-authored `lesson` strings are rejected in the
-primary A/B runner. Extraction latency and available token usage are included in
-the treatment run totals. Verifiers run on the agent patch applied
-to a fresh base clone, not on the agent's potentially contaminated process.
-For multiple repositories, set `repositories` to an ID-to-local-path map and
-set each task's `repository` to one of those IDs. All source checkouts must be
-clean; their HEAD commits are recorded separately. A verifier may declare an
-`overlay` map from repository-relative destination paths to external hidden
-test files; their hashes are pinned in the manifest and files are copied only
-into the verifier clone after the agent patch is applied.
+Создайте JSON-файл с упорядоченным списком задач. Порядок набора данных задаёт границу накопления опыта. Последовательные задачи могут накапливать опыт, извлечённый отдельным проходом той же модели по фактической траектории агента, хешу полученного патча и доказательствам проверки. Основной A/B runner отклоняет написанные вручную строки `lesson`. Задержка извлечения и доступные данные об использовании токенов включаются в общий расход экспериментального запуска. Проверки выполняются на патче агента, применённом к свежему базовому клону, а не внутри потенциально загрязнённого процесса агента. Для нескольких репозиториев задайте `repositories` как карту идентификаторов к локальным путям, а в `repository` каждой задачи укажите один из этих идентификаторов. Все исходные checkout должны быть чистыми; их коммиты HEAD записываются отдельно. Проверка может объявлять карту `overlay`, связывающую пути назначения относительно репозитория с внешними скрытыми тестовыми файлами; их хеши закрепляются в манифесте, а сами файлы копируются только в клон для проверки и только после применения патча агента.
 
 ```json
 {
@@ -66,21 +38,11 @@ into the verifier clone after the agent patch is applied.
 }
 ```
 
-Supported difficulties: `easy`, `medium`, `hard`, `very hard`. Categories:
-`bug_fix`, `feature`, `refactoring`, `cross_file`, `architecture`,
-`regression`, `historical_experience`, and `misleading_experience`. Include
-historical or misleading memory scenarios in separately labeled suites; the
-primary runner excludes hand-authored memory to prevent answer leakage; a
-controlled-memory runner is not implemented yet. The
-source repository currently must be at
-one clean base commit for all configured tasks.
+Поддерживаемые уровни сложности: `easy`, `medium`, `hard`, `very hard`. Категории: `bug_fix`, `feature`, `refactoring`, `cross_file`, `architecture`, `regression`, `historical_experience` и `misleading_experience`. Сценарии с исторической или вводящей в заблуждение памятью размещайте в отдельно обозначенных наборах; основной runner исключает память, написанную вручную, чтобы предотвратить утечку ответа. Runner для контролируемой памяти пока не реализован. Сейчас исходный репозиторий для всех задач набора должен быть на одном чистом базовом коммите.
 
-## Run and rebuild a report
+## Запуск и повторная сборка отчёта
 
-Install Galaxy and ensure the configured Codex CLI is authenticated. For
-repeatable comparisons, provide a fixed model and reasoning effort, use at
-least three repetitions, preserve the config and source commit, and avoid
-changing model/provider settings during the run.
+Установите Galaxy и убедитесь, что настроенный Codex CLI авторизован. Для воспроизводимых сравнений укажите фиксированную модель и уровень рассуждения, выполните не менее трёх повторов, сохраните конфигурацию и коммит исходников и не меняйте настройки модели/провайдера во время запуска.
 
 ```bash
 galaxy benchmark run benchmarks/my-suite.json \
@@ -91,41 +53,25 @@ galaxy benchmark run benchmarks/my-suite.json \
   --repetitions 3
 ```
 
-Rebuild summaries and charts from the saved records without calling a model:
+Повторно соберите сводки и диаграммы из сохранённых записей, не вызывая модель:
 
 ```bash
 galaxy benchmark report reports/galaxy-benchmark-v1/run-001
 ```
 
-Output layout includes `manifest.json`, per-run prompt/events/answer/patch,
-verification logs and hash ledgers under `runs/`, plus `runs.jsonl`, `runs.csv`,
-`summary.json`, `report.md`, `report.html`, and `charts/`. Reports never insert
-example values in place of unavailable results.
+В структуру выходных данных входят `manifest.json`, prompt/events/answer/patch каждого запуска, журналы проверок и реестры хешей в `runs/`, а также `runs.jsonl`, `runs.csv`, `summary.json`, `report.md`, `report.html` и `charts/`. В отчёты не подставляются примеры вместо отсутствующих результатов.
 
-## Fairness and limits
+## Сопоставимость и ограничения
 
-Both arms use the same writable Codex CLI harness and task prompt. The treatment
-arm appends the Context Compiler packet. Context assembly latency is recorded
-separately; all other task limits should match. Galaxy runtime stores are rooted
-under the benchmark run ID. `--temperature` and `--seed` are recorded as
-requested metadata, but the Codex CLI may not accept/enforce these controls;
-check the manifest and provider support before claiming they were fixed. The
-runner currently does not set an API-level token budget and does not support
-non-Codex providers. Claims must be scoped to the exact task suite, model,
-repository snapshot, and run manifest.
+В обеих группах используются одинаковые изменяющий файлы harness Codex CLI и prompt задачи. В экспериментальной группе добавляется пакет Context Compiler. Задержка сборки контекста записывается отдельно; остальные ограничения задачи должны совпадать. Хранилища runtime Galaxy размещаются в каталоге с ID запуска бенчмарка. `--temperature` и `--seed` записываются как запрошенные метаданные, но Codex CLI может не принимать эти параметры или не обеспечивать их соблюдение; прежде чем заявлять, что они были зафиксированы, проверьте манифест и поддержку провайдера. Сейчас runner не устанавливает токенный бюджет на уровне API и не поддерживает провайдеров, отличных от Codex. Выводы должны относиться к точному набору задач, модели, снимку репозитория и манифесту запуска.
 
-This tool is a measurement harness, not evidence that Galaxy improves outcomes.
-Publish failed runs, harm, incomplete telemetry, and the full raw run records.
+Этот инструмент — измерительный стенд, а не доказательство того, что Galaxy улучшает результаты. Публикуйте неудачные запуски, случаи вреда, неполную телеметрию и полные исходные записи запусков.
 
-## SWE-bench Verified import (stage 1)
+## Импорт SWE-bench Verified (этап 1)
 
-The importer uses the official `SWE-bench/SWE-bench_Verified` Hugging Face
-dataset, `test` split, pinned to revision
-`8db12b107a1abfd10808f023ed233890b4d7cbae`. The upstream row fields include
-`instance_id`, `repo`, `base_commit`, `problem_statement`, `patch`, `test_patch`,
-`FAIL_TO_PASS`, `PASS_TO_PASS`, and `difficulty`.
+Импортёр использует официальный датасет Hugging Face `SWE-bench/SWE-bench_Verified`, split `test`, закреплённый на ревизии `8db12b107a1abfd10808f023ed233890b4d7cbae`. Поля строк исходного набора включают `instance_id`, `repo`, `base_commit`, `problem_statement`, `patch`, `test_patch`, `FAIL_TO_PASS`, `PASS_TO_PASS` и `difficulty`.
 
-Install optional Python packages and ensure Docker is running before auditing:
+Установите необязательные Python-пакеты и убедитесь, что Docker запущен, прежде чем проводить аудит:
 
 ```bash
 pip install '.[benchmark]'
@@ -142,23 +88,6 @@ galaxy benchmark swebench-pilot \
   --galaxy-home /tmp/galaxy-swebench-pilot --model YOUR_CODEX_MODEL
 ```
 
-The importer writes an agent-visible `tasks/<id>/task.json` and `metadata.json`.
-Gold patches, test overlays, and test identifier lists are stored only in the
-separate `_hidden/<id>/` tree. The catalog records both hashes and marks tasks
-`pending`; import alone is not an audit. Do not put `_hidden/` under a repository
-used as the agent's working clone or Galaxy context source. The pilot integration
-must apply `test_patch` only in a fresh verifier environment after the agent
-patch, then require every `FAIL_TO_PASS` and `PASS_TO_PASS` check to pass. Gold
-patch validation must use a separate fresh clone. The official SWE-bench
-evaluator uses Docker for reproducible task environments. This checkout has no
-Docker executable or SWE-bench runtime, so no task has been audited here yet.
-The audit command performs two separate official-harness runs (empty base patch
-and gold patch), stores their reports/logs, and accepts only a baseline F2P
-failure with P2P preserved plus complete gold F2P/P2P success.
-The pilot command accepts only an `accepted` task with a materialized snapshot.
-During each agent process, all imported evaluator-only files and previous-arm
-patch/trajectory artifacts are temporarily removed from disk; the agent sees
-only its checked-out repository, issue statement, and (for ON) compiled Galaxy
-context. Evaluator artifacts are restored after both arms finish. The pilot
-still requires a separate security review of the Codex sandbox before claiming
-host-wide isolation guarantees.
+Импортёр создаёт доступные агенту `tasks/<id>/task.json` и `metadata.json`. Эталонные патчи, тестовые overlay и списки идентификаторов тестов хранятся только в отдельном дереве `_hidden/<id>/`. Каталог записывает оба хеша и помечает задачи как `pending`; один лишь импорт не является аудитом. Не размещайте `_hidden/` в репозитории, который используется как рабочий клон агента или источник контекста Galaxy. Интеграция пилота должна применять `test_patch` только в свежем окружении проверки, после патча агента, а затем требовать прохождения каждой проверки `FAIL_TO_PASS` и `PASS_TO_PASS`. Эталонный патч следует проверять в отдельном свежем клоне. Официальный оценщик SWE-bench использует Docker для воспроизводимых окружений задач. В этом checkout нет исполняемого файла Docker и runtime SWE-bench, поэтому здесь пока не проверена ни одна задача.
+
+Команда аудита выполняет два отдельных запуска официального harness (с пустым базовым патчем и эталонным патчем), сохраняет их отчёты/журналы и принимает задачу, только если базовый вариант не проходит F2P, сохраняет P2P, а эталонный патч полностью проходит F2P/P2P. Команда пилота принимает только задачу со статусом `accepted` и материализованным снимком. Во время каждого процесса агента все импортированные файлы, предназначенные только оценщику, и артефакты патча/траектории предыдущей группы временно удаляются с диска; агент видит только свой checkout, формулировку задачи и (для ON) собранный контекст Galaxy. После завершения обеих групп артефакты оценщика восстанавливаются. Прежде чем заявлять гарантии изоляции на уровне всего хоста, для пилота всё ещё требуется отдельная проверка безопасности песочницы Codex.

@@ -1,65 +1,64 @@
-# Real-repository Experience transfer: controlled challenge v1
+# Перенос Experience на реальном репозитории: контролируемое испытание v1
 
-Status: benchmark assembled and offline source/evaluator preflight passed.
-No new agent runs or transfer outcomes have been collected. Existing historical
-base/gold audits are evaluator calibration, not Experience-producing agent runs.
+Статус: бенчмарк собран, предварительная офлайн-проверка источника/оценщика пройдена.
+Новых запусков агента и результатов переноса пока нет. Существующие исторические
+аудиты базы/эталона служат калибровкой оценщика, а не запусками агента, создающими Experience.
 
-## Frozen candidate sequence
+## Зафиксированная последовательность-кандидат
 
-Repository: genuine upstream `sympy/sympy` snapshots from the imported SWE-bench
-Verified dataset. Source A: `sympy__sympy-14711` (numeric zero in Vector addition).
-An intervening unrelated maintenance task: `sympy__sympy-16766` (Indexed support
-in PythonCodePrinter). Target B: `sympy__sympy-17630` (lost ZeroMatrix shape in
-repeated BlockMatrix multiplication). Base commit, clean Git state, accepted
-base/gold audit and hidden patch hashes were checked for each snapshot and saved
-in `reports/real-experience-transfer-v1/preflight.json`. These are independent
-real reported bugs in different subsystems; transfer relevance is a candidate
-hypothesis about typed symbolic identity, not an established property.
+Репозиторий: подлинные upstream-снимки `sympy/sympy` из импортированного набора SWE-bench
+Verified. Источник A: `sympy__sympy-14711` (числовой ноль при сложении Vector).
+Промежуточная несвязанная задача сопровождения: `sympy__sympy-16766` (поддержка Indexed
+в PythonCodePrinter). Целевая задача B: `sympy__sympy-17630` (потеря формы ZeroMatrix при
+повторном умножении BlockMatrix). Для каждого снимка проверены базовый коммит, чистое состояние Git, принятый
+аудит базы/эталона и хеши скрытых патчей; результаты сохранены в
+`reports/real-experience-transfer-v1/preflight.json`. Это реальные независимые
+сообщения об ошибках в разных подсистемах; релевантность переноса — гипотеза-кандидат
+о типизированной символьной идентичности, а не установленное свойство.
 
-The GitHub Galaxy URL could not resolve from this environment. No GitHub sync
-or fabricated source history is claimed; all selected upstream snapshots are
-already local, with their original commits.
+URL Galaxy на GitHub не удалось разрешить из этого окружения. Синхронизация с GitHub
+или выдуманная история источников не заявляются; все выбранные upstream-снимки
+уже находятся локально со своими исходными коммитами.
 
-## Conditions and interpretation
+## Условия и интерпретация
 
-| Condition | Delivered material | Gate |
+| Условие | Передаваемый материал | Фильтр |
 |---|---|---|
-| control | same ordinary Galaxy context, zero Experience | empty store |
-| relevant | extracted episode from successful A | intact source run/log/patch/report/extraction |
-| irrelevant | episode from successful intervening printer task | same evidence checks; relevance label preregistered |
-| obsolete | formerly verified advice plus target-specific supersession warning | reviewed supersession and hashed supporting evidence |
+| control | тот же обычный контекст Galaxy, без Experience | пустое хранилище |
+| relevant | эпизод, извлечённый из успешной A | целые исходный запуск/журнал/патч/отчёт/извлечение |
+| irrelevant | эпизод из успешно выполненной промежуточной задачи по printer | те же проверки доказательств; метка релевантности зарегистрирована заранее |
+| obsolete | ранее проверенная рекомендация и предупреждение о её замене для конкретной цели | проверенная замена и хешированные подтверждающие доказательства |
 
-Age, different repository commits, or advice from another subsystem does not
-establish obsolescence. No obsolete episode is authored to fill the fourth arm.
-It remains unavailable until historical validity and current supersession are
-independently documented. `reviewed` is a local review annotation, not an
-authenticated identity or an automatic determination that advice is stale.
+Возраст, разные коммиты репозитория или рекомендация из другой подсистемы не
+подтверждают устаревание. Эпизод obsolete не создаётся искусственно для заполнения четвёртой группы.
+Он недоступен до независимого документирования исторической достоверности и текущей замены. `reviewed` — это локальная отметка проверки, а не
+аутентифицированная личность и не автоматическое определение того, что рекомендация устарела.
 
-These conditions intentionally force selected, audited exposure, testing agent
-transfer and resistance to unhelpful advice. They do not measure native retrieval.
-A separate ExperienceStore replay must report eligible/retrieved/delivered IDs,
-with obsolete entries retracted before cutoff, against the same B task. Distinguish
-native stale exclusion from the forced obsolete challenge; historical verified
-outcome never means currently valid advice. Wrong patch counts, semantic usage
-and repeated-error categories stay null until independently annotated against a
-fixed rubric. Use independent tests, not the agent's description, for success.
+Эти условия намеренно принудительно передают выбранный материал после аудита, проверяя перенос
+агентом и устойчивость к бесполезным рекомендациям. Штатный поиск они не измеряют.
+Отдельное воспроизведение ExperienceStore должно сообщать ID допустимых/извлечённых/переданных записей,
+при этом записи obsolete отзываются до отсечки, на той же задаче B. Различайте
+штатное исключение устаревшей записи и принудительное испытание с obsolete; исторически подтверждённый
+результат не означает, что рекомендация остаётся действительной. Число ошибочных патчей, семантическое использование
+и категории повторных ошибок остаются null до независимой разметки по
+фиксированной рубрике. Для успеха используйте независимые тесты, а не описание агента.
 
-## Commands
+## Команды
 
-Use `.venv-mcp/bin/python`: that existing environment has SWE-bench and Docker
-SDK. Podman API preflight succeeded at
-`unix:///run/user/1000/podman/podman.sock`. Only the unrelated Podman hello image
-is cached; the actual task evaluator images still need preparation. Network
-access/image builds must succeed before new model runs are useful.
+Используйте `.venv-mcp/bin/python`: в имеющемся окружении установлены SWE-bench и SDK Docker.
+Предварительная проверка API Podman прошла по адресу
+`unix:///run/user/1000/podman/podman.sock`. В кэше есть только посторонний образ Podman hello;
+образы среды оценщика реальных задач ещё нужно подготовить. Перед полезными новыми запусками модели
+должны заработать сетевой доступ и сборка образов.
 
 ```bash
 .venv-mcp/bin/python scripts/real_experience_transfer.py prepare /tmp/real-transfer-prepared
-# Execute source A, then intervening task; each run uses a distinct output/state:
+# Выполните сначала источник A, затем промежуточную задачу; для каждого запуска задайте отдельный каталог результата/состояния:
 DOCKER_HOST=unix:///run/user/1000/podman/podman.sock \
 .venv-mcp/bin/python scripts/real_experience_transfer.py run \
   --task sympy__sympy-14711 --out /tmp/real-transfer-A \
   --state /tmp/real-transfer-A-state --model gpt-6-luna
-# Once official A checks pass, extract only its actual trajectory/patch:
+# После успешного прохождения официальных проверок A извлеките только её фактическую траекторию/патч:
 .venv-mcp/bin/python scripts/real_experience_transfer.py extract \
   --run /tmp/real-transfer-A/runs/SOURCE_RUN_ID --out /tmp/real-transfer-A-episode \
   --target sympy__sympy-17630 --condition relevant --model gpt-6-luna
@@ -71,43 +70,43 @@ DOCKER_HOST=unix:///run/user/1000/podman/podman.sock \
   --condition relevant --bundle /tmp/real-transfer-A-episode/bundle.json
 ```
 
-Use `--condition control` with no bundle for the control; obtain irrelevant
-bundle through the same extraction procedure after the intervening task. Obsolete
-bundle requires an actual historical source, extraction and supersession record.
-That record names `source_episode_id`, `target_base_commit`, a reviewed reason,
-and an `evidence` path/SHA-256 reference proving the behavioral change. Do not
-relabel irrelevant as obsolete. Extraction saves its own usage separately.
+Для контрольной группы используйте `--condition control` без bundle; bundle irrelevant
+получите той же процедурой извлечения после промежуточной задачи. Bundle obsolete
+требует реального исторического источника, извлечения и записи о замене.
+В этой записи указываются `source_episode_id`, `target_base_commit`, проверенная причина
+и ссылка `evidence` на путь/SHA-256, подтверждающая изменение поведения. Не
+переименовывайте irrelevant в obsolete. Использование ресурсов извлечения сохраняется отдельно.
 
-Existing adapter preserves hidden-test/gold isolation during agent execution,
-official evaluator artifacts, exact context packages, raw events, agent patch
-and verifier ledger. Challenge bundle SHA-256 is frozen in the target manifest
-and rechecked at packet construction. Legacy OFF/ON remains the default.
-Challenge overflow fails rather than silently drop base context or the episode.
+Существующий адаптер сохраняет изоляцию скрытых тестов/эталона во время работы агента,
+артефакты официального оценщика, точные пакеты контекста, исходные события, патч агента
+и журнал проверок. SHA-256 bundle испытания фиксируется в манифесте цели
+и проверяется повторно при сборке пакета. Унаследованный OFF/ON остаётся режимом по умолчанию.
+При переполнении испытание завершается ошибкой, а базовый контекст или эпизод не отбрасываются молча.
 
-## Remaining prerequisites and decision rules
+## Оставшиеся предварительные условия и правила принятия решения
 
-Prepare/certify evaluator images; collect successful independently verified A
-and intervening runs; audit extracted lessons; identify actual superseded
-historical advice; then freeze episode hashes and counterbalanced condition
-order before B. Initial calibration is one repetition. Measurement requires
-independent repeated runs, identical model/tools/budget/source commits, and
-matching non-Experience context items. Do not compare arms if sources are absent,
-base context differs, or evaluators fail. Preserve every failed source attempt.
+Подготовьте/сертифицируйте образы среды оценщика; соберите успешно выполненные независимо проверенные A
+и промежуточные задачи; проведите аудит извлечённых уроков; найдите реально заменённые
+исторические рекомендации; затем зафиксируйте хеши эпизодов и сбалансированный порядок условий
+до запуска B. Начальная калибровка — один повтор. Для измерения нужны
+независимые повторы, одинаковые модель/инструменты/бюджет/коммиты источников и
+совпадающие элементы контекста вне Experience. Не сравнивайте группы, если источники отсутствуют,
+базовый контекст отличается или оценщики завершаются сбоем. Сохраняйте каждую неудачную попытку по источнику.
 
-Primary: official B resolution with PASS_TO_PASS preservation. Secondary:
-verified repeated-error rate, observable searches/tool calls, execution tokens,
-time to verified completion. Learning/extraction overhead is separate. Raw
-input tokens are not billed cost; unknown cached pricing stays unavailable.
-A tie in success can motivate an efficiency study but a single lower-token run
-does not prove benefit. Evaluate irrelevant/obsolete harm as carefully as relevant
-benefit. Context and Experience remain experimental; memory has a local minimal
-store; skill candidates exist but validated skills/learning are unproved.
-Evidence and benchmark passed scoped local calibration; neither is globally
-certified stable. Core/platform expansion remains frozen.
+Основной показатель: официальное решение B при сохранении PASS_TO_PASS. Дополнительные:
+проверенная частота повторных ошибок, наблюдаемые поиски/вызовы инструментов, токены выполнения,
+время до подтверждённого завершения. Накладные расходы обучения/извлечения учитываются отдельно. Сырые
+входные токены не равны оплаченной стоимости; неизвестная цена кэшированных токенов остаётся неизвестной.
+Равенство успеха может стать основанием для исследования эффективности, но один запуск с меньшим числом токенов
+не доказывает пользу. Вред от нерелевантной/устаревшей памяти оценивайте так же тщательно, как пользу релевантной.
+Context и Experience остаются экспериментальными; для Memory есть минимальное локальное
+хранилище; наличие кандидатов навыков не доказывает валидированность Skills/Learning.
+Evidence и бенчмарк прошли локальную калибровку в заданных границах; глобальная стабильность
+ни одного из них не подтверждена. Расширение Core/платформы остаётся замороженным.
 
-Native retrieval replay is executable via `scripts/real_experience_transfer.py
+Воспроизведение штатного поиска запускается командой `scripts/real_experience_transfer.py
 replay --target TARGET_ID --bundle RELEVANT_BUNDLE --bundle IRRELEVANT_BUNDLE
---bundle OBSOLETE_BUNDLE --out NEW_DIRECTORY`. It validates source bundles,
-records them in an isolated existing ExperienceStore, retracts the independently
-superseded episode before compilation, and saves eligible/retrieved/delivered IDs
-plus the bundle-ID/store-ID mapping. It makes no agent-success or semantic-use claim.
+--bundle OBSOLETE_BUNDLE --out NEW_DIRECTORY`. Она проверяет исходные bundle,
+записывает их в изолированный существующий ExperienceStore, отзывает независимо
+подтверждённый как заменённый эпизод до компиляции и сохраняет ID допустимых/извлечённых/переданных записей
+и соответствие bundle-ID/store-ID. Команда не делает выводов об успехе агента или семантическом использовании.

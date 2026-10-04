@@ -1,19 +1,19 @@
 # Amnesia — project charter
 
-**Status:** new working repository, migrated 2026-10-04.
+**Статус:** новый рабочий репозиторий, перенос выполнен 2026-10-04.
 
-## Research objective
+## Цель исследования
 
-Improve coding-agent work by finding when context, memory, and past experience help the next task. Claims must be tested on coding work with independent outcome checks, resource measures, and preserved provenance.
+Улучшить работу агентов программирования, выяснив, когда контекст, память и прошлый опыт помогают в следующей задаче. Утверждения необходимо проверять на задачах программирования, независимо оценивать результат, измерять затраты ресурсов и сохранять происхождение данных.
 
-## Starting evidence
+## Исходные свидетельства
 
-The imported direct Context pilot found no verified outcome change in five paired tasks (3/5 passed in both arms), with 51.6% more aggregate processed tokens in the ON arm. This is exact for the observed runs, not a general estimate. Experience calibration demonstrates parts of delivery/provenance but has not established real-task transfer benefit. See the imported reports and evidence hashes in `../legacy-galaxy/reports/` and the source map.
+Перенесённый пилот с прямым контекстом не выявил подтверждённого изменения результата на пяти парных задачах (успешно решены 3 из 5 в обеих группах); в группе с включённым контекстом суммарно обработано на 51,6% больше токенов. Это точное описание наблюдавшихся запусков, а не общая оценка. Калибровка опыта проверяет отдельные этапы передачи данных и фиксации их происхождения, но не подтвердила пользу переноса опыта на реальных задачах. См. перенесённые отчёты и хеши свидетельств в `../legacy-galaxy/reports/` и карту источников.
 
-## Scope not yet selected
+## Объём работ пока не выбран
 
-This charter establishes the research question, not a product architecture. The PM will choose what Amnesia should become after reviewing evidence. Galaxy code, its five-foundation implementation scope, and its release roadmap are not carried forward as binding implementation requirements.
+Этот устав задаёт исследовательский вопрос, а не архитектуру продукта. PM определит, чем должна стать Amnesia, после анализа свидетельств. Код Galaxy, объём реализации пяти основ и дорожная карта выпусков не переносятся как обязательные требования к реализации.
 
-## Evidence standard
+## Стандарт свидетельств
 
-Compare matched coding tasks with and without the treatment; freeze task, model, settings, and evaluator; retain traces, official outcomes, hashes, and missing-data notes. Separate success, time, token categories, monetary cost, retrieval errors, freshness, and human repairs. Report null and inconclusive results directly.
+Сравнивай сопоставимые задачи программирования с воздействием и без него; зафиксируй задачу, модель, настройки и способ оценки; сохраняй трассы, официальные результаты, хеши и сведения об отсутствующих данных. Отдельно учитывай успешность, время, категории токенов, денежную стоимость, ошибки извлечения, актуальность данных и исправления человека. Прямо сообщай о нулевых и неубедительных результатах.

@@ -1,22 +1,22 @@
-# SymPy context ablation — SWE-bench Verified
+# Абляция контекста SymPy — SWE-bench Verified
 
-Five single-run conditions on the same audited issue and model. A/B reuse the already completed frozen sanity-pilot runs; C/D/E are new official SWE-bench evaluator runs.
+Пять условий, каждое выполнено один раз на одной и той же проверенной задаче и с одной моделью. Для A/B повторно используются уже завершённые запуски зафиксированного проверочного пилота; C/D/E — новые запуски официального оценщика SWE-bench.
 
-## Results
+## Результаты
 
-| Arm | Context condition | Verified | Trajectory tokens | Context text tokens (chars/4 approx.) | Searches | Unique files opened | Repeat reads | Edit events | Tests | Duration (s) |
+| Вариант | Условие контекста | Подтверждено | Токены траектории | Токены текста контекста (приблизительно: символы/4) | Поиски | Уникальные открытые файлы | Повторные чтения | События редактирования | Тесты | Длительность (с) |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| A | off | FAIL | 358733 | — | 5 | 2 | 3 | 1 | 0 | 138.3 |
-| B | galaxy_current | FAIL | 1025635 | 1161 | 7 | 2 | 2 | 14 | 0 | 178.9 |
-| C | top3 | PASS | 1056719 | 1007 | 11 | 2 | 4 | 6 | 0 | 178.4 |
-| D | top1 | FAIL | 376234 | 974 | 4 | 1 | 1 | 3 | 0 | 122.9 |
-| E | without_ctx_004 | FAIL | 466626 | 1162 | 5 | 3 | 3 | 3 | 0 | 125.0 |
+| A | off | НЕУДАЧА | 358733 | — | 5 | 2 | 3 | 1 | 0 | 138.3 |
+| B | galaxy_current | НЕУДАЧА | 1025635 | 1161 | 7 | 2 | 2 | 14 | 0 | 178.9 |
+| C | top3 | УСПЕХ | 1056719 | 1007 | 11 | 2 | 4 | 6 | 0 | 178.4 |
+| D | top1 | НЕУДАЧА | 376234 | 974 | 4 | 1 | 1 | 3 | 0 | 122.9 |
+| E | without_ctx_004 | НЕУДАЧА | 466626 | 1162 | 5 | 3 | 3 | 3 | 0 | 125.0 |
 
-## Context influence observed by file path
+## Наблюдаемое влияние контекста по путям файлов
 
-A file marked opened or touched is an observed path match from the trace, not proof that its content helped. Semantic context use and entity use remain unknown.
+Отметка об открытии или изменении файла означает лишь совпадение пути, наблюдаемое в трассе, и не доказывает, что его содержимое помогло. Семантическое использование контекста и сущностей остаётся неизвестным.
 
-| Arm | First opened files | Supplied context files later opened | Supplied context files later edited |
+| Вариант | Первые открытые файлы | Переданные файлы контекста, открытые позднее | Переданные файлы контекста, изменённые позднее |
 |---|---|---|---|
 | A | `sympy/stats/crv_types.py`, `sympy/stats/crv.py` | — | — |
 | B | `sympy/stats/crv_types.py`, `sympy/stats/tests/test_continuous_rv.py` | `sympy/stats/crv_types.py`, `sympy/stats/tests/test_continuous_rv.py` | `sympy/stats/crv_types.py`, `sympy/stats/tests/test_continuous_rv.py` |
@@ -24,10 +24,10 @@ A file marked opened or touched is an observed path match from the trace, not pr
 | D | `sympy/stats/crv_types.py` | — | — |
 | E | `sympy/stats/crv_types.py`, `sympy/stats/crv.py`, `sympy/stats/tests/test_continuous_rv.py` | `sympy/stats/crv.py`, `sympy/stats/crv_types.py`, `sympy/stats/tests/test_continuous_rv.py` | `sympy/stats/crv_types.py` |
 
-## Interpretation
+## Интерпретация
 
-The outcome difference between A and the Galaxy arms is descriptive: each arm ran once, and the model is stochastic. The A/B traces are legacy JSONL without per-action timestamps; C/D/E use the v1.1 live event clock. Per-action token totals are not emitted by Codex and remain unknown.
+Различие результатов между A и вариантами Galaxy носит описательный характер: каждый вариант запускался один раз, а модель вероятностная. Трассы A/B — устаревший формат JSONL без временных меток отдельных действий; в C/D/E используется потоковая шкала событий v1.1. Codex не выдаёт количество токенов для каждого действия, поэтому оно неизвестно.
 
-rank 4 in the frozen current packet is sympy/core/tests/test_args.py, a downstream test outside the changed component and outside the agent's observed first reads; this is a hypothesis for ablation, not a finding of causal harm.
+Файл на 4-м месте в зафиксированном текущем пакете — sympy/core/tests/test_args.py: это последующий тест вне изменённого компонента и вне первых прочтений агента, наблюдавшихся в трассе. Это гипотеза для абляции, а не установленный факт причинённого вреда.
 
-Every arm has a distinct Codex run ID. Full observable action traces, exact rendered context, structured context inventory, agent patch, and official evaluator artifacts are retained in each arm directory.
+У каждого варианта свой идентификатор запуска Codex. В каталоге каждого варианта сохранены полные наблюдаемые трассы действий, точный отрисованный контекст, структурированная опись контекста, исправление агента и артефакты официального оценщика.

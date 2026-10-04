@@ -1,41 +1,41 @@
-# Sphinx #7590 lean-context diagnostic
+# Sphinx #7590: диагностика сокращённого контекста
 
-## Outcome
+## Результат
 
-One predeclared Galaxy context arm was run against the frozen SWE-bench instance, using `gpt-6-luna`, low reasoning, and the official evaluator.
+Один заранее определённый вариант контекста Galaxy был запущен на зафиксированном экземпляре SWE-bench с моделью `gpt-6-luna`, низким уровнем рассуждений и официальным оценщиком.
 
-| Metric | Historical OFF | Historical Galaxy | Lean Galaxy |
+| Метрика | Исторический OFF | Исторический Galaxy | Galaxy с сокращённым контекстом |
 |---|---:|---:|---:|
-| ContextCompiler source-packet estimate (approx., pre text trim) | 0 | 4,073 | 2,251 |
-| Rendered Markdown characters | 0 | 3,891 | 1,673 |
-| Processed input tokens | 400,212 | 699,086 | 299,881 |
-| Cached input tokens | 364,288 | 656,640 | 278,528 |
-| Uncached input tokens | 35,924 | 42,446 | 21,353 |
-| Output tokens | 1,855 | 3,130 | 1,499 |
-| Input + output tokens | 402,067 | 702,216 | 301,380 |
-| Tool calls | 17 | 22 | 11 |
-| Duration | 195.9 s | 220.6 s | 165.0 s |
-| SWE-bench target | FAIL (0/1 F2P) | FAIL (0/1 F2P) | FAIL (0/1 F2P) |
+| Оценка пакета источников ContextCompiler (приблизительно, до обрезки текста) | 0 | 4,073 | 2,251 |
+| Символы отрисованного Markdown | 0 | 3,891 | 1,673 |
+| Обработанные входные токены | 400,212 | 699,086 | 299,881 |
+| Кэшированные входные токены | 364,288 | 656,640 | 278,528 |
+| Некэшированные входные токены | 35,924 | 42,446 | 21,353 |
+| Выходные токены | 1,855 | 3,130 | 1,499 |
+| Входные + выходные токены | 402,067 | 702,216 | 301,380 |
+| Вызовы инструментов | 17 | 22 | 11 |
+| Длительность | 195.9 s | 220.6 s | 165.0 s |
+| Целевая проверка SWE-bench | FAIL (0/1 F2P) | FAIL (0/1 F2P) | FAIL (0/1 F2P) |
 
-The ContextCompiler source-packet estimate is 44.8% lower than the historical Galaxy packet. It is calculated before the render-only removal of duplicate task text; final rendered Markdown had 1,673 characters. This run processed 57.1% fewer total tokens than the historical Galaxy arm and 25.0% fewer than historical OFF. The evaluator reported the same failure result and the same report SHA-256 as both historical arms (`491d1ae3164ae60cdf9494857b7fd2f59d197751fa131d20c072622e1007566b`). All arms passed 24/24 pass-to-pass checks; none passed the fail-to-pass target.
+Оценка пакета источников ContextCompiler на 44.8% ниже, чем у исторического пакета Galaxy. Её рассчитали до удаления дублирующего текста задачи только при отрисовке; итоговый Markdown содержал 1,673 символа. В этом запуске обработано на 57.1% меньше токенов, чем в историческом варианте Galaxy, и на 25.0% меньше, чем в историческом OFF. Оценщик выдал тот же результат неудачи и тот же SHA-256 отчёта, что и для обоих исторических вариантов (`491d1ae3164ae60cdf9494857b7fd2f59d197751fa131d20c072622e1007566b`). Все варианты прошли 24/24 проверок «успех → успех»; ни один не прошёл целевую проверку «неудача → успех».
 
-This is a promising diagnostic observation, not causal evidence: there is one new run, no randomized repetitions, and no basis to infer a general effect or billing cost. Leave default retrieval unchanged until counterbalanced repeats confirm the signal.
+Это многообещающее диагностическое наблюдение, а не причинное свидетельство: выполнен один новый запуск, случайных повторов нет, оснований выводить общий эффект или стоимость оплаты также нет. Оставьте извлечение по умолчанию без изменений, пока сигнал не подтвердится сбалансированными повторными запусками.
 
-## Integrity checks
+## Проверки целостности
 
-- Post-run telemetry correction: the original `context_tokens` field held rendered Markdown characters divided by four (419), not the source-packet compiler estimate (2,251). The saved ContextPackage held that estimate, computed before render-only task-block removal. Code and derived metrics were corrected without changing the prompt, supplied context, model run, or evaluator output. This estimate is approximate, not exact tokenization of the final rendered payload or provider tokenization.
+- Исправление телеметрии после запуска: исходное поле `context_tokens` содержало число символов отрисованного Markdown, делённое на четыре (419), а не оценку компилятора пакета источников (2,251). В сохранённом ContextPackage содержалась эта оценка, рассчитанная до удаления блока задачи только при отрисовке. Код и производные метрики исправили, не меняя запрос, переданный контекст, запуск модели или результат оценщика. Оценка приблизительная и не является точной токенизацией итоговой отрисованной полезной нагрузки или токенизацией провайдера.
 
-- The run used the plan-frozen base commit, dataset revision, task patches, model, effort, and timeout.
-- The context retained `sphinx/domains/cpp.py` and `tests/test_domain_cpp.py`; it excluded the 12 paths listed in the plan and omitted only the duplicate task section from injected context.
-- Leakage audit passed; hidden gold/reference material was absent during the agent run.
-- Rendered `context.md` SHA-256 matches both the context package's declared rendered-text hash and the run metric: `fb9026b9d6bbab18307b22c912555a4105410b265a5d32d1e621ee5950816b0f`.
-- Verification evidence integrity passed. The official evaluator completed without infrastructure failure, but did not resolve the task.
+- В запуске использованы зафиксированные планом базовый коммит, ревизия набора данных, исправления задачи, модель, уровень усилий и ограничение времени.
+- В контексте сохранены `sphinx/domains/cpp.py` и `tests/test_domain_cpp.py`; исключены 12 путей, перечисленных в плане, а из добавленного контекста удалён только дублирующий раздел задачи.
+- Аудит утечки пройден; во время запуска агента скрытые эталонные материалы отсутствовали.
+- SHA-256 отрисованного `context.md` совпадает с заявленным хешем отрисованного текста в пакете контекста и метрикой запуска: `fb9026b9d6bbab18307b22c912555a4105410b265a5d32d1e621ee5950816b0f`.
+- Целостность свидетельств проверки подтверждена. Официальный оценщик завершился без инфраструктурного сбоя, но задачу не решил.
 
-## Provenance
+## Происхождение данных
 
-- Frozen protocol: `examples/sphinx-7590-context-ablation-v1/plan.json`
-- Raw arm, traces, context, patch, leakage audit and evaluator artifacts are in this report's sibling `runs/`, `evaluator-artifacts/`, and `leakage-audit.json`.
-- Main historical comparison: `reports/swebench-pilot/analysis/sphinx-7590-context-harm.md`.
-- Internal grounding: `docs/galaxy-v5-roadmap.md`, `docs/sources/galaxy-superapp/00-source-map.md`, `docs/sources/galaxy-superapp/01-current-galaxy.md`, `docs/sources/galaxy-superapp/05-product-validation.md`, `docs/sources/galaxy-superapp/08-operation-amnesia-radar.md`, `docs/architecture/foundation.md`, and `docs/architecture/current-state.md`. These support the five-foundation scope and evidence-based paired measurement, not the outcome of this run.
-- No external source was needed; this was a local replay against frozen benchmark data with an official local evaluator.
-- A matched follow-up pair is reported at `reports/swebench-pilot/sphinx-7590-lean-context-paired-v2/report.md`; it did not reproduce the first run's token reduction.
+- Зафиксированный протокол: `examples/sphinx-7590-context-ablation-v1/plan.json`
+- Исходные данные варианта, трассы, контекст, исправление, аудит утечки и артефакты оценщика находятся в соседних с этим отчётом `runs/`, `evaluator-artifacts/` и `leakage-audit.json`.
+- Основное историческое сравнение: `reports/swebench-pilot/analysis/sphinx-7590-context-harm.md`.
+- Внутренняя опора: `docs/galaxy-v5-roadmap.md`, `docs/sources/galaxy-superapp/00-source-map.md`, `docs/sources/galaxy-superapp/01-current-galaxy.md`, `docs/sources/galaxy-superapp/05-product-validation.md`, `docs/sources/galaxy-superapp/08-operation-amnesia-radar.md`, `docs/architecture/foundation.md` и `docs/architecture/current-state.md`. Они обосновывают объём из пяти основ и парные измерения на основе свидетельств, но не результат этого запуска.
+- Внешние источники не потребовались: это был локальный повтор на зафиксированных данных бенчмарка с официальным локальным оценщиком.
+- Отчёт о сопоставленной паре повторных запусков находится в `reports/swebench-pilot/sphinx-7590-lean-context-paired-v2/report.md`; в ней снижение числа токенов из первого запуска не воспроизвелось.

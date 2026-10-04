@@ -7,13 +7,13 @@ routines:
   - code_audit: false
   - evening_sync: false
 ---
-# Daily Log: {{date}}
+# Дневник за день: {{date}}
 
-## Focus of the Day
+## Главный фокус дня
 - 
 
-## Tasks Log
+## Журнал задач
 - 
 
-## Notes & Fleeting Ideas
+## Заметки и мимолётные идеи
 - 

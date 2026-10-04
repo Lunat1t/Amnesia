@@ -1,4 +1,3 @@
-# Legacy refresh proposal (superseded)
+# Старое предложение по обновлению токена (заменено)
 
-An old rollout proposal suggested accepting the previous refresh token for a
-five-minute grace window. This proposal is not the current security policy.
+В старом предложении о развёртывании рекомендовалось принимать предыдущий токен обновления в течение пятиминутного льготного периода. Это предложение не является действующей политикой безопасности.

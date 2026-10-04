@@ -1,5 +1,3 @@
-# Current refresh-token security policy
+# Действующая политика безопасности токенов обновления
 
-After successful rotation the previous refresh token is revoked immediately.
-There is no grace window. A lost response must be recovered using an explicit
-idempotency contract; this service has not implemented that contract yet.
+После успешной ротации предыдущий токен обновления немедленно отзывается. Льготного периода нет. Потерянный ответ следует обрабатывать по явному контракту идемпотентности; этот сервис пока его не реализовал.

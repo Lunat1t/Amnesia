@@ -10,11 +10,11 @@ circuit_breaker:
 ---
 # {{agent_name}} — {{role_title}}
 
-## System Prompt
+## Системная инструкция
 {{system_prompt}}
 
-## Protocol & Constraints
+## Протокол и ограничения
 - 
 
-## Tools Matrix (MCP)
+## Таблица инструментов (MCP)
 - 

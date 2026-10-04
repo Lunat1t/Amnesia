@@ -1,34 +1,34 @@
-# Galaxy 3.2 Context OS — Legacy Runtime Architecture
+# Galaxy 3.2 Context OS — архитектура унаследованного runtime
 
 > Этот документ описывает существующий alpha runtime и частично устарел как продуктовая архитектура. Текущая карта — [`architecture/current-state.md`](architecture/current-state.md); scope новой версии — [`architecture/foundation.md`](architecture/foundation.md). Отдельная большая Core/OS архитектура сейчас не является целью.
 
-Galaxy Core is UI-agnostic and model-agnostic. Its job is to maintain project understanding, detect when that understanding drifts, forecast bounded structural consequences, and deliver trustworthy context to execution systems.
+Galaxy Core не зависит от пользовательского интерфейса и модели. Его задача — поддерживать понимание проекта, выявлять устаревание этого понимания, прогнозировать ограниченные структурные последствия и передавать системам исполнения надёжный контекст.
 
-## Architectural layers
+## Архитектурные уровни
 
 ### 1. Project World Model — `galaxy_core/world/`
 
-A persistent structural representation of the repository. It scans files, extracts symbols, resolves supported dependency edges and stores a snapshot in local runtime data.
+Постоянное структурное представление репозитория. Оно сканирует файлы, извлекает символы, устанавливает поддерживаемые связи зависимостей и хранит снимок в локальных данных runtime.
 
-Current alpha understands Python imports, relative JS/TS imports and Markdown wikilinks. The contract remains extensible for AST/LSP/runtime edges later.
+Текущая alpha распознаёт импорты Python, относительные импорты JS/TS и wikilinks Markdown. Контракт можно будет расширить связями AST/LSP/runtime.
 
 ### 2. Drift Detector — `galaxy_core/world/drift.py`
 
-Compares the stored world snapshot with a fresh observation.
+Сравнивает сохранённый снимок мира с новым наблюдением.
 
 Evidence includes:
 
-- file additions/removals/modifications;
-- symbol additions/removals;
-- dependency-edge additions/removals;
-- components touched;
-- bounded structural drift score.
+- добавления/удаления/изменения файлов;
+- добавления/удаления символов;
+- добавления/удаления связей зависимостей;
+- затронутые компоненты;
+- ограниченная оценка структурного дрейфа.
 
-A drift score is not a code-quality score.
+Оценка дрейфа не является оценкой качества кода.
 
 ### 3. Future Graph — `galaxy_core/world/future.py`
 
-Counterfactual structural impact layer.
+Уровень контрфактического структурного влияния.
 
 ```text
 hypothetical change
@@ -42,93 +42,93 @@ dependent code / tests / docs / components
 structural risk + uncertainty
 ```
 
-Future Graph alpha is deterministic and explainable. Dynamic runtime relationships are not yet inferred.
+Future Graph alpha детерминирован и объясним. Динамические связи runtime пока не выводятся.
 
 ### 4. Living Memory — `galaxy_core/brain/`
 
-Durable project knowledge with provenance, confidence, importance, confirmation, revisions, embeddings and entity links.
+Долговременные знания о проекте с provenance, уверенностью, важностью, подтверждением, редакциями, векторными представлениями и связями сущностей.
 
-Lifecycle states:
+Состояния жизненного цикла:
 
-`active → stale / contradicted → active` when revalidated, while `superseded` and `retracted` remain terminal historical states.
+При повторной проверке возможен переход `active → stale / contradicted → active`, а `superseded` и `retracted` остаются окончательными историческими состояниями.
 
-Stale and contradicted items remain auditable but are excluded from normal agent retrieval.
+Устаревшие и опровергнутые элементы остаются доступными для аудита, но исключаются из обычного поиска для агента.
 
 ### 5. Memory Reconciliation — `galaxy_core/brain/reconcile.py`
 
-Evidence-driven knowledge-health detection.
+Выявление проблем актуальности знаний на основе доказательств.
 
-It currently supports deterministic source lifecycle checks and conservative same-slot assertion conflict detection. The default is read-only. Applying mutations requires explicit `--apply` and stronger confidence rules.
+Сейчас поддерживаются детерминированные проверки жизненного цикла источника и консервативное обнаружение конфликтующих утверждений в одной позиции. По умолчанию режим только для чтения. Для применения изменений нужен явный `--apply` и более строгие правила уверенности.
 
 ### 6. Attention Engine + Context Compiler — `galaxy_core/attention/`, `galaxy_core/context/`
 
-3.2 separates **retrieval/attention** from final context assembly.
+В версии 3.2 **поиск/внимание** отделены от окончательной сборки контекста.
 
 ```text
-wide candidates
+широкий набор кандидатов
    ↓
-BM25 + lexical + portable semantic
+BM25 + лексический поиск + переносная семантика
    ↓
-graph + Future Graph expansion
+расширение графом + Future Graph
    ↓
-confidence gatekeeper
+фильтр уверенности
    ↓
-evidence extraction
+извлечение доказательств
    ↓
-adaptive role budget
+адаптивный бюджет для роли
    ↓
 Context Compiler
 ```
 
-The Attention Engine produces auditable file candidates with per-signal scores, roles, evidence windows and estimated token cost. The compiler then combines selected files with living memory, hierarchical instructions, project relationships, Future Graph impact and knowledge-health findings.
+Attention Engine выдаёт проверяемых кандидатов-файлов с оценками по отдельным сигналам, ролями, окнами доказательств и оценкой стоимости в токенах. Затем компилятор объединяет выбранные файлы с живой памятью, иерархическими инструкциями, связями проекта, влиянием Future Graph и результатами проверки актуальности знаний.
 
-For small repositories that genuinely fit inside the bounded budget, Galaxy may use a full-context strategy instead of retrieval.
+Для небольших репозиториев, которые действительно помещаются в ограниченный бюджет, Galaxy может использовать стратегию полного контекста вместо поиска.
 
-Retrieval quality fields are heuristic diagnostics, not accuracy benchmarks.
+Поля качества поиска — эвристическая диагностика, а не бенчмарки точности.
 
 ### 7. Decision Fabric — `galaxy_core/engine/decisions/`
 
-Narrow probabilistic decisions only. Noul/Choice/Score remain Jev-compatible.
+Только узкие вероятностные решения. Noul/Choice/Score остаются совместимыми с Jev.
 
 ```text
-narrow question
+узкий вопрос
     ↓
 Jev / local System-One
     ↓
-probability distribution
+распределение вероятностей
     ↓
 Galaxy deterministic policy
   ├─ high confidence → auto
   └─ uncertain       → escalate
 ```
 
-No decision model can redefine Galaxy safety policy.
+Ни одна модель принятия решений не может переопределять политику безопасности Galaxy.
 
-### 8. Discovery, planning and execution
+### 8. Поиск, планирование и выполнение
 
-Sun turns ambiguous intent into a structured goal. The planner converts the goal into a validated DAG. The execution engine remains responsible for dependency validation, bounded concurrency, model routing, budgets, isolated write workspaces, approvals, deterministic verification, durable state and evidence.
+Sun преобразует неоднозначное намерение в структурированную цель. Планировщик переводит цель в проверенный DAG. Механизм исполнения отвечает за проверку зависимостей, ограниченный параллелизм, маршрутизацию моделей, бюджеты, изолированные рабочие каталоги для записи, согласования, детерминированную проверку, постоянное состояние и доказательства.
 
-Workers receive `project_context` plus managed memory.
+Рабочие агенты получают `project_context` и управляемую память.
 
-## Design principles
+## Принципы проектирования
 
-1. **Attention before generation.** Retrieve widely, then compile bounded evidence instead of dumping the repository.
-2. **State before prompts.** Project understanding lives in machine-readable state.
-3. **Detect drift explicitly.** A cached world model must be able to admit that the repository changed.
-4. **Forecast with uncertainty.** Future Graph exposes structural assumptions rather than pretending to know runtime truth.
-5. **Provenance over memory dumps.** Knowledge has source, confidence and lifecycle.
-6. **Detection is not authority.** A conflict detector may surface evidence; policy decides whether state changes.
-7. **Cheap decisions before expensive reasoning.** Use narrow decision models only where confidence can be measured.
-8. **Policy in code.** Safety, approvals and permissions are deterministic.
-9. **Human control for irreversible work.** Critical actions escalate.
-10. **Headless core.** UI can evolve independently.
+1. **Сначала внимание, затем генерация.** Широко ищите, затем собирайте ограниченные доказательства, а не передавайте весь репозиторий.
+2. **Сначала состояние, затем prompts.** Понимание проекта хранится в машиночитаемом состоянии.
+3. **Явно выявляйте дрейф.** Кэшированная модель мира должна распознавать, что репозиторий изменился.
+4. **Прогнозируйте с неопределённостью.** Future Graph показывает структурные предположения, а не делает вид, что знает факты runtime.
+5. **Provenance важнее дампов памяти.** У знания есть источник, уверенность и жизненный цикл.
+6. **Обнаружение не даёт полномочий.** Детектор конфликтов может показать доказательства; политика определяет, менять ли состояние.
+7. **Сначала дешёвые решения, затем дорогое рассуждение.** Используйте узкие модели принятия решений только там, где можно измерить уверенность.
+8. **Политика в коде.** Безопасность, согласования и разрешения детерминированы.
+9. **Контроль человека для необратимых действий.** Критические действия передаются на согласование.
+10. **Ядро без интерфейса.** UI может развиваться независимо.
 
-## Current alpha limits
+## Ограничения текущей alpha
 
-- World Model is structural, not yet a full semantic/runtime architecture graph.
-- Drift is structural and does not infer product intent.
-- Future Graph does not yet simulate runtime dataflow, infrastructure or external services.
-- Memory contradiction detection is conservative and primarily same-slot/source-evidence based.
-- Attention retrieval is hybrid but still bounded by current static dependency extraction and portable embeddings.
-- BM25 is currently built in-memory per run; AST-block/dataflow evidence extraction is not implemented yet.
-- No TUI, web app or SaaS layer.
+- World Model описывает структуру; это пока не полный семантический/Runtime-граф архитектуры.
+- Дрейф описывает структуру и не выводит намерения продукта.
+- Future Graph пока не моделирует потоки данных runtime, инфраструктуру или внешние службы.
+- Обнаружение противоречий памяти консервативно и в основном опирается на одну позицию/доказательства из источника.
+- Поиск Attention гибридный, но пока ограничен текущим статическим извлечением зависимостей и переносимыми векторными представлениями.
+- BM25 сейчас строится в памяти при каждом запуске; извлечение доказательств по блокам AST/потокам данных пока не реализовано.
+- Нет TUI, веб-приложения или слоя SaaS.

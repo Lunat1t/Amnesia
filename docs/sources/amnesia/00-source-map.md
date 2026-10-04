@@ -1,21 +1,21 @@
-# Amnesia source map
+# Карта источников Amnesia
 
-This map indexes the imported Operation Amnesia and Galaxy research corpus. Original cards are preserved verbatim under `legacy-galaxy/docs/sources/galaxy-superapp/`. They describe the former Galaxy project and its evidence at migration time; they are not proof of Amnesia behavior or product decisions.
+В этой карте собраны перенесённые исследовательские материалы Операции «Амнезия» и проекта Galaxy. Исходные карточки находятся в `legacy-galaxy/docs/sources/galaxy-superapp/`; при переносе они были скопированы без изменений, а позднее локализуются по запросу PM. Карточки описывают прежний проект Galaxy и имевшиеся на момент переноса свидетельства; они не доказывают поведение Amnesia и не являются продуктовыми решениями.
 
-## Starting points
+## С чего начать
 
-- [Operation Amnesia research mandate and radar](../../../legacy-galaxy/docs/sources/galaxy-superapp/08-operation-amnesia-radar.md) — broad research objective and monitoring approach.
-- [Research leads](../../../legacy-galaxy/docs/sources/galaxy-superapp/06-research-leads.md) — hypotheses from adjacent work; none become Amnesia decisions without evidence.
-- [Context, memory, and agents](../../../legacy-galaxy/docs/sources/galaxy-superapp/02-context-memory-agents.md) — prior context/memory literature and Galaxy hypotheses.
-- [Temporal memory and updates](../../../legacy-galaxy/docs/sources/galaxy-superapp/09-temporal-memory-and-updates.md) and [context compaction and transfer](../../../legacy-galaxy/docs/sources/galaxy-superapp/10-context-compaction-and-transfer.md) — research threads for freshness and transfer.
-- [Product validation methods](../../../legacy-galaxy/docs/sources/galaxy-superapp/05-product-validation.md) — methods, not proof of demand or efficacy.
-- [Former Galaxy current state](../../../legacy-galaxy/docs/sources/galaxy-superapp/01-current-galaxy.md) — historical code claims; verify against the original checkout if needed.
+- [Исследовательская задача и радар Операции «Амнезия»](../../../legacy-galaxy/docs/sources/galaxy-superapp/08-operation-amnesia-radar.md) — широкая цель исследования и подход к наблюдению за областью.
+- [Исследовательские зацепки](../../../legacy-galaxy/docs/sources/galaxy-superapp/06-research-leads.md) — гипотезы из смежных областей; без свидетельств ни одна из них не становится решением для Amnesia.
+- [Контекст, память и агенты](../../../legacy-galaxy/docs/sources/galaxy-superapp/02-context-memory-agents.md) — прежние исследования контекста и памяти, а также гипотезы Galaxy.
+- [Временная память и обновления](../../../legacy-galaxy/docs/sources/galaxy-superapp/09-temporal-memory-and-updates.md) и [сжатие и передача контекста](../../../legacy-galaxy/docs/sources/galaxy-superapp/10-context-compaction-and-transfer.md) — направления исследования актуальности и переноса.
+- [Методы проверки продукта](../../../legacy-galaxy/docs/sources/galaxy-superapp/05-product-validation.md) — методы, а не доказательство спроса или эффективности.
+- [Текущее состояние прежнего проекта Galaxy](../../../legacy-galaxy/docs/sources/galaxy-superapp/01-current-galaxy.md) — исторические утверждения о коде; при необходимости сверь их с исходной копией.
 
 ## Внешние исследовательские зацепки
 
 - [Маршрутизация ограниченных решений: Jev + Claude](01-bounded-routing-jev-claude-video.md) — демонстрация автора с передачей неуверенных случаев; может быть полезна для гипотезы о выборочной маршрутизации памяти и навыков. Заявления о скорости и стоимости не проверены независимо и ничего не доказывают об Amnesia.
 
-## Internal experiment evidence
+## Свидетельства внутренних экспериментов
 
-- [Five-task direct Context pilot](../../../legacy-galaxy/docs/galaxy-direct-context-eval-v1.md) and [raw-artifact reconciliation](../../../legacy-galaxy/reports/swebench-dataset-v1/sanity-pilot-v1/paired-audit.json).
-- Other compact historical protocol/report files remain under `legacy-galaxy/reports/`; raw traces, snapshots, and dataset payloads remain in the original Galaxy checkout as listed in [`MIGRATION.md`](../../../MIGRATION.md).
+- [Пилот с прямым контекстом на пяти задачах](../../../legacy-galaxy/docs/galaxy-direct-context-eval-v1.md) и [сверка исходных артефактов](../../../legacy-galaxy/reports/swebench-dataset-v1/sanity-pilot-v1/paired-audit.json).
+- Другие компактные исторические протоколы и отчёты находятся в `legacy-galaxy/reports/`; исходные трассы, снимки и наборы данных остались в исходной копии Galaxy, как указано в [`MIGRATION.md`](../../../MIGRATION.md).

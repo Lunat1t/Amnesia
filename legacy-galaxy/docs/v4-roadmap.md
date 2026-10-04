@@ -1,74 +1,74 @@
-# Galaxy Kernel 4.0 roadmap
+# Дорожная карта Galaxy Kernel 4.0
 
-Galaxy 4.0 is the point where the existing context components become one fast,
-shared runtime used by real coding agents. The priorities are context quality,
-token cost, latency and safe sharing between people and agents.
+Galaxy 4.0 — этап, на котором существующие компоненты контекста объединяются в единый быстрый
+общий runtime для реальных coding-агентов. Приоритеты: качество контекста,
+расход токенов, задержка и безопасный обмен данными между людьми и агентами.
 
-## Completed foundation
+## Завершённая основа
 
-- Persistent incremental Attention index and BM25 postings.
-- Source text separated from semantic vectors for selective loading.
-- Incremental World Model sync with stable snapshot identifiers.
-- Cached structural component maps (capsules).
-- Durable World Model event feed and idempotent cache projector.
-- Foreground polling watcher with debounce.
-- Installable Python package and one-tool MCP adapter for real clients.
-- Bounded approximate semantic retrieval with exact candidate reranking.
-- Adaptive ANN candidate sizing and exact/ANN ContextBench export modes.
-- Persistent Context Packet cache with source freshness checks and memory-sensitive invalidation.
-- Paired exact/ANN ContextBench comparison command with optional upstream scoring.
-- AST inheritance edges and opt-in Top-15 one-hop graph ablation for three fixed Django tasks.
-- RepoBench-R JSONL snippet-ranking adapter with gold-index metrics.
+- Постоянный инкрементальный индекс Attention и списки BM25.
+- Текст источника отделён от семантических векторов для выборочной загрузки.
+- Инкрементальная синхронизация World Model со стабильными идентификаторами снимков.
+- Кэшируемые карты структурных компонентов (capsules).
+- Постоянная лента событий World Model и идемпотентный проектор кэша.
+- Активный наблюдатель с опросом и debounce.
+- Устанавливаемый пакет Python и одноинструментальный адаптер MCP для реальных клиентов.
+- Ограниченный приближённый семантический поиск с точным повторным ранжированием кандидатов.
+- Адаптивное определение числа кандидатов ANN и режимы экспорта ContextBench exact/ANN.
+- Постоянный кэш Context Packet с проверкой свежести источников и инвалидацией с учётом памяти.
+- Команда парного сравнения ContextBench exact/ANN с необязательной оценкой upstream.
+- Связи наследования AST и опциональная абляция графа Top-15 с одним переходом для трёх фиксированных задач Django.
+- Адаптер ранжирования фрагментов RepoBench-R JSONL с метриками по эталонному индексу.
 
-## Remaining before 4.0
+## Что осталось до 4.0
 
-### P0 — prove the context runtime
+### P0 — подтвердить работу runtime контекста
 
-- Validate ANN recall loss and latency on ContextBench and tune candidate limits
-  against repository size and task type.
-- Run the fixed Django graph ablation with official task snapshots/evaluator and keep the 15-file, 20k-token limits unchanged.
-- Run RepoBench-R test splits; report Python cff/cfr separately and preserve the benchmark's data terms.
-- Extend packet cache scope when Team Model adds private-user and per-agent
-  identities; current cache is isolated by repository and project.
-- Run 10–30 real Codex tasks with and without Galaxy. Measure completion rate,
-  total input tokens, time to first useful edit, repeated file reads and stale
-  context failures.
-- Set and validate release targets: warm P95 context assembly below 500 ms,
-  typical packets of 5–12k tokens and more than 70% reuse on repeated work.
+- Проверить потерю полноты ANN и задержку на ContextBench; настроить пределы числа кандидатов
+  с учётом размера репозитория и типа задачи.
+- Запустить фиксированную абляцию графа Django на официальных снимках задач/оценщике, не меняя ограничения в 15 файлов и 20k токенов.
+- Запустить тестовые выборки RepoBench-R; приводить Python cff/cfr отдельно и соблюдать условия использования данных бенчмарка.
+- Расширить область кэша пакетов, когда Team Model добавит идентичность частного пользователя и отдельную идентичность агента;
+  текущий кэш изолирован по репозиторию и проекту.
+- Выполнить 10–30 реальных задач Codex с Galaxy и без неё. Измерить долю завершения,
+  общее число входных токенов, время до первого полезного изменения, повторные чтения файлов и сбои из-за устаревшего
+  контекста.
+- Задать и проверить целевые показатели выпуска: тёплая сборка контекста P95 менее 500 мс,
+  типичные пакеты по 5–12k токенов и повторное использование более чем в 70% повторяющихся задач.
 
-### P1 — shared Team Model
+### P1 — общая модель команды
 
-- Separate shared project truth, private user memory and temporary agent working
-  memory. Every item needs owner, visibility, evidence and version.
-- Add per-user and per-agent cursors over the shared event feed.
-- Add copy-on-write snapshots so several agents can work from one base without
-  mutating each other's active context.
-- Consolidate completed agent episodes into decisions, failures and reusable
-  evidence; keep raw sessions bounded.
-- Resolve duplicate and competing memories with trust scores, provenance and an
-  explicit reconciliation history.
+- Разделить общие сведения проекта, личную память пользователя и временную рабочую
+  память агента. Для каждого элемента нужны владелец, видимость, доказательства и версия.
+- Добавить отдельные курсоры пользователя и агента для общей ленты событий.
+- Добавить снимки copy-on-write, чтобы несколько агентов могли работать от общей основы и не
+  изменять активный контекст друг друга.
+- Обобщать завершённые эпизоды работы агента в решения, сбои и пригодные для повторного использования
+  доказательства; ограничивать размер исходных сессий.
+- Разрешать дубликаты и конкурирующие записи памяти с помощью оценок доверия, происхождения и
+  явной истории согласования.
 
-### P1 — runtime reliability
+### P1 — надёжность runtime
 
-- Replace the foreground polling loop with an optional background service and
-  native filesystem events, while retaining polling as a portable fallback.
-- Coordinate concurrent writers and make cache/event updates transactional.
-- Add health/status telemetry for snapshot age, cache reuse, event lag, packet
-  size and retrieval confidence.
-- Produce reproducible wheels, lock dependencies, test Windows installation and
-  publish migration rules for `GALAXY_HOME`.
+- Заменить активный цикл опроса необязательной фоновой службой и
+  нативными событиями файловой системы, сохранив опрос как переносимый резервный вариант.
+- Координировать параллельных писателей и сделать обновления кэша/событий транзакционными.
+- Добавить телеметрию состояния/здоровья для возраста снимка, повторного использования кэша, задержки событий, размера пакета
+  и уверенности поиска.
+- Собирать воспроизводимые wheels, фиксировать зависимости, проверять установку Windows и
+  публиковать правила миграции для `GALAXY_HOME`.
 
-### P2 — product surface
+### P2 — пользовательская поверхность
 
-- Add a thin VS Code view for task context, sources, uncertainty and refresh.
-- Add Project Multiverse links between repositories only after single-project
-  team isolation is measured and stable.
-- Expose more MCP tools only from observed demand. Likely candidates are a fast
-  component overview and explicit memory feedback; neither is part of the first
-  adapter.
+- Добавить лёгкое представление для VS Code с контекстом задачи, источниками, неопределённостью и обновлением.
+- Добавлять связи Project Multiverse между репозиториями только после измерения и стабилизации
+  изоляции команды в одном проекте.
+- Добавлять инструменты MCP только при подтверждённом спросе. Возможные кандидаты — быстрый
+  обзор компонентов и явная обратная связь по памяти; ни один из них не входит в первый
+  адаптер.
 
-## 4.0 definition of done
+## Критерии готовности 4.0
 
-Version 4.0 should be released only after Galaxy improves real agent work, keeps
-team/private context isolated, survives concurrent activity and meets measured
-latency/token targets. Feature count alone is not a release criterion.
+Версию 4.0 следует выпускать только после того, как Galaxy улучшит работу реальных агентов, изолирует
+контекст команды и пользователя, выдержит параллельную работу и достигнет измеренных
+целевых показателей задержки/токенов. Одно лишь количество функций не является критерием выпуска.

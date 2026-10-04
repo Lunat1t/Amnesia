@@ -3,6 +3,7 @@
   "source_checkout": "/home/bah/Documents/Codex/galaxy-3.2.1-alpha.19-evidence-integrity",
   "destination_name": "Amnesia",
   "source_checkout_modified": false,
+  "sha256_scope": "Хеши фиксируют содержимое файлов на момент первоначального переноса; последующие изменения и переводы меняют эти хеши.",
   "original_document_files": 37,
   "original_agent_definitions": 7,
   "active_amnesia_agent_definitions": 7,

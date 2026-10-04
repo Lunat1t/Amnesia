@@ -1,32 +1,31 @@
 # Galaxy 3.0.0-alpha.1 — Context OS
 
-This release changes the center of gravity of Galaxy.
+Этот выпуск меняет основное направление Galaxy.
 
-The previous core primarily coordinated memory, roles, DAGs and model execution. Version 3.0 alpha 1 introduces a project-intelligence layer before execution:
+Прежнее ядро в основном координировало память, роли, DAG и выполнение моделей. Версия 3.0 alpha 1 добавляет перед выполнением слой анализа проекта:
 
-1. **Project World Model** keeps a persistent structural snapshot of a repository.
-2. **Context Compiler** builds a bounded task-specific packet from files, dependency edges, living memory and hierarchical project instructions.
-3. **Living Memory** can be marked stale or contradicted without deleting history; inactive knowledge is excluded from normal context.
-4. **Decision Fabric** wraps Jev/System-One style narrow decisions with explicit confidence escalation.
-5. **Autonomous workers** receive compiled `project_context` separately from managed memory.
+1. **Project World Model** хранит постоянный структурный снимок репозитория.
+2. **Context Compiler** формирует ограниченный пакет для конкретной задачи из файлов, связей зависимостей, актуальной памяти и иерархических инструкций проекта.
+3. **Living Memory** можно пометить устаревшей или противоречащей другим сведениям, не удаляя историю; неактивные знания исключаются из обычного контекста.
+4. **Decision Fabric** оборачивает узкие решения в стиле Jev/System-One явным повышением уровня уверенности.
+5. **Autonomous workers** получают скомпилированный `project_context` отдельно от управляемой памяти.
 
-## What is intentionally not in this build
+## Что намеренно не входит в эту сборку
 
 - TUI
-- Orbit/web server
-- SaaS dashboard
-- Obsidian REST integration
-- automatic contradiction detection
-- full semantic/runtime architecture graph
-- Future Graph / counterfactual simulation
+- Сервер Orbit/web
+- Панель SaaS
+- Интеграция с Obsidian REST
+- автоматическое обнаружение противоречий
+- полный семантический/выполняемый граф архитектуры
+- Future Graph / контрфактическое моделирование
 
-The last three are product research targets, not silently claimed as complete features.
+Последние три пункта — цели продуктового исследования, а не функции, которые здесь объявляются завершёнными.
 
-## Verification
+## Проверка
 
-- 90 Python regression tests executed
-- 0 failures
-- 0 errors
-- 2 expected skips (live LLM unavailable; generated run history absent in clean build)
-- JavaScript calculator fixture passed
-
+- Выполнено 90 регрессионных тестов Python
+- 0 сбоев
+- 0 ошибок
+- 2 ожидаемых пропуска (активная LLM недоступна; в чистой сборке нет истории сгенерированных запусков)
+- Проверка примера калькулятора JavaScript прошла

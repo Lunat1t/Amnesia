@@ -1,17 +1,17 @@
-# Attention map — task context
+# Карта внимания — контекст задачи
 
-Use this as a compact internal task map. Fill only fields relevant to the current request; do not persist one copy per ordinary task.
+Используйте её как компактную внутреннюю карту задачи. Заполняйте только поля, относящиеся к текущему запросу; не сохраняйте отдельную копию для каждой обычной задачи.
 
-- **Desired outcome:** What changes for the user/PM?
-- **Done means:** Observable acceptance signal.
-- **Current state:** Internal evidence and source locations.
-- **Gap:** Difference between current and desired state.
-- **Next best step:** Smallest useful action that reduces the gap.
-- **Constraints:** PM decisions, scope, permissions, compatibility, cost/time.
-- **Evidence:** Internal / external / hypothesis, with source cards and confidence.
-- **Unknowns:** Facts to gather; who can answer them.
-- **Risks / attention:** Likely drift, repeated incident, duplicate work, incomplete handoff, stale context.
-- **Route:** Main Codex and only the specialists needed; independent workstreams.
-- **Steering trigger:** Observable event or mismatch that should cause a pause/check/correction.
-- **Stop condition:** What result ends work; what would require PM direction.
-- **Outcome record:** Actual result, what was verified, corrections/rework, time/cost only if observed.
+- **Желаемый результат:** Что изменится для пользователя/PM?
+- **Признак завершения:** Наблюдаемый сигнал приёмки.
+- **Текущее состояние:** Внутренние свидетельства и расположение источников.
+- **Разрыв:** Разница между текущим и желаемым состоянием.
+- **Лучший следующий шаг:** Наименьшее полезное действие, сокращающее разрыв.
+- **Ограничения:** Решения PM, объём работ, разрешения, совместимость, затраты/время.
+- **Свидетельства:** Внутренние / внешние / гипотезы, с карточками источников и уровнем уверенности.
+- **Неизвестное:** Какие факты нужно собрать и кто может ответить.
+- **Риски / внимание:** Вероятное отклонение, повторный инцидент, дублирование работы, незавершённая передача, устаревший контекст.
+- **Маршрут:** Основной Codex и только нужные специалисты; независимые направления работы.
+- **Триггер корректировки:** Наблюдаемое событие или несоответствие, которое должно вызвать паузу/проверку/исправление.
+- **Условие остановки:** Какой результат завершает работу и что потребует решения PM.
+- **Запись результата:** Фактический результат, что проверено, исправления/переделки, время/стоимость — только если измерены.

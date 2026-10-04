@@ -1,38 +1,36 @@
-# Evidence integrity and acceptance status — alpha 19
+# Целостность доказательств и статус приёмки — alpha 19
 
-## Fixed in this release
+## Исправлено в этом выпуске
 
-- A `NodeResult.evidence` string authored by an agent cannot satisfy an active
-  `require_evidence` rule. At least one verification command must have exited 0
-  and its saved log must still match Galaxy's SHA-256 ledger entry.
-- Before marking an execution `DONE`, every succeeded QA node with commands is
-  audited. Missing or damaged logs make that node and the run fail. Reopening
-  a `DONE` run repeats the audit and revokes completion if evidence changed.
-- Active command rules are checked at run creation and again before execution.
-- The learning hook marks an episode verified only after the ledger's passing
-  log check, not from a model's `PASS` or evidence string.
+- Строка `NodeResult.evidence`, добавленная агентом, не может удовлетворить действующему
+  правилу `require_evidence`. Как минимум одна команда проверки должна завершиться с кодом 0,
+  а её сохранённый журнал должен по-прежнему совпадать с записью SHA-256 в реестре Galaxy.
+- Перед отметкой выполнения как `DONE` проводится аудит каждого успешно завершённого QA-узла с командами.
+  Отсутствующие или повреждённые журналы приводят к сбою этого узла и запуска. При повторном открытии
+  запуска `DONE` аудит проводится заново; если доказательства изменились, статус завершения отзывается.
+- Действующие правила команд проверяются при создании запуска и повторно перед выполнением.
+- Механизм обучения помечает эпизод как проверенный только после успешной проверки журнала в реестре,
+  а не на основании `PASS` или строки доказательства от модели.
 
-## Reproduction and scope
+## Воспроизведение и область проверки
 
-On this build, `python -X dev -W always run_tests.py` reported 146 Python tests,
-0 failures, 2 skips, and no SQLite ResourceWarning in the current runtime.
-The skipped cases are live LLM inference (no endpoint) and log filtering
-without generated runs. A separate report citing 141 tests and SQLite warnings
-may come from a different copy or Python runtime. Without its actual log and
-archive hash, those warnings cannot be located or claimed fixed here.
+На этой сборке команда `python -X dev -W always run_tests.py` сообщила о 146 тестах Python,
+0 сбоях, 2 пропусках и отсутствии SQLite ResourceWarning в текущем runtime.
+Пропущены живой inference LLM (нет endpoint) и фильтрация журналов
+без сгенерированных запусков. Отдельный отчёт о 141 тесте и предупреждениях SQLite
+может относиться к другой копии или runtime Python. Без исходного журнала и
+хеша архива нельзя установить источник этих предупреждений или утверждать, что они устранены здесь.
 
-## Acceptance still open
+## Приёмка ещё не завершена
 
-- The full 15-scenario acceptance matrix has not been executed in a real
-  deployment. This release adds targeted forged, damaged, and changed-rule
-  cases, not a complete adversarial audit.
-- The SQLite ledger and project files are trusted local state. A process with
-  permission to modify both the database and logs can forge them; a model
-  executor with unrestricted host access is outside this integrity boundary.
-- CLI owner/team/reviewer strings are scope selectors, not authenticated
-  identities. Multi-user isolation requires a real authorization service.
-- A live end-to-end agent run, repeated-error comparison, escaped-defect
-  review, model token counts and time to verified completion remain unmeasured.
-- A post-completion audit marks damaged evidence invalid when the run is
-  reopened; it cannot retract already exported external actions or previously
-  copied knowledge without a separate reconciliation process.
+- Полная матрица приёмки из 15 сценариев не выполнялась в реальном
+  развёртывании. Этот выпуск добавляет целевые случаи подделанных/повреждённых доказательств и изменённых правил,
+  но не полный состязательный аудит.
+- Реестр SQLite и файлы проекта считаются доверенным локальным состоянием. Процесс с
+  правом изменять базу данных и журналы может их подделать; исполнитель модели с неограниченным доступом к хосту находится вне этой границы целостности.
+- Строки owner/team/reviewer в CLI задают область действия, но не являются подтверждёнными
+  личностями. Для изоляции между пользователями нужна настоящая служба авторизации.
+- Живой сквозной запуск агента, сравнение повторных ошибок, проверка
+  пропущенных дефектов, число токенов модели и время до подтверждённого завершения остаются неизмеренными.
+- Аудит после завершения помечает повреждённые доказательства недействительными при повторном открытии запуска;
+  он не может отменить уже экспортированные внешние действия или ранее скопированные знания без отдельного процесса согласования.

@@ -1,15 +1,15 @@
-# Experience transfer v2 calibration
+# Калибровка переноса опыта v2
 
-Completed agent task runs: 18; verifier passes: 17. Model: gpt-6-luna. One repetition per condition.
+Выполнено запусков задач агента: 18; проверок, завершившихся успехом: 17. Модель: gpt-6-luna. По одному повтору на условие.
 
-| Pair | B context only | B with Experience | Agent tokens: context only | Agent tokens: Experience |
+| Пара | Контекст B без Experience | Контекст B с Experience | Токены агента: только контекст | Токены агента: Experience |
 |---|---|---|---:|---:|
 | expiry | True | True | 82878 | 50430 |
 | copy-isolation | True | True | 66358 | 128568 |
 | normalized-collision | True | True | 82932 | 119101 |
 
-All 18 verifier logs matched their evidence hashes. For every pair, the source commit and non-Experience context items match; B receives only the linked A episode and controls contain no Experience.
+Все 18 журналов проверки соответствовали хешам свидетельств. В каждой паре совпадают исходный коммит и элементы контекста вне Experience; вариант B получает только связанный эпизод A, а в контрольных вариантах Experience отсутствует.
 
-No B success improvement observed. Agent token differences are mixed. These include all input tokens, not estimated billed costs; cached-input pricing is not modeled. Extraction usage and duration are separate in audit.json. One repetition cannot establish an efficiency or general benefit claim.
+Улучшения успешности B не наблюдалось. Различия в числе токенов агента неоднозначны. Здесь учтены все входные токены, а не расчётные оплачиваемые расходы; стоимость кэшированных входных данных не моделировалась. Использование ресурсов при извлечении и длительность отдельно указаны в audit.json. Один повтор не позволяет утверждать, что эффективность или общая польза улучшились.
 
-The synthetic functions remain too easy to distinguish success consistently. The next useful study should use real repository maintenance pairs with independent hidden checks and irrelevant/obsolete advice controls. Keep these runs as delivery/evaluator calibration; do not expand repetitions merely to seek a positive result.
+На синтетических функциях по-прежнему слишком легко получить стабильный успех. Следующее полезное исследование должно использовать парные задачи сопровождения реальных репозиториев с независимыми скрытыми проверками и контрольными вариантами с неуместными или устаревшими советами. Сохраните эти запуски как калибровку доставки и оценщика; не увеличивайте число повторов только ради поиска положительного результата.
